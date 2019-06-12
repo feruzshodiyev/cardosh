@@ -156,87 +156,6 @@
               <item name="antproject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Header" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Advantages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Footer" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Reasons" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="containers" type="462c0819:PsiDirectoryNode" />
-              <item name="Routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="offerTrip" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="searchRoute" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
-              <item name="antproject" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="sign" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -307,7 +226,7 @@
       <workItem from="1560172503288" duration="5896000" />
       <workItem from="1560239652667" duration="750000" />
       <workItem from="1560252010208" duration="12035000" />
-      <workItem from="1560330537564" duration="13641000" />
+      <workItem from="1560330537564" duration="14495000" />
     </task>
     <task id="LOCAL-00001" summary="Responsive">
       <created>1560265715138</created>
@@ -320,13 +239,12 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44567000" />
+    <option name="totallyTimeSpent" value="45421000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.7880184" visible="true" weight="0.24676375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.7880184" visible="true" weight="0.24676375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -342,7 +260,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49919093" visible="true" weight="0.30112723" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49919093" visible="true" weight="0.30112723" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5008091" side_tool="true" weight="0.32850242" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
