@@ -1,0 +1,92 @@
+.app-title {
+  float: left;
+  margin-left: 300px;
+
+
+
+  a {
+    text-decoration: none;
+    line-height: 64px;
+    font-size: 41px;
+    display: inline-block;
+    color: #ff6600;
+    &:hover{
+      text-decoration: none;
+    }
+  }
+}
+.app-header {
+  position: fixed;
+  width: 100%;
+  box-shadow: 0 2px 8px #f0f1f2;
+  z-index: 10;
+  padding: 0;
+  background-color: #ffff;
+}
+
+.app-menu {
+  float: right;
+  margin-right: 100px;
+  >li {
+    padding: 0 20px;
+    > a {
+      padding: 0 20px;
+      margin: 0 -20px;
+      > i {
+        margin-right: 10px !important;
+      }
+    }
+  }
+}
+
+.profile-dropdown-menu {
+  min-width: 180px;
+  .user-full-name-info {
+    font-size: 17px;
+    font-weight: 600;
+    //color: rgba(0,0,0,0.85);
+  }
+  .username-info {
+    font-size: 14px;
+    //color: rgba(0,0,0,0.65);
+  }
+}
+
+.dropdown-item {
+  padding: 10px 12px;
+  a {
+    padding: 10px 12px;
+    margin: -10px -12px;
+  }
+}
+
+.nav-icon {
+  font-size: 20px;
+}
+
+.poll-icon {
+  margin-top: -4px;
+}
+
+@media (max-width: 846px) {
+  .app-title {
+    margin-left: 40%;
+    > a {
+      font-size: 10px;
+    }
+  }
+  .app-header{
+    height: 55px;
+  }
+  .app-menu {
+    display: none;
+    > li {
+      padding: 0 5px;
+      > a {
+        padding: 0 15px;
+        margin: 0 -15px;
+
+      }
+    }
+  }
+}

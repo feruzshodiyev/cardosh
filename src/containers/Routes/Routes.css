@@ -1,0 +1,39 @@
+.wrapper-routes{
+    position: relative;
+    height: 600px;
+    padding-top: 20px;
+    background: silver;
+    top: 10%;
+    text-align: center;
+}
+
+.title-text{
+    text-align: initial;
+    margin: 0%;
+    padding-left: 29%;
+}
+
+.popular-routes{
+    position: absolute;
+    top: 4%;
+    color: wheat;
+    right: 28%;
+    padding: 5px;   
+}
+.routes{
+    margin-top: 2%;
+    margin-left: 35px;
+
+}
+.route-link{
+    width: 180px;
+    block-size: 60px;
+    margin-right: 20px;
+    text-align: left;
+}
+.icon-text{
+    margin-left:25px;
+    margin-block-end: 50px;
+    vertical-align:top;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,23 @@
+.raw{
+    box-sizing: border-box;
+    width: 90%;
+    float: right;
+    right: 0;
+}
+.col{
+    box-sizing: border-box;
+    width: 30%;
+    margin-left: 10px;
+    float: right;    
+}
+.reasons-wrapper{
+    background: khaki;
+    margin: 0;
+    height: 600px;    
+}
+.reason-title{
+    right: 20%;
+    margin: auto;
+    text-align: center;
+    padding-top: 20px;
+}

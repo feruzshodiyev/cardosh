@@ -1,0 +1,31 @@
+
+.homePage{
+    background: white;
+    height: 600px;
+}
+.homeContent{
+    position: absolute;
+    top: 40%;
+    left: 10%;
+}
+.search-ride-btn{
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+
+}
+.offer-ride-btn{
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+
+}
+
+.button-group{
+  > Button{
+    background-color: #ff6600;
+      height: 55px;
+      width: 200px;
+      font-size: 15px;
+      color: white;
+
+  }
+}
