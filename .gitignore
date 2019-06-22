@@ -23,3 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 antproject.iws___jb_tmp___
+antproject.iws
+antproject.ipr
+antproject.iml
+*.iws

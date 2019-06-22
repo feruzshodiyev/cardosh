@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Routes.css'
+import './Routes.scss'
 import {Button, Icon} from 'antd' 
 import ButtonGroup from 'antd/lib/button/button-group';
 

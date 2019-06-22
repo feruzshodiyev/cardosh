@@ -1,6 +1,5 @@
 
 .homePage{
-    background: white;
     height: 600px;
 }
 .homeContent{
@@ -20,12 +19,18 @@
 }
 
 .button-group{
-  > Button{
+  > Button {
     background-color: #ff6600;
-      height: 55px;
-      width: 200px;
-      font-size: 15px;
-      color: white;
+    height: 55px;
+    width: 200px;
+    font-size: 15px;
+    color: white;
+
+
+  }
+  :hover {
+    background-color: #cc5200;
+    color: white;
 
   }
 }

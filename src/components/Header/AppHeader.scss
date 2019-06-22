@@ -1,20 +1,39 @@
-.app-title {
-  float: left;
-  margin-left: 300px;
-
-
-
-  a {
-    text-decoration: none;
-    line-height: 64px;
-    font-size: 41px;
-    display: inline-block;
-    color: #ff6600;
-    &:hover{
-      text-decoration: none;
-    }
-  }
+.ant-menu-horizontal > .ant-menu-item > a {
+  display: block;
+  color: #ff6600;
 }
+.ant-menu-horizontal > .ant-menu-item-selected > a {
+  color: #ff6600;
+}
+
+.ant-menu-horizontal > .ant-menu-item:hover, .ant-menu-horizontal > .ant-menu-submenu:hover, .ant-menu-horizontal > .ant-menu-item-active, .ant-menu-horizontal > .ant-menu-submenu-active, .ant-menu-horizontal > .ant-menu-item-open, .ant-menu-horizontal > .ant-menu-submenu-open, .ant-menu-horizontal > .ant-menu-item-selected, .ant-menu-horizontal > .ant-menu-submenu-selected {
+  color: #ff6600;
+  border-bottom: 2px solid #ff6600;
+}
+
+.ant-menu-horizontal > .ant-menu-item > a:hover {
+  color: #cf5a13;
+}
+
+.withoutHeader{
+  //display: none;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+  padding: 0;
+  background: none;
+  > .container > .ant-menu-horizontal{
+    border-bottom: none;
+  }
+
+}
+
+
+
+
+
+
+
 .app-header {
   position: fixed;
   width: 100%;
@@ -22,22 +41,31 @@
   z-index: 10;
   padding: 0;
   background-color: #ffff;
+  //background: ;
 }
 
 .app-menu {
-  float: right;
-  margin-right: 100px;
+  text-align: center;
+  background: none ;
+
   >li {
     padding: 0 20px;
     > a {
+      color: #ff6600;
       padding: 0 20px;
       margin: 0 -20px;
       > i {
+        color: #ff6600 !important;
+
         margin-right: 10px !important;
       }
     }
   }
 }
+
+
+
+
 
 .profile-dropdown-menu {
   min-width: 180px;
@@ -69,17 +97,12 @@
 }
 
 @media (max-width: 846px) {
-  .app-title {
-    margin-left: 40%;
-    > a {
-      font-size: 10px;
-    }
-  }
+
   .app-header{
     height: 55px;
   }
   .app-menu {
-    display: none;
+    //display: none;
     > li {
       padding: 0 5px;
       > a {

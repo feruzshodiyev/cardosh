@@ -1,0 +1,59 @@
+.wrapper-reg{
+    padding-top: 70px;
+    text-align: center;
+    height: 500px;
+}
+
+.login-form{
+    display: inline-block;
+    width: 40%;
+}
+.register-title{
+    text-align: center;
+    font-family: 'Nunito', sans-serif;
+    //font: 700;
+    font-size: 30px;
+    color: #ca5021;
+    margin-top: 20px;
+}
+.reg-btns-form > Button{
+    display: block;
+    margin: 10px;
+    font-size: 18px;
+    font-family: 'Nunito', sans-serif;
+}
+.btn-gender{
+    display: block;
+    width: 400px;
+}
+.login-form  {
+    .input-data{
+        color: #fa7921;
+        height: 50px;
+        margin-bottom: 10px;
+        border-color: #ff6600;
+        box-shadow: inset 0 0 3px 3px #fff;
+        border-radius: 20px;
+    }
+    .btn-form{
+        @extend .input-data;
+        width: 40%;
+        font-size: 18px;
+        background: #ff6600;
+        box-shadow: none;
+        >a{
+            color: #fff;
+        };
+    }
+    .btn-form:hover{
+        background-image: none;
+        background-color: #ca5021;
+        color: white;
+    }
+
+    .btn-gender{
+        @extend .input-data;
+    }
+
+
+}
