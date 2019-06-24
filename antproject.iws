@@ -2,30 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3a11227-cf17-4e55-b84f-52f52a9c9dbb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/images/cardosh_preview.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/forTestApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/cardosh.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/antproject.iws" beforeDir="false" afterPath="$PROJECT_DIR$/antproject.iws" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/AppHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/AppHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/AppHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/AppHeader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Routes/Routes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Routes/Routes.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Routes/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/SignIn.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sign/Auth/SignIn.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sign/Auth/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/SignUp.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Advantages/Advantage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Advantages/Advantage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Reasons/Reasons.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Reasons/Reasons.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/containers/Routes/Routes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Routes/Routes.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/cardosh_preview.jpg" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="antproject.iml" />
@@ -56,18 +39,6 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.scss">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -76,13 +47,78 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/sign/Register/SignUp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="151" column="30" lean-forward="true" selection-start-line="151" selection-start-column="30" selection-end-line="151" selection-end-column="30" />
+            <state relative-caret-position="99">
+              <caret line="138" column="6" selection-start-line="138" selection-start-column="6" selection-end-line="138" selection-end-column="6" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Reasons/Reasons.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build/index.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Advantages/Advantage.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="68" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -143,7 +179,6 @@
         <option value="$PROJECT_DIR$/src/components/Header/AppHeader.scss" />
         <option value="$PROJECT_DIR$/src/pages/sign/Register/SignUp.css" />
         <option value="$PROJECT_DIR$/src/components/Header/AppHeader.js" />
-        <option value="$PROJECT_DIR$/src/App.css" />
         <option value="$PROJECT_DIR$/src/containers/Home/Home.scss" />
         <option value="$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss" />
         <option value="$PROJECT_DIR$/src/App.js" />
@@ -151,12 +186,15 @@
         <option value="$PROJECT_DIR$/src/pages/forTestApi.js" />
         <option value="$PROJECT_DIR$/src/containers/Routes/Routes.js" />
         <option value="$PROJECT_DIR$/src/containers/Routes/Routes.css" />
-        <option value="$PROJECT_DIR$/src/containers/Routes/Routes.scss" />
         <option value="$PROJECT_DIR$/src/pages/sign/Auth/SignIn.js" />
         <option value="$PROJECT_DIR$/src/pages/sign/Auth/SignIn.scss" />
         <option value="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.js" />
         <option value="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.scss" />
         <option value="$PROJECT_DIR$/src/pages/sign/Register/SignUp.js" />
+        <option value="$PROJECT_DIR$/src/App.css" />
+        <option value="$PROJECT_DIR$/src/containers/Advantages/Advantage.css" />
+        <option value="$PROJECT_DIR$/src/containers/Routes/Routes.scss" />
+        <option value="$PROJECT_DIR$/src/containers/Reasons/Reasons.css" />
       </list>
     </option>
   </component>
@@ -175,12 +213,46 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="antproject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="antproject" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
@@ -216,6 +288,13 @@
               <item name="antproject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="containers" type="462c0819:PsiDirectoryNode" />
+              <item name="Advantages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="antproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="containers" type="462c0819:PsiDirectoryNode" />
               <item name="Footer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -243,7 +322,20 @@
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="antproject" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="antproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="antproject" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="offerTrip" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
@@ -279,35 +371,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -324,13 +387,13 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\antproject\src\images" />
-      <recent name="D:\antproject\src\components\Header" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\antproject\src\pages\sign\Auth" />
       <recent name="D:\antproject\src\pages\sign\Register" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\antproject\src\images" />
+      <recent name="D:\antproject\src\components\Header" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -421,7 +484,8 @@
       <workItem from="1561027272289" duration="14219000" />
       <workItem from="1561096539079" duration="13809000" />
       <workItem from="1561135342927" duration="715000" />
-      <workItem from="1561190105940" duration="13740000" />
+      <workItem from="1561190105940" duration="13795000" />
+      <workItem from="1561395493264" duration="3280000" />
     </task>
     <task id="LOCAL-00001" summary="Responsive">
       <created>1560265715138</created>
@@ -434,22 +498,21 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172752000" />
+    <option name="totallyTimeSpent" value="176087000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="776" extended-state="7" />
+    <frame x="-8" y="-8" width="1296" height="776" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.59540635" visible="true" weight="0.24838188" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.59363955" visible="true" weight="0.24838188" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="npm" order="7" sideWeight="0.40459365" side_tool="true" visible="true" weight="0.24838188" />
+      <window_info id="npm" order="7" sideWeight="0.40636042" side_tool="true" visible="true" weight="0.24838188" />
       <window_info id="Learn" order="8" />
-      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49514562" visible="true" weight="0.12111801" />
@@ -462,6 +525,7 @@
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5048544" side_tool="true" weight="0.6925466" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
       <window_info anchor="bottom" id="Version Control" order="11" sideWeight="0.49919093" weight="0.46859902" />
+      <window_info anchor="bottom" id="TypeScript" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -588,13 +652,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="60" lean-forward="true" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -612,32 +669,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header/AppHeader.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="20" selection-start-line="20" selection-end-line="20" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="68" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -679,17 +716,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.scss">
+    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="19" column="4" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="4" />
+        <state relative-caret-position="180">
+          <caret line="459" column="8" selection-start-line="459" selection-start-column="8" selection-end-line="459" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state relative-caret-position="306">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -703,6 +740,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/sign/Register/SignUp.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="138" column="6" selection-start-line="138" selection-start-column="6" selection-end-line="138" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="25" column="65" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="48" lean-forward="true" selection-start-line="3" selection-start-column="48" selection-end-line="3" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -710,22 +774,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/@types/react/index.d.ts">
+    <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="459" column="8" selection-start-line="459" selection-start-column="8" selection-end-line="459" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/sign/Register/SignUp.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="151" column="30" lean-forward="true" selection-start-line="151" selection-start-column="30" selection-end-line="151" selection-end-column="30" />
+        <state relative-caret-position="221">
+          <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="68" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Advantages/Advantage.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Routes/Routes.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/containers/Reasons/Reasons.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="14" lean-forward="true" selection-start-line="14" selection-start-column="14" selection-end-line="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/index.html">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>

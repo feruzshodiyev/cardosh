@@ -1,5 +1,7 @@
 
 .app-js{
 
-    /*background-image: url("images/cardosh_preview.jpg");*/
+    background-image: url("images/cardosh.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
