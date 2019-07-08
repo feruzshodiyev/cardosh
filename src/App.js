@@ -1,14 +1,15 @@
 import React, {Component} from 'react';
 import './App.css';
-import Footer from './containers/Footer/Footer'
-import AppHeader from './components/Header/AppHeader'
+import Footer from './containers/Footer/Footer';
+import AppHeader from './components/Header/AppHeader';
 import {Route, Switch, withRouter} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import SearchRoute from "./pages/searchRoute/SearchRoute";
 import OfferTrip from "./pages/offerTrip/OfferTrip";
 import SignUp from "./pages/sign/Register/SignUp";
 import SignIn from "./pages/sign/Auth/SignIn";
-import forTestApi from "./pages/forTestApi"
+import forTestApi from "./pages/forTestApi";
+import {notification} from 'antd';
 
 class App extends Component {
 
@@ -20,12 +21,26 @@ class App extends Component {
         }
     }
 
+//checkForCurrentPageOnLoad func is used for detecting current location on load page
+    checkForCurrentPageOnLoad = () => {
+        if (this.props.history.location.pathname === '/') {
+            console.log("home page");
+            this.setState({
+                isOnHomePage: true
+            })
+        } else {
+            this.setState({
+                isOnHomePage: false
+            });
+        }
+    };
 
 
-    componentWillMount() {
+    componentDidMount() {
+        this.checkForCurrentPageOnLoad();
+        // this is used for detecting location on route path change
         this.unlisten = this.props.history.listen((location) => {
             if (location.pathname==="/") {
-                console.log("home page");
                 this.setState({
                     isOnHomePage: true
                 })
@@ -34,13 +49,25 @@ class App extends Component {
                     isOnHomePage: false
                 })
             }
-            console.log("on route change "+location.pathname);
+
 
         });
+
     }
+
+
     componentWillUnmount() {
         this.unlisten();
     }
+
+handleLogin=()=>{
+    notification.success({
+        message: 'Cardosh App',
+        description: "Вы успешно вошли в систему.",
+    });
+
+    this.props.history.push("/");
+};
 
     render(){
 
@@ -55,10 +82,10 @@ class App extends Component {
                     <Route path="/search" component={SearchRoute}/>
                     <Route path="/offerTrip" component={OfferTrip}/>
                     <Route path="/register" component={SignUp}/>
-                    <Route path="/login" component={SignIn}/>
+                    <Route path="/login" render={(props)=><SignIn onLogin={this.handleLogin} {...props}/>}/>
                     <Route path="/test" component={forTestApi}/>
                 </Switch>
-                <Footer/>
+                <Footer isOnHomePage={this.state.isOnHomePage}/>
                     </div>
 
 

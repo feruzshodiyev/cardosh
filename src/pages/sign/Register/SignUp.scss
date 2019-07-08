@@ -2,6 +2,7 @@
     padding-top: 70px;
     text-align: center;
     height: 500px;
+    background-color: white;
 }
 
 .login-form{
@@ -21,7 +22,30 @@
     margin: 10px;
     font-size: 18px;
     font-family: 'Nunito', sans-serif;
+
+    >span{
+        color: #ff6600;
+    }
+
+    >i{
+        color: #ff6600;
+    }
+
 }
+
+.reg-btns-form > Button :hover{
+
+    >span{
+        color: #fef9ff;
+    }
+}
+
+.ant-btn-link > a:only-child {
+    color: #ff6600;
+}
+
+
+
 .btn-gender{
     display: block;
     width: 400px;
@@ -44,6 +68,9 @@
         >a{
             color: #fff;
         };
+        >span{
+            color: #fff;
+        }
     }
     .btn-form:hover{
         background-image: none;

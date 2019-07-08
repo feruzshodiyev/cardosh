@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import './Reasons.css'
+import './Reasons.scss'
  class Reasons extends Component{
      render(){
          return(

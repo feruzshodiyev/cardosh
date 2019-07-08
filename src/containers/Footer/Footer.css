@@ -8,3 +8,8 @@
 .media li a{
     text-decoration: none;
 }
+
+.footerWithBackground {
+    background-color: white;
+    text-align: center;
+}

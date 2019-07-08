@@ -3,7 +3,7 @@ import './Footer.css'
 class Footer extends Component{
     render(){
         return(
-            <div className='footer'>
+            <div className={this.props.isOnHomePage ? ("footer"):("footerWithBackground")}>
               <div className='wrapper'> 
                 <ul className='media'>
                     <li>

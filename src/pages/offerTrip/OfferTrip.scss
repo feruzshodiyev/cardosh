@@ -1,0 +1,36 @@
+
+.wrapper-offer{
+    padding-top: 70px;
+ background-color: white;
+}
+.form-group{
+    padding-top: 70px;
+    padding-bottom: 50px;
+    width: 80%;
+
+}
+.plll{
+    width: 50%;
+}
+.from-to{
+
+    margin-left: 30px;
+}
+.trip-header{
+    margin-left: 20px;
+}
+
+.date-time{
+@extend .from-to;
+}
+.submit-btn{
+    float: right;
+
+}
+.route-map{
+    margin-left: 50px;
+
+}
+.form-flex{
+    display: inline-flex;
+}
