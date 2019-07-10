@@ -8,7 +8,7 @@ const request = (options) => {
     })
 
     if (localStorage.getItem(ACCESS_TOKEN)) {
-        headers.append('Aithorization', 'Bearer' + localStorage.getItem(ACCESS_TOKEN));
+        headers.append('Authorization', 'Bearer ' + localStorage.getItem(ACCESS_TOKEN));
     }
 
     const defaults = {headers: headers};
@@ -28,7 +28,7 @@ const request = (options) => {
 
 export function login(loginRequest) {
     return request({
-        url: API_BASE_URL + '/auth/signin',
+        url: API_BASE_URL + '/login/',
         method: 'POST',
         body:loginRequest
     });
@@ -41,9 +41,9 @@ export function getCurrentUser() {
         return Promise.reject('No access token set.');
     }
     return request({
-        url: API_BASE_URL+"/user/me",
+        url: API_BASE_URL+"/current_user/",
         method: 'GET'
     })
 
-    
+
 }

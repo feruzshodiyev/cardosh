@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import './OfferTrip.scss'
-import {Checkbox,Input,DatePicker,Label, TimePicker, Button,Icon} from 'antd'
+import {Checkbox,Input,DatePicker, TimePicker, Button,Icon} from 'antd'
+
 class OfferTrip extends Component {
-    render() {
+    render(){
         return (
             <div className="wrapper-offer">
                 <div className="form-group">
@@ -45,9 +46,9 @@ class OfferTrip extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="route-map google-maps">
+                            <div className="route-map google-maps" >
                                 <h3>Маршрут</h3>
-                                <img alt="your route map "></img>
+
                             </div>
                         </div>
                     </form>
@@ -58,4 +59,5 @@ class OfferTrip extends Component {
     }
 }
 
-export default OfferTrip;
+
+export default OfferTrip

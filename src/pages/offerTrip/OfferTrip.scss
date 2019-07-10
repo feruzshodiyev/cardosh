@@ -13,7 +13,6 @@
     width: 50%;
 }
 .from-to{
-
     margin-left: 30px;
 }
 .trip-header{
@@ -21,15 +20,16 @@
 }
 
 .date-time{
-@extend .from-to;
+    @extend .from-to;
 }
 .submit-btn{
     float: right;
 
 }
 .route-map{
-    margin-left: 50px;
-
+    margin-left: 90px;
+    border: 1px solid black;
+    width: 60%;
 }
 .form-flex{
     display: inline-flex;

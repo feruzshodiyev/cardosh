@@ -35,9 +35,9 @@ class LoginForm extends Component{
                 const loginRequest = Object.assign({}, values);
                 login(JSON.stringify(loginRequest))
                     .then(response => {
-                        localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+                        localStorage.setItem(ACCESS_TOKEN, response.access);
                         this.props.onLogin();
-                        console.log(response.accessToken, localStorage.getItem(ACCESS_TOKEN))
+                        console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
                     }).catch(error => {
                     if (error.status ===401) {
                         notification.error({
@@ -64,7 +64,7 @@ class LoginForm extends Component{
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
-                    {getFieldDecorator('username', {
+                    {getFieldDecorator('email', {
                         rules: [{required: true, message: 'Please input your email address!'}]
                     })(
                         <Input type="text" className="input-data" placeholder="Эл.почта"/>

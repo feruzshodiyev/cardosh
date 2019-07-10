@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Icon} from 'antd';
+import {Layout, Menu, Icon, Avatar, Dropdown} from 'antd';
 
 import {Link, withRouter} from 'react-router-dom';
 
@@ -18,6 +18,7 @@ class AppHeader extends Component {
         this.state={
             prevScrollpos: window.pageYOffset,
             visible: false,
+            rotate: false
 
         }
     }
@@ -42,10 +43,15 @@ class AppHeader extends Component {
             visible: visible
         });
 
+    };
+
+
+
+    rotateChange=()=>{
+        this.setState({
+            rotate: !   this.state.rotate
+        })
     }
-
-
-
 
 
 
@@ -53,15 +59,27 @@ class AppHeader extends Component {
 
     render() {
 
+        const menu = (
+            <Menu>
+                <Menu.Item key="0">
+                    <a href="http://www.alipay.com/">1st menu item</a>
+                </Menu.Item>
+                <Menu.Item key="1">
+                    <a href="http://www.taobao.com/">2nd menu item</a>
+                </Menu.Item>
+                <Menu.Divider />
+                <Menu.Item key="3">3rd menu item</Menu.Item>
+            </Menu>
+        );
 
         return (
 
 
-            <Header className={this.props.isOnHomePage ? (this.state.visible ? ("app-header") : ("withoutHeader")):("app-header")}>
+            <Header
+                className={this.props.isOnHomePage ? (this.state.visible ? ("app-header") : ("withoutHeader")) : ("app-header")}>
                 <div className="container">
 
                     <Menu
-                        onClick={this.handleClick}
                         className="app-menu"
                         mode="horizontal"
                         style={{lineHeight: '63px'}}
@@ -78,14 +96,32 @@ class AppHeader extends Component {
                             <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Предложить
                                 поездку</Link>
                         </MenuItem>
-                        <MenuItem key="addUser">
-                            <Link to="/register"><Icon type="user-add"
-                                                       style={{fontSize: '16px'}}/> Регистрация</Link>
-                        </MenuItem>
-                        <MenuItem key="login">
+                        {
+                            !this.props.isAuthenticated ?
+                                <MenuItem key="addUser">
+                                    <Link to="/register"><Icon type="user-add"
+                                                               style={{fontSize: '16px'}}/> Регистрация</Link>
+                                </MenuItem>
+                                : ''
+
+                        }
+
+                        {!this.props.isAuthenticated ? (<MenuItem key="login">
                             <Link to="/login"> <Icon type="login"
                                                      style={{fontSize: '16px'}}/>Войти</Link>
-                        </MenuItem>
+                        </MenuItem>) : ''}
+
+                        {this.props.isAuthenticated ? <MenuItem key="user" className="avatar">
+                            <Dropdown overlay={menu} trigger={['click']} onVisibleChange={this.rotateChange}>
+                                <div>
+                                    <p>{this.props.name}</p>
+                                    <Avatar size={55}
+                                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+                                            <Icon rotate={this.state.rotate ? (180) : (0)} style={{ fontSize: '16px'}} type='down'/>
+                                </div>
+                            </Dropdown>
+                        </MenuItem> : ''}
+
 
                     </Menu>
                 </div>
@@ -97,6 +133,8 @@ class AppHeader extends Component {
 
 AppHeader.propTypes={
 isOnHomePage: PropTypes.bool,
+    isAuthenticated: PropTypes.bool,
+    name: PropTypes.string,
 };
 
 

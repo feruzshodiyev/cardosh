@@ -96,6 +96,24 @@
   margin-top: -4px;
 }
 
+.avatar{
+  float: right;
+  right: 10%;
+  > div{
+    display: inline-flex;
+    height: 63px;
+    //border: 1px black solid;
+    >p {
+      padding-right: 10px;
+  }
+    >i{
+      padding-top: 21%;
+    }
+  };
+}
+
+
+
 @media (max-width: 846px) {
 
   .app-header{
