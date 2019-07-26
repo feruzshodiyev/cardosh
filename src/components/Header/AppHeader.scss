@@ -17,14 +17,18 @@
 
 .withoutHeader{
   //display: none;
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 10;
   padding: 0;
   background: none;
+  transition: 0.7s;
+
   > .container > .ant-menu-horizontal{
     border-bottom: none;
+    margin: auto;
   }
+
 
 }
 
@@ -41,6 +45,7 @@
   z-index: 10;
   padding: 0;
   background-color: #ffff;
+  transition: 0.5s;
   //background: ;
 }
 
@@ -96,6 +101,13 @@
   margin-top: -4px;
 }
 
+.ant-menu-item .anticon, .ant-menu-submenu-title .anticon {
+  min-width: 0px;
+  margin-right: 0px;
+  font-size: 30px;
+  transition: font-size 0.15s cubic-bezier(0.215, 0.61, 0.355, 1), margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
 .avatar{
   float: right;
   right: 10%;
@@ -108,6 +120,14 @@
   }
     >i{
       padding-top: 21%;
+    }
+
+    >span{
+      >i{
+         min-width: 0px;
+         margin-right: 0px;
+         font-size: 30px;
+      }
     }
   };
 }
@@ -130,4 +150,10 @@
       }
     }
   }
+}
+
+@media screen and (min-width: 1260px) {
+  .app-header{
+ width: 1260px;
+}
 }

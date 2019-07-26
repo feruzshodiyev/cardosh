@@ -1,16 +1,26 @@
 
 .wrapper-offer{
-    padding-top: 70px;
+    padding-top: 10px;
+    //padding-left: 13%;
  background-color: white;
+    margin: auto;
+
 }
 .form-group{
     padding-top: 70px;
     padding-bottom: 50px;
-    width: 80%;
+    width: 90%;
+    margin: auto;
+    >h1{
+        margin-left: 30%;
+        color: #ff6600;
+    }
 
 }
 .plll{
-    width: 50%;
+    width: 70%;
+    border: solid 1px #ff8533;
+    padding: 10px;
 }
 .from-to{
     margin-left: 30px;
@@ -24,13 +34,58 @@
 }
 .submit-btn{
     float: right;
+}
+.wrap-back-forward{
 
+    >div{
+        display: inline-flex;
+    }
+    #forward{
+        float: right;
+    }
+}
+.seats{
+    >div{
+        display: inline-flex;
+    }
+    #inp{
+      margin-left: 30px;
+    }
 }
 .route-map{
-    margin-left: 90px;
-    border: 1px solid black;
+    margin-left: 50px;
     width: 60%;
+    height: 400px;
+    border: 1px solid #ff8533;
+    >div{
+        position: relative;
+        width: 100%;
+        height: 400px;
+
+        >div{
+            >div{
+                margin: auto;
+                padding-top: 5px;
+            }
+        }
+    }
 }
 .form-flex{
     display: inline-flex;
+    width: 100%;
+}
+.map {
+
+}
+.price{
+    > div{
+        display: inline-flex;
+    };
+}
+.currency{
+    >p{
+        margin-top: 13%;
+        margin-left: 20px;
+        font-size: large;
+    }
 }

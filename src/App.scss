@@ -1,0 +1,19 @@
+
+.app-js{
+    position: relative;
+    background-image: url("images/cardosh.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    //background-size: 100%  3000px;
+    font-family: 'Archivo', sans-serif;
+    background-size: cover;
+
+
+}
+
+@media screen and (min-width: 1260px) {
+    .app-js{
+        width: 1260px;
+        margin: auto;
+    }
+}

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import './Home.scss'
 import {Button} from "antd";
-import axios from 'axios';
-import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
+import Plx from 'react-plx';
 
 class Home extends Component{
 
@@ -18,9 +17,32 @@ class Home extends Component{
     };
 
 
+
     render(){
+        const parallaxData = [
+            {
+                start: 0,
+                end: 300,
+                properties: [
+                    {
+                        startValue: 1,
+                        endValue: -1,
+                        property: 'scale',
+                    },
+                    {
+                        startValue: 1,
+                        endValue: 0,
+                        property: "opacity",
+                        unit: ""
+                    }
+                ],
+            },
+        ];
         return(
             <div className="homePage">
+
+                <Plx
+                    parallaxData={ parallaxData } animateWhenNotInViewport={true}>
 
                 <div className='homeContent'>
                     <p>
@@ -30,7 +52,8 @@ class Home extends Component{
                             <Button onClick={this.handleClick} type='default' className='search-ride-btn'>Найти поездку</Button>
                             <Button type='default' className='offer-ride-btn'>Предложить поездку</Button>                            
                         </div> 
-                </div>   
+                </div>
+                </Plx>
             </div>
         )
     }

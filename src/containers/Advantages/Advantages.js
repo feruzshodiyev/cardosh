@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Advantage.css'
+import './Advantage.scss'
 
 class Advantages extends Component{
     render(){

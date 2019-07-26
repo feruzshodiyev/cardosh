@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 
 import './AppHeader.scss';
+import {ACCESS_TOKEN} from "../../constants";
 
 const Header = Layout.Header;
 const MenuItem = Menu.Item;
@@ -55,6 +56,13 @@ class AppHeader extends Component {
 
 
 
+    handleLogout=()=>{
+        localStorage.removeItem(ACCESS_TOKEN);
+        window.location.reload();
+
+
+    };
+
 
 
     render() {
@@ -68,7 +76,7 @@ class AppHeader extends Component {
                     <a href="http://www.taobao.com/">2nd menu item</a>
                 </Menu.Item>
                 <Menu.Divider />
-                <Menu.Item key="3">3rd menu item</Menu.Item>
+                <Menu.Item key="3" onClick={this.handleLogout}><Icon type="logout" />Выйти</Menu.Item>
             </Menu>
         );
 
@@ -115,8 +123,7 @@ class AppHeader extends Component {
                             <Dropdown overlay={menu} trigger={['click']} onVisibleChange={this.rotateChange}>
                                 <div>
                                     <p>{this.props.name}</p>
-                                    <Avatar size={55}
-                                            src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
+                                    <Avatar size={60} icon="user" />
                                             <Icon rotate={this.state.rotate ? (180) : (0)} style={{ fontSize: '16px'}} type='down'/>
                                 </div>
                             </Dropdown>

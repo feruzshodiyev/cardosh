@@ -7,11 +7,11 @@
 .wrap-from-to {
     margin: auto;
     width: 80%;
-    border: 1px solid;
+    //border: 1px solid;
     padding: 20px;
     height: 450px;
     > h1{
-
+      text-align: center;
         color: #ff6600;
     }
 
@@ -55,6 +55,8 @@
   height: 50px;
   border: 2px solid #ff6600;
   border-radius: 20px;
+  padding-left: 5%;
+  font-size: xx-large;
 
 }
 

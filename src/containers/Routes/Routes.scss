@@ -1,9 +1,17 @@
-.wrapper-routes{
-    position: relative;
-    height: 600px;
-    padding-top: 20px;
-    top: 10%;
-    text-align: center;
+.wrapper-routes {
+  position: relative;
+  height: 600px;
+  padding-top: 20px;
+  top: 10%;
+  text-align: center;
+  overflow: hidden;
+  background: url('../../images/cardosh-sam.jpg') no-repeat;
+  //background-size: cover;
+  //background-position-y: 700px;
+  //background-attachment: fixed;
+  //background:
+  //        url(https://deploy-preview-5--reinventsoftwareio.netlify.com/static/cover.841dad16.jpg) no-repeat;
+
 
 }
 
@@ -37,10 +45,9 @@
 
 
 .icon-text{
-    margin-left:25px;
-    margin-block-end: 50px;
-    vertical-align:top;
-    margin-bottom: 10px;
+    margin-left:105px;
+  display: inline;
+  //float: right;
 }
 .ant-btn-group .ant-btn {
   border-radius: 10px;
@@ -61,4 +68,14 @@
 .ant-btn-group > .ant-btn:first-child:not(:last-child), .ant-btn-group > span:first-child:not(:last-child) > .ant-btn {
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
+}
+
+
+
+.parallax{
+background-color: rgba(255, 255, 255, 0.7);
+  height: 200px;
+}
+.plxButton{
+  display: inline-block;
 }

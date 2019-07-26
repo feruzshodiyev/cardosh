@@ -1,11 +1,19 @@
 import React, {Component} from 'react';
 import "./SignUp.scss";
 
-import {Button, Icon, Form, Input} from 'antd'
+import {Button, Icon, Form, Input, notification} from 'antd'
 import ButtonGroup from 'antd/lib/button/button-group';
 
-import { BrowserRouter as Router, Link, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
+import {ACCESS_TOKEN, API_BASE_URL} from "../../../constants";
+import PropTypes from 'prop-types';
+import {login} from "../../../utils/ApiUtils";
+
+import FacebookLogin from 'react-facebook-login';
+
+import GoogleLogin from 'react-google-login';
+
 
 class SignUp extends Component {
 
@@ -17,12 +25,17 @@ class SignUp extends Component {
             isLastNameFilled: false,
             isDobFilled: false,
             isPasswordValid: false,
+            isRegSuccess: false,
+            isRegError: false,
             fields: {
                 'first_name': "",
                 'last_name': "",
                 'email': "",
                 "dob": null,
                 "gender": 1,
+                'password': ""},
+            loginFields: {
+                'email': "",
                 'password': ""}
         };
 
@@ -40,6 +53,10 @@ if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
         isEmailValid: true,
         fields: {
             ...prevState.fields,
+            [name] : value
+        },
+        loginFields: {
+            ...prevState.loginFields,
             [name] : value
         }
     }));
@@ -99,6 +116,10 @@ if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
              fields: {
                  ...prevState.fields,
                  [name] : value
+             },
+             loginFields: {
+                 ...prevState.loginFields,
+                 [name] : value
              }
          }));
      }else {
@@ -112,14 +133,27 @@ if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
 
  onPasswordButtonClick=()=>{
 
+     this.props.onRegWait();
+
      console.log("State values: ",this.state.fields);
 
-     axios.post('http://api.cardosh.uz/v1/restapi/user/create/', this.state.fields
+     axios.post(API_BASE_URL+'/user/create/', this.state.fields
 
      ).then(response => {
-console.log(response)
+console.log(response);
+         this.setState({
+             isRegSuccess: true
+         });
+         this.handleSubmitFromSignUp();
+         // window.location.reload();
      }).catch(error => {
+         this.setState({
+             isRegError: true,
+         });
+         this.props.onRegSuccess();
          console.log("this is error", error);
+         window.location.reload();
+
      });
 
  };
@@ -158,18 +192,63 @@ console.log(e.target.value);
     };
 
 
+//auth
+    handleSubmitFromSignUp = () => {
 
+                const loginRequest = Object.assign({}, this.state.loginFields);
+                login(JSON.stringify(loginRequest))
+                    .then(response => {
+                        localStorage.setItem(ACCESS_TOKEN, response.access);
+                        this.props.onLogin();
+                        console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
+                        this.props.onRegSuccess();
+                        window.location.reload();
+                    }).catch(error => {
+                    if (error.status ===401) {
+                        notification.error({
+                            message: 'Cardosh login',
+                            description:"Ваш электронный адрес или пароль неверны. Пожалуйста, попробуйте еще раз!"
+                        })
+                    }else {
+                        notification.error({
+                            message: 'Cardosh login',
+                            description: error.message || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
+                        })
+                    }
+                });
 
+    };
+
+    // Social authentication
+     responseFacebook = (response) => {
+        console.log(response);
+    };
+
+     responseGoogle = (response) => {
+        console.log(response);
+    };
 
 
 
     render() {
 
+        if (this.state.isRegSuccess){
+            return <Redirect to='/register/success'/>;
+        }
+
+        if (this.state.isRegError){
+            return <Redirect to='/register/error'/>;
+        }
+
+
         return (
 
             <Router>
                 <div className="wrapper-reg">
-                    <Route exact path='/register' render={() => <Reg/>}/>
+                    <Route exact path='/register' render={() => <Reg
+                        responseFacebook={this.responseFacebook}
+                        responseGoogle={this.responseGoogle}
+                    />}/>
                     <Route path='/register/mail' render={() => <MailForm
                         handleOnChange={this.handleEmailChange}
                         emailIsValid={this.state.isEmailValid}/>}
@@ -195,6 +274,10 @@ console.log(e.target.value);
                         handleOnChange={this.handleDateInputChange}
                         isDobFilled={this.state.isDobFilled}
                     />}/>
+
+                    <Route path='/register/success' component={()=><SuccessRegister/>}/>
+
+                    <Route path='/register/error' component={()=><ErrorRegister/>}/>
 
                 </div>
             </Router>
@@ -229,16 +312,35 @@ const MailForm=(props)=>{
 };
 
 
-const Reg=()=>{
+const Reg=(props)=>{
+    const {responseFacebook, responseGoogle} = props;
     return(
         <div>
             <h1 className='register-title'>Страница для регистрации</h1>
-            <Form className="login-form">
+            <div className="login-form">
                 <ButtonGroup className="reg-btns-form">
-                    <Button type="link">Войти через Facebook <Icon type='facebook'/></Button>
+                    <br/>
+                    <br/>
+                    <FacebookLogin
+                        textButton="Регистрация через Facebook"
+                        appId="916694295343872" //APP ID
+                        fields="first_name, last_name, email, picture, birthday, gender"
+                        callback={responseFacebook}
+                        scope="public_profile, email, user_birthday, user_gender"
+                    />
+                    <br/>
+                    <br/>
+                    <GoogleLogin
+                        clientId="823750689194-2n636shuiamk842p9ahehglrlkd3es22.apps.googleusercontent.com" //CLIENTID
+                        buttonText="Регистрация через Google"
+                        onSuccess={responseGoogle}
+                        onFailure={responseGoogle}
+                    />
+                    <br/>
+                    <br/>
                     <Button type="link"><Link to='/register/mail'>Регистрация через эл. почту</Link></Button>
                 </ButtonGroup>
-            </Form>
+            </div>
         </div>
     )
 };
@@ -322,5 +424,27 @@ const BirthForm=(props)=>{
     );
 
 };
+
+const SuccessRegister = ()=>{
+    return(
+        <div>
+            <h1>Спасибо за регистрацию!</h1>
+        </div>
+    )
+};
+
+const ErrorRegister = ()=>{
+    return(
+        <div>
+            <h1>Something went error!</h1>
+        </div>
+    )
+};
+
+SignUp.propTypes={
+    onRegWait: PropTypes.func,
+    onRegSuccess: PropTypes.func
+};
+
 
 export default SignUp;

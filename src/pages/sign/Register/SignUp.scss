@@ -20,9 +20,10 @@
 .reg-btns-form > Button{
     display: block;
     margin: 10px;
-    font-size: 18px;
     font-family: 'Nunito', sans-serif;
-
+    >a{
+        font-size: x-large;
+    }
     >span{
         color: #ff6600;
     }

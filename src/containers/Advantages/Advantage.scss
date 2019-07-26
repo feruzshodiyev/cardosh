@@ -1,0 +1,32 @@
+.advantages-wrapper{
+    height: 600px;
+    padding: 20px;
+
+}
+.articles{
+
+    width: 100%;
+    font: 25px  bold;
+    color: #ff6600;
+    background-color: rgba(255, 255, 255, 0.8);
+    >article{
+        display: inline-block;
+        width: 350px;
+        padding-left: 60px;
+    }
+
+}
+
+.advant-title {
+    display: block;
+    font: 30px bold;
+    color: #ff6600;
+    padding: auto;
+    background-color: rgba(255, 255, 255, 0.8);
+border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    text-align: center;
+
+}
+
+
