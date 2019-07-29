@@ -39,9 +39,8 @@ if (this.props.renderDirection){
     }
 
 
-
     render() {
-        const GoogleMapExample = withGoogleMap(props => (
+        const GoogleMapExample = withGoogleMap(() => (
             <GoogleMap
                 defaultCenter={{ lat: 41.322658, lng: 69.242630 }}
                 defaultZoom={10}

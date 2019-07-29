@@ -2,32 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a3a11227-cf17-4e55-b84f-52f52a9c9dbb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/App.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/containers/Advantages/Advantage.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/images/cardosh-sam.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/offerTrip/Map.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/offerTrip/Second.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/antproject.iws" beforeDir="false" afterPath="$PROJECT_DIR$/antproject.iws" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/AppHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/AppHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Header/AppHeader.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header/AppHeader.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Advantages/Advantage.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Advantages/Advantages.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Advantages/Advantages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Home/Home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Home/Home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Routes/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Routes/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/containers/Routes/Routes.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/containers/Routes/Routes.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/HomePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/forTestApi.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/offerTrip/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/offerTrip/Map.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/searchRoute/SearchRoute.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="antproject.iml" />
@@ -60,8 +41,21 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="224" column="50" lean-forward="true" selection-start-line="224" selection-start-column="50" selection-end-line="224" selection-end-column="50" />
+            <state relative-caret-position="-1995">
+              <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#20#59#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/Second.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1496">
+              <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -72,8 +66,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
-              <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+            <state relative-caret-position="99">
+              <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -81,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/Map.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+            <state relative-caret-position="476">
+              <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#20#59#0" expanded="true" />
@@ -115,7 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config-overrides.js" />
         <option value="$PROJECT_DIR$/src/pages/searchRoute/Search.js" />
         <option value="$PROJECT_DIR$/src/pages/searchRoute/Search.css" />
         <option value="$PROJECT_DIR$/src/pages/sign/SignUp.js" />
@@ -159,15 +152,22 @@
         <option value="$PROJECT_DIR$/src/containers/Routes/Routes.scss" />
         <option value="$PROJECT_DIR$/src/containers/Routes/Routes.js" />
         <option value="$PROJECT_DIR$/src/pages/sign/Register/SignUp.scss" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/pages/sign/Register/SignUp.js" />
         <option value="$PROJECT_DIR$/src/pages/offerTrip/GoogleMaps.js" />
         <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/src/pages/offerTrip/Second.js" />
         <option value="$PROJECT_DIR$/src/pages/offerTrip/Map.js" />
+        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.scss" />
         <option value="$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.js" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="463" />
@@ -183,13 +183,46 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope">
+        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
+          <expand>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="Routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
               <item name="antproject" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
+              <item name="antproject" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="antproject" type="b2602c69:ProjectViewProjectNode" />
@@ -252,35 +285,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Scope 'Default Changelist'; set:Default Changelist; class com.intellij.packageDependencies.ChangeListScope">
-          <expand>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="antproject" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="antproject" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="containers" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="Routes" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -297,13 +302,13 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\antproject\src\pages\sign\Auth" />
-      <recent name="D:\antproject\src\pages\sign\Register" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\antproject\src\images" />
       <recent name="D:\antproject\src\components\Header" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\antproject\src\pages\sign\Auth" />
+      <recent name="D:\antproject\src\pages\sign\Register" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -412,7 +417,13 @@
       <workItem from="1563953403752" duration="19533000" />
       <workItem from="1564044093943" duration="13381000" />
       <workItem from="1564070267470" duration="2353000" />
-      <workItem from="1564125003586" duration="2366000" />
+      <workItem from="1564125003586" duration="16340000" />
+      <workItem from="1564162798930" duration="1188000" />
+      <workItem from="1564214538007" duration="11132000" />
+      <workItem from="1564244158023" duration="753000" />
+      <workItem from="1564309460239" duration="17485000" />
+      <workItem from="1564388493832" duration="12692000" />
+      <workItem from="1564421784210" duration="1269000" />
     </task>
     <task id="LOCAL-00001" summary="Responsive">
       <created>1560265715138</created>
@@ -425,29 +436,28 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="495608000" />
+    <option name="totallyTimeSpent" value="554101000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1296" height="776" extended-state="7" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.67236024" visible="true" weight="0.21521036" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.82465756" visible="true" weight="0.21521036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Capture Tool" order="4" />
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info id="npm" order="7" sideWeight="0.32763976" side_tool="true" visible="true" weight="0.21521036" />
+      <window_info id="npm" order="7" sideWeight="0.17534247" side_tool="true" visible="true" weight="0.21521036" />
       <window_info id="Learn" order="8" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919255" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4935275" weight="0.33695653" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.11645963" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4935275" weight="0.24378882" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.45962733" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49838188" weight="0.4332298" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49838188" visible="true" weight="0.4332298" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50647247" side_tool="true" weight="0.10248447" />
       <window_info anchor="bottom" id="Database Changes" order="10" />
@@ -456,7 +466,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Maven" order="3" weight="0.32928804" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
       <window_info anchor="right" id="Palette&#9;" order="6" />
@@ -480,14 +490,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/antproject.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package-lock.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-279604" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Header/Header.js" />
     <entry file="file://$PROJECT_DIR$/src/components/Header/Register/Register.js" />
     <entry file="file://$PROJECT_DIR$/src/hoc/Layout/Layout.js" />
@@ -537,16 +539,6 @@
           <caret line="5" column="91" lean-forward="true" selection-start-line="5" selection-start-column="91" selection-end-line="5" selection-end-column="91" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -741,9 +733,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/GoogleMaps.js" />
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="935">
+        <state relative-caret-position="-1114">
           <caret line="68" selection-start-line="68" selection-end-line="68" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
@@ -751,25 +754,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="61" selection-start-line="29" selection-start-column="61" selection-end-line="29" selection-end-column="100" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/GoogleMaps.js" />
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="16" column="27" lean-forward="true" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/sign/Register/SignUp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="312" selection-start-line="312" selection-end-line="312" />
+        <state relative-caret-position="423">
+          <caret line="445" column="13" selection-start-line="445" selection-start-column="13" selection-end-line="445" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="197">
+          <caret line="17509" column="12" selection-start-line="17509" selection-start-column="12" selection-end-line="17509" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/manifest.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="37" column="30" lean-forward="true" selection-start-line="37" selection-start-column="30" selection-end-line="37" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="7" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/Second.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1496">
+          <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
@@ -778,8 +800,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/Map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="55" column="11" lean-forward="true" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
+        <state relative-caret-position="476">
+          <caret line="35" column="6" selection-start-line="35" selection-start-column="6" selection-end-line="35" selection-end-column="6" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="e#20#59#0" expanded="true" />
@@ -789,17 +811,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="35" column="17" selection-start-line="35" selection-start-column="17" selection-end-line="35" selection-end-column="17" />
+        <state relative-caret-position="99">
+          <caret line="31" column="11" lean-forward="true" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/offerTrip/OfferTrip.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="224" column="50" lean-forward="true" selection-start-line="224" selection-start-column="50" selection-end-line="224" selection-end-column="50" />
+        <state relative-caret-position="-1995">
+          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#20#59#0" expanded="true" />
           </folding>
         </state>
       </provider>
