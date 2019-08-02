@@ -1,0 +1,39 @@
+.media li {
+
+  display: inline-block;
+  padding-left: 30px;
+}
+
+.footer {
+  text-align: center;
+  .wrapper-footer {
+    margin-top: 170px;
+
+    > p {
+      color: white;
+    }
+  }
+}
+
+.media li a {
+  color: white;
+
+  > i {
+    font-size: 35px;
+  }
+}
+
+
+.footerWithBackground {
+  background-color: white;
+  text-align: center;
+  .wrapper-footer {
+    > p {
+      color: #ff6600;
+    }
+    .media li a {
+      color: #ff6600;
+    }
+    }
+}
+

@@ -33,8 +33,16 @@ class Second extends Component {
                                 <h2>Цена с пассажира</h2>
                             </div>
                             <div className="direction">
+                                <div>
+                                    <p>Отправление:   Завтра - 17:00</p>
+                                    <p>Расстоярие:    100км</p>
+                                    <p>Время в путиЖ  16 ч 20 м</p>
+
+                                </div>
+                                <div>
                                 <p><Icon type="down-circle"/>{this.props.origin} </p>
                                 <p><Icon type="environment"/>{this.props.destination}</p>
+                                </div>
                             </div>
                             <div className="price">
                                 <div>

@@ -1,31 +1,29 @@
-.advantages-wrapper{
-    height: 600px;
-    padding: 20px;
-
+.advantages-wrapper {
+  margin-top: 450px;
 }
-.articles{
 
-    width: 100%;
-    font: 25px  bold;
-    color: #ff6600;
-    background-color: rgba(255, 255, 255, 0.8);
-    >article{
-        display: inline-block;
-        width: 350px;
-        padding-left: 60px;
+.articles {
+  color: #fdffff;
+  padding-left: 40px;
+margin-top: auto;
+  > div {
+    text-align: center;
+
+    > h3 {
+      font-weight: bold;
+      color: #fdffff;
+      margin-bottom: -5px;
+
     }
+  }
 
 }
 
 .advant-title {
-    display: block;
-    font: 30px bold;
-    color: #ff6600;
-    padding: auto;
-    background-color: rgba(255, 255, 255, 0.8);
-border-top-right-radius: 30px;
-    border-top-left-radius: 30px;
-    text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+  color: #fdffff;
+  text-align: center;
 
 }
 

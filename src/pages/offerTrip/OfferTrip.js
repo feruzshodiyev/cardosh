@@ -1,16 +1,16 @@
 /* global google */
 import React, {Component} from 'react';
 import './OfferTrip.scss'
-import {Input, DatePicker, TimePicker, Button, Steps, Form, Icon} from 'antd';
+import {DatePicker, TimePicker, Button, Steps, Form, Icon, notification} from 'antd';
 import moment from 'moment';
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import { geocodeByPlaceId, getLatLng } from 'react-places-autocomplete';
-import { BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom';
-import { createBrowserHistory } from 'history';
+import {geocodeByPlaceId, getLatLng} from 'react-places-autocomplete';
+import {BrowserRouter as Router, Link, Route, Redirect, withRouter, Switch} from 'react-router-dom';
+import {createBrowserHistory} from 'history';
 import Map from './Map';
 import SecondStepForm from './Second'
 import axios from 'axios'
-// import GoogleMap from 'google-distance-matrix';
+
 
 const history = createBrowserHistory();
 const location = history.location;
@@ -19,16 +19,16 @@ history.listen((location) => {
 });
 
 
-
 const {Step} = Steps;
 
 const steps = [
-"First", "Second", "Last"
+    "First", "Second", "Last"
 ];
+
 class OfferTrip extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             offerTripFields: {
                 'fromm': "",
                 'to': "",
@@ -38,32 +38,31 @@ class OfferTrip extends Component {
                 'seats': 3,
                 'extra_info': ""
             },
-            time: null,
-            date: null,
             origin: {},
             hasOrigin: false,
             destination: {},
             hasDestination: false,
             current: 0,
+            loading: false,
+            redirectSecond: false,
         }
     }
 
 
-
-    handleSelectFrom=(description, place_id)=>{
-        this.setState(prevState=>({
+    handleSelectFrom = (description, place_id) => {
+        this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'fromm':  description
+                'fromm': description
             }
         }));
 
         geocodeByPlaceId(place_id)
             .then(results => getLatLng(results[0]))
-            .then(({ lat, lng }) =>
+            .then(({lat, lng}) =>
                 // console.log('Successfully got latitude and longitude', { lat, lng })
                 this.setState({
-                    origin: { lat, lng },
+                    origin: {lat, lng},
                     hasOrigin: true
                 })
             );
@@ -73,93 +72,77 @@ class OfferTrip extends Component {
 
     };
 
-    handleSelectTo=(description, place_id)=>{
+    handleSelectTo = (description, place_id) => {
 
-        this.setState(prevState=>({
+        this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'to' :  description
+                'to': description
             },
 
         }));
         geocodeByPlaceId(place_id)
             .then(results => getLatLng(results[0]))
-            .then(({ lat, lng }) =>
+            .then(({lat, lng}) =>
                 // console.log('Successfully got latitude and longitude', { lat, lng })
                 this.setState({
-                    destination: { lat, lng },
+                    destination: {lat, lng},
                     hasDestination: true
                 })
             );
         console.log(this.state.offerTripFields);
-        console.log(description, place_id)};
-
-    handleDate=(date, dateString)=>{
-        this.setState(prevState=>({
-            offerTripFields: {
-                ...prevState.offerTripFields,
-                'departure_date' :  dateString
-            },
-            date
-        }));
-
+        console.log(description, place_id)
     };
 
-    handleTime=(time, timeString)=>{
-        this.setState(prevState=>({
-            offerTripFields: {
-                ...prevState.offerTripFields,
-                'departure_time' :  timeString
-            },
-            time
-        }));
-    };
 
-    handleClick=e=>{
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-                this.setState({
-                    current: +1
-                });
-                const service = new google.maps.DistanceMatrixService();
-
-                service.getDistanceMatrix({
-                        origins: [new google.maps.LatLng(this.state.origin)],
-                        destinations: [new google.maps.LatLng(this.state.destination)],
-                        travelMode: window.google.maps.TravelMode.DRIVING,
-                        avoidHighways: false,
-                        avoidTolls: false,
-                    },
-                    (result, status)=>{
-                        if (status === google.maps.DistanceMatrixStatus.OK) {
-                            console.log('result from custom code: '+result.rows[0].elements[0].distance.text);
-                        } else {
-                            console.error(`error fetching distance ${result}`);
-                        }
-                    });
-            }else {
-                console.log('error')
-            }
+    handleClickDale = values => {
+        this.setState({
+            loading: true
         });
 
 
+        const date = moment(values.date);
+        const obj = date.toObject();
+        const day = obj.date;
+        const months = obj.months;
+        const years = obj.years;
+        const formattedDate = "" + day + "." + months + "." + years;
+
+        console.log(formattedDate);
+
+        const service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix({
+                origins: [new google.maps.LatLng(this.state.origin)],
+                destinations: [new google.maps.LatLng(this.state.destination)],
+                travelMode: window.google.maps.TravelMode.DRIVING,
+                avoidHighways: false,
+                avoidTolls: false,
+            },
+            (result, status) => {
+                if (status === google.maps.DistanceMatrixStatus.OK) {
+                    console.log('result from custom code: ' + result.rows[0].elements[0].distance.text);
+                    notification.success({
+                        message: 'Успешно',
+                        description: '',
+                    });
+                    this.setState({
+                        loading: false,
+                        redirectSecond: true,
+                    })
+                } else {
+                    console.error(`error fetching distance ${result}`);
+                }
+            });
+
 
     };
 
-    disabledDate=(current)=> {
-        // Can not select days before today and today
-        return current && current < moment().endOf('day');
-    };
 
-
-
-    handleSecondStepVal=(values)=>{
-        this.setState(prevState=>({
+    handleSecondStepVal = (values) => {
+        this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'price':  values.price,
+                'price': values.price,
                 'seats': values.seats,
                 'extra_info': values.extra_info
             }
@@ -167,16 +150,16 @@ class OfferTrip extends Component {
     };
 
 
-    render(){
+    render() {
 
-        const FirstStep = () =>{
+        const FirstStep = () => {
             return (
                 <div className="form-flex">
                     <div className="plll">
                         <div className='from-to'>
                             <h1>Откуда вы выезжаете?</h1>
                             <GooglePlacesAutocomplete
-                                placeholder='Ташкент'
+                                placeholder='Например: Ташкент'
                                 initialValue={this.state.offerTripFields.fromm}
                                 onSelect={({description, place_id}) => (this.handleSelectFrom(description, place_id))}
                                 autocompletionRequest={{
@@ -185,9 +168,10 @@ class OfferTrip extends Component {
                                     },
                                 }}
                             />
+                            <hr/>
                             <h1>Куда вы едете?</h1>
                             <GooglePlacesAutocomplete
-                                placeholder='Шахрисабз'
+                                placeholder='Например: Шахрисабз'
                                 initialValue={this.state.offerTripFields.to}
                                 onSelect={({description, place_id}) => (this.handleSelectTo(description, place_id))}
                                 autocompletionRequest={{
@@ -196,15 +180,20 @@ class OfferTrip extends Component {
                                     }
                                 }}
                             />
-
+                            <hr/>
                         </div>
-                        <DateAndTime/>
+                        <DateAndTime
+                            onClickDale={this.handleClickDale}
+                            disabled={this.state.hasOrigin && this.state.hasDestination}
+                            loading={this.state.loading}
+                        />
                     </div>
 
                     <div className="route-map google-maps">
                         <div>
                             <Map
                                 origin={this.state.origin}
+
                                 destination={this.state.destination}
                                 renderDirection={this.state.hasOrigin && this.state.hasDestination}
                             />
@@ -215,27 +204,27 @@ class OfferTrip extends Component {
 
         };
 
-        const SecondStep1 =() =>{
-            return(
-            <div className="form-flex">
-                <div className="plll">
-                    <SecondStepForm
-                        origin={this.state.offerTripFields.fromm}
-                        destination={this.state.offerTripFields.to}
-                        onValuesSubmit={this.handleSecondStepVal}
-                    />
-                </div>
-                <div className="route-map google-maps">
-                    <div>
-                        <Map
-                            origin={this.state.origin}
-                            destination={this.state.destination}
-                            renderDirection={this.state.hasOrigin && this.state.hasDestination}
+        const SecondStep1 = () => {
+            return (
+                <div className="form-flex">
+                    <div className="plll">
+                        <SecondStepForm
+                            origin={this.state.offerTripFields.fromm}
+                            destination={this.state.offerTripFields.to}
+                            onValuesSubmit={this.handleSecondStepVal}
                         />
                     </div>
-                </div>
+                    <div className="route-map google-maps">
+                        <div>
+                            <Map
+                                origin={this.state.origin}
+                                destination={this.state.destination}
+                                renderDirection={this.state.hasOrigin && this.state.hasDestination}
+                            />
+                        </div>
+                    </div>
 
-            </div>
+                </div>
             );
         };
 
@@ -253,10 +242,13 @@ class OfferTrip extends Component {
                         </Steps>
                         <br/>
                         <div className='offer-form'>
-                            <Route exact path='/offerTrip' render={() => <FirstStep/>}/>
+
+                            <Route exact path='/offerTrip' render={() => this.state.redirectSecond ?
+                                <Redirect to='/offerTrip/second'/> : <FirstStep/>}/>
                             <Route path='/offerTrip/second'
                                    render={() => this.state.hasOrigin && this.state.hasDestination ? <SecondStep1/> :
                                        <Redirect to="/offerTrip"/>}/>
+
                         </div>
                     </div>
 
@@ -267,20 +259,26 @@ class OfferTrip extends Component {
 }
 
 
-
-class  DateAndTimeComponent extends Component {
-    handleClickSubmit=e=>{
+class DateAndTimeComponent extends Component {
+    handleClickSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                this.props.onClickDale(values);
             }
         });
 
     };
+    disabledDate = (current) => {
+        // Can not select days before today and today
+        return current && current < moment().endOf('day');
+    };
+
     render() {
 
-        const { getFieldDecorator } = this.props.form;
+        const {getFieldDecorator} = this.props.form;
+        const {loading, disabled} = this.props;
+
         return (
             <Form onSubmit={this.handleClickSubmit}>
                 <div className='date-time'>
@@ -289,38 +287,44 @@ class  DateAndTimeComponent extends Component {
                     </div>
                     <div className='date-time-inputs'>
                         <Form.Item label="DatePicker">
-                        {getFieldDecorator('date',{
-                            rules: [{ required: true, message: 'Please input your date!' }],
-                        })(
-                            <DatePicker
-                                format='DD.MM.YYYY'
-                                placeholder='Дата'
-                            />
-                        )}
+                            {getFieldDecorator('date', {
+                                rules: [{required: true, message: 'Please input your date!'}],
+                            })(
+                                <DatePicker
+                                    format='DD.MM.YYYY'
+                                    placeholder='Дата'
+                                    disabled={!disabled}
+                                    disabledDate={this.disabledDate}
+                                />
+                            )}
                         </Form.Item>
 
-                       <Form.Item label="TimePicker">
-                        {getFieldDecorator('time',{
-                            rules: [{ required: true, message: 'Please input your time!' }],
-                        })(
-                            <TimePicker
-                                format='HH:mm'
-                                placeholder='Время'
-                            />
-                        )}
-                       </Form.Item>
+                        <Form.Item label="TimePicker">
+                            {getFieldDecorator('time', {
+                                rules: [{required: true, message: 'Please input your time!'}],
+                            })(
+                                <TimePicker
+                                    disabled={!disabled}
+                                    format='HH:mm'
+                                    placeholder='Время'
+                                />
+                            )}
+                        </Form.Item>
 
                     </div>
                     <br/>
                     <div className="submit-btn">
                         <Form.Item>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                        >
-                            <Link id="link" to='/offerTrip/second'>Продолжить</Link>
-                            <Icon type="double-right" />
-                        </Button>
+                            {/*<Link id="link" to='/offerTrip/second'>*/}
+                            <Button
+                                disabled={!disabled}
+                                type="primary"
+                                htmlType="submit"
+                            >
+                                Продолжить
+                                {loading ? <Icon type="loading"/> : <Icon type="double-right"/>}
+                            </Button>
+                            {/*</Link>*/}
                         </Form.Item>
                     </div>
                 </div>
@@ -328,8 +332,8 @@ class  DateAndTimeComponent extends Component {
         );
     }
 }
+
 const DateAndTime = Form.create()(DateAndTimeComponent);
 
 
-
-export default OfferTrip
+export default withRouter(OfferTrip);

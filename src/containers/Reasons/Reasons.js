@@ -1,36 +1,42 @@
 import React,{Component} from 'react'
 import './Reasons.scss'
+import {Icon} from "antd";
  class Reasons extends Component{
      render(){
          return(
              <div className='reasons-wrapper'>
-                 <h2 className='reason-title'> 3 причины полюбить CarDosh</h2>
+                 <h1 className='reason-title'> 3 причины полюбить CarDosh</h1>
                  <div className='raw'>
-                    <div className='col'> 
-                        <img alt="soobshestvo-icon"></img>
-                            <h4>Сообщество</h4>
+                    <div className='col'>
+                        <div>
+                            <Icon type="file-protect" />
+                            <h3>Сообщество</h3>
                         <p>
-                            Мы хотим узнать наших пользователей как можно лучше.
-                            Наша команда проверяет профили и отзывы. Когда в профили 
-                            потверждено удостоверение личности вы наверняка, с кем садитесь 
+                            Мы проверяем и подтверждаем каждый <br/>профиль и отзыв,
+                            чтобы Вы знали наверняка <br/> с кем садитесь
                             в машину 
                         </p>
+                        </div>
                     </div>
                     <div className='col'>
-                            <img alt="ryadom-icon"></img>
-                        <h4>Рядом</h4>
+                        <div>
+                            <Icon type="environment" />
+                        <h3>Рядом</h3>
                         <p>
-                            Забудьте о том что надо спешить на станцию 
-                            через весь город. Ловите попуткупрямо за углом
+                            Забудьте о том что надо спешить на станцию <br/>
+                            через весь город. Ловите попуткупрямо за <br/>углом
                         </p>
+                        </div>
                     </div>
                     <div className='col'>
-                            <img alt="skorost-icon"></img>
-                        <h4>Скорость</h4>
+                        <div>
+                            <Icon type="clock-circle" />
+                        <h3>Скорость</h3>
                         <p>
-                            60 секунд. Именно столько в среднем 
-                            требуется, чтобы найти попутчиков поблизости 
+                            60 секунд. Именно столько в среднем <br/>
+                            требуется, чтобы найти попутчиков <br/>поблизости
                         </p>
+                        </div>
                     </div>
                  </div>
              </div>

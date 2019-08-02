@@ -2,15 +2,22 @@
 .homePage{
     height: 700px;
 }
+.logo{
+  width: 480px;
+  height: 190px;
+  background-size: 240px 100px;
+  background-image:  url("../../images/logo cardosh.png");
+  background-repeat: no-repeat;
+}
 .homeContent{
-padding-top: 20%;
+padding-top: 13%;
   padding-left: 10%;
 }
 .search-ride-btn{
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-
 }
+
 .offer-ride-btn{
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -18,10 +25,11 @@ padding-top: 20%;
 }
 
 .button-group{
+  margin-top: 8%;
   > Button {
     background-color: #ff6600;
-    height: 55px;
-    width: 200px;
+    height: 50px;
+    width: 240px;
     font-size: 15px;
     color: white;
 

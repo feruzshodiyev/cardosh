@@ -1,23 +1,39 @@
-.raw{
-    box-sizing: border-box;
-    width: 90%;
-    float: right;
-    right: 0;
+.raw {
+  width: max-content;
+  margin: auto;
 }
-.col{
-    box-sizing: border-box;
-    width: 30%;
-    margin-left: 10px;
-    float: right;    
+
+.col {
+  display: inline-flex;
+  margin-right: 20px;
+
+  >div {
+    >i{
+      padding-left: 43%;
+      font-size: xx-large;
+    }
+    > h3 {
+      color: #f0f1f2;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    > p {
+      text-align: center;
+      font-size: small;
+    }
+  }
 }
-.reasons-wrapper{
-    /*background: khaki;*/
-    margin: 0;
-    height: 600px;    
+
+.reasons-wrapper {
+  color: #f0f1f2;
+  margin-top: 180px;
+  >h1{
+    font-weight: bold;
+  }
 }
-.reason-title{
-    right: 20%;
-    margin: auto;
-    text-align: center;
-    padding-top: 20px;
+
+.reason-title {
+  color: #f0f1f2;
+  text-align: center;
 }

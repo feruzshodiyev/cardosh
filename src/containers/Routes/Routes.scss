@@ -1,81 +1,59 @@
 .wrapper-routes {
   position: relative;
-  height: 600px;
-  padding-top: 20px;
-  top: 10%;
+  padding-top: 135px;
   text-align: center;
   overflow: hidden;
-  background: url('../../images/cardosh-sam.jpg') no-repeat;
-  //background-size: cover;
-  //background-position-y: 700px;
-  //background-attachment: fixed;
-  //background:
-  //        url(https://deploy-preview-5--reinventsoftwareio.netlify.com/static/cover.841dad16.jpg) no-repeat;
-
 
 }
 
-.title-text{
-    text-align: initial;
-    margin: 0%;
-    padding-left: 17%;
+.route-text {
+  background-color: #f0f1f2;
+  width: 70%;
+  margin-left: 5.6%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
   color: #ff6600;
+  text-align: left;
 }
 
-.popular-routes{
-    position: absolute;
-    top: 4%;
-    color: #ff6600;
-    right: 16%;
-    padding: 5px;   
+.route-price {
+  width: 24.4%;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #dedde2;
+  color: #ff6600;
+  padding-top: 6.5%;
+  font-weight: bold;
 }
-.routes{
-    margin-top: 2%;
-    margin-left: 35px;
 
-
+.title-text {
+  text-align: center;
+  margin: 0;
+  font-size: x-large;
+  color: #fffafe;
 }
-.route-link{
-    width: 270px;
-    block-size: 60px;
-    margin-right: 20px;
-    text-align: left;
+
+.popular-routes {
+  font-size: large;
+  align-content: center;
+  top: 4%;
+  color: #bc3505;
+  right: 16%;
+  padding: 5px;
+}
+
+.routes {
+  margin-top: 2%;
+  margin-left: 35px;
+}
+
+.route-link {
+  border-radius: 10px;
+  display: inline-flex;
+  width: 27%;
+  height: 70px;
+  margin-right: 20px;
   background-color: #ff6600;
 }
 
-
-.icon-text{
-    margin-left:105px;
-  display: inline;
-  //float: right;
-}
-.ant-btn-group .ant-btn {
-  border-radius: 10px;
-  color: white;
-  font-size: 15px;
-}
-
-.ant-btn:hover, .ant-btn:focus, .ant-btn:active, .ant-btn.active {
-  background: #cc2900;
-  color: white;
-}
-
-.ant-btn-group > .ant-btn:last-child:not(:first-child), .ant-btn-group > span:last-child:not(:first-child) > .ant-btn {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-}
-
-.ant-btn-group > .ant-btn:first-child:not(:last-child), .ant-btn-group > span:first-child:not(:last-child) > .ant-btn {
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-}
-
-
-
-.parallax{
-background-color: rgba(255, 255, 255, 0.7);
-  height: 200px;
-}
-.plxButton{
-  display: inline-block;
-}

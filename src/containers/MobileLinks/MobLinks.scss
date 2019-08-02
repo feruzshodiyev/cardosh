@@ -1,0 +1,43 @@
+.wrap-mob{
+  width: 90%;
+  height: 100px;
+  margin: 60px auto;
+
+>div{
+  width: max-content;
+margin: auto;
+  >h1{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+  }
+  >a {
+    > div {
+      display: inline-flex;
+      background-repeat: no-repeat;
+      margin: 20px;
+
+    }
+  }
+}
+}
+
+#app-store{
+  width: 200px;
+  height: 70px;
+  background-size: 200px 78px;
+  background-image: url("../../images/appStore.png");
+  background-position: 0 -9px;
+  :hover{
+    background-color: #ffffff;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+  }
+}
+
+#play-market{
+  width: 200px;
+  height: 70px;
+  background-size: 200px 70px;
+  background-image: url("../../images/playMarket.png");
+}
