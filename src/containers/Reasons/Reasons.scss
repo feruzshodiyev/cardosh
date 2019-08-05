@@ -1,6 +1,9 @@
 .raw {
-  width: max-content;
-  margin: auto;
+  width: 100%;
+  >div{
+    width: 70%;
+    margin: auto;
+  }
 }
 
 .col {

@@ -5,11 +5,12 @@ import {DatePicker, TimePicker, Button, Steps, Form, Icon, notification} from 'a
 import moment from 'moment';
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import {geocodeByPlaceId, getLatLng} from 'react-places-autocomplete';
-import {BrowserRouter as Router, Link, Route, Redirect, withRouter, Switch} from 'react-router-dom';
+import {HashRouter as Router, Route, Redirect, withRouter} from 'react-router-dom';
 import {createBrowserHistory} from 'history';
 import Map from './Map';
 import SecondStepForm from './Second'
 import axios from 'axios'
+import Confirm from "./Confirm";
 
 
 const history = createBrowserHistory();
@@ -36,7 +37,7 @@ class OfferTrip extends Component {
                 'departure_time': "",
                 'price': 5000,
                 'seats': 3,
-                'extra_info': ""
+                'extra_info': "",
             },
             origin: {},
             hasOrigin: false,
@@ -107,8 +108,14 @@ class OfferTrip extends Component {
         const months = obj.months;
         const years = obj.years;
         const formattedDate = "" + day + "." + months + "." + years;
+        const time = moment(values.time);
+        const timeObj = time.toObject();
+        const hours = timeObj.hours;
+        const minutes = timeObj.minutes;
+        const formattedTime = ""+hours+":"+minutes;
 
         console.log(formattedDate);
+        console.log(formattedTime);
 
         const service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix({
@@ -130,10 +137,21 @@ class OfferTrip extends Component {
                         redirectSecond: true,
                     })
                 } else {
-                    console.error(`error fetching distance ${result}`);
+                    this.setState({
+                        loading: false,
+                        redirectSecond: true,
+                    })
                 }
             });
 
+        this.setState( prevState=>({
+        offerTripFields: {
+            ...prevState.offerTripFields,
+            'departure_date': formattedDate,
+            'departure_time': formattedTime,
+        }
+
+        }));
 
     };
 
@@ -234,12 +252,12 @@ class OfferTrip extends Component {
                 <div className="wrapper-offer">
                     <div className="form-group">
                         <h1 className="trip-header">Предложить поездку</h1>
-                        <Steps current={this.state.current}>
-                            {
-                                steps.map(item => (<Step key={item} title={item}/>))
-                            }
+                        {/*<Steps current={this.state.current}>*/}
+                        {/*    {*/}
+                        {/*        steps.map(item => (<Step key={item} title={item}/>))*/}
+                        {/*    }*/}
 
-                        </Steps>
+                        {/*</Steps>*/}
                         <br/>
                         <div className='offer-form'>
 
@@ -248,6 +266,7 @@ class OfferTrip extends Component {
                             <Route path='/offerTrip/second'
                                    render={() => this.state.hasOrigin && this.state.hasDestination ? <SecondStep1/> :
                                        <Redirect to="/offerTrip"/>}/>
+                                       <Route path='/offerTrip/confirm' render={()=> <Confirm/>}/>
 
                         </div>
                     </div>
@@ -315,7 +334,7 @@ class DateAndTimeComponent extends Component {
                     <br/>
                     <div className="submit-btn">
                         <Form.Item>
-                            {/*<Link id="link" to='/offerTrip/second'>*/}
+
                             <Button
                                 disabled={!disabled}
                                 type="primary"
@@ -324,7 +343,7 @@ class DateAndTimeComponent extends Component {
                                 Продолжить
                                 {loading ? <Icon type="loading"/> : <Icon type="double-right"/>}
                             </Button>
-                            {/*</Link>*/}
+
                         </Form.Item>
                     </div>
                 </div>

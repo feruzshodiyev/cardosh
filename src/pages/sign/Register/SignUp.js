@@ -4,7 +4,7 @@ import "./SignUp.scss";
 import {Button, Icon, Form, Input, notification} from 'antd'
 import ButtonGroup from 'antd/lib/button/button-group';
 
-import { BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import { HashRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 import {ACCESS_TOKEN, API_BASE_URL} from "../../../constants";
 import PropTypes from 'prop-types';
