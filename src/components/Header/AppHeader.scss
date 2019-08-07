@@ -16,7 +16,6 @@
 }
 
 .withoutHeader{
-  //display: none;
   position: absolute;
   width: 100%;
   z-index: 10;
@@ -46,12 +45,11 @@
   padding: 0;
   background-color: #ffff;
   transition: 0.5s;
-  //background: ;
+
 }
 
 .app-menu {
   text-align: center;
-  background: none ;
 
   >li {
     padding: 0 20px;

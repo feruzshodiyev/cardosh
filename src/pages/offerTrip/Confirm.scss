@@ -1,13 +1,16 @@
 .wrap-confirm{
+  text-align: center;
+  color: #a14106;
+  height: 320px;
   >div{
-    width: 50%;
     margin: auto;
+>div{
+  display: inline-block;
+  font-size: x-large;
+  .input-confirm{
+    width: 200px;
+  }
+}
 
-    >p{
-      display: inline-table;
-    }
-    >Input{
-      display: inline-table;
-    }
   }
 }

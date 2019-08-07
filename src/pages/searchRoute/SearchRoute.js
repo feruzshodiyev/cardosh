@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Icon } from 'antd';
+import {Button, Icon} from 'antd';
 import "./SearchRoute.scss";
 import { Link,  Route,  BrowserRouter as Router, Switch, withRouter} from 'react-router-dom'
 import ChoosePlace from "./ChoosePlace"
@@ -70,7 +70,7 @@ const  FromTo = (props) => {
                 <div className="section">
                     {selectedFrom===''?
                         <p className="text"><Icon type="environment"/>Откуда</p> :
-                        <p>{selectedFrom}</p>}
+                        <p className="text">{selectedFrom}</p>}
 
                 </div>
             </Link>
@@ -79,11 +79,14 @@ const  FromTo = (props) => {
                 <div className="section">
                     {selectedTo===''?
                         <p className="text"><Icon type="environment"/> Куда</p> :
-                        <p>{selectedTo}</p>
+                        <p className="text">{selectedTo}</p>
                     }
                 </div>
             </Link>
             </div>
+
+            <Button className="btn-search" type="primary">Найти</Button>
+
         </div>
     );
 

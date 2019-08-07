@@ -1,12 +1,18 @@
 import React, {Component} from 'react';
 import {Input, Select} from "antd";
 import './Confirm.scss'
-const { Option } = Select;
+
+const {Option} = Select;
 
 class Confirm extends Component {
+
+    handleNumChange = e => {
+        console.log(e.target.value);
+    };
+
     render() {
-        const SelectBefore=(
-            <Select defaultValue="90" style={{ width: 80 }}>
+        const SelectBefore = (
+            <Select defaultValue="90" style={{width: 80}}>
                 <Option value="90">90</Option>
                 <Option value="91">91</Option>
                 <Option value="93">93</Option>
@@ -20,8 +26,11 @@ class Confirm extends Component {
             <div className="wrap-confirm">
                 <h1>Подтверждите ваш номер!</h1>
                 <div>
-                    <p>+998</p>
-                    <Input addonBefore={SelectBefore}/>
+                    <div><p>+998</p></div>
+                    <div>
+                        <Input className="input-confirm" addonBefore={SelectBefore} autoFocus={true}
+                               onChange={value=>this.handleNumChange(value)}/>
+                    </div>
                 </div>
             </div>
         );
