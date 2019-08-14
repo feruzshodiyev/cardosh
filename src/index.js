@@ -8,6 +8,7 @@ import {HashRouter} from "react-router-dom";
 
 ReactDOM.render(
     <HashRouter>
+        <div id="background"/>
          <App/>
     </HashRouter>,
 

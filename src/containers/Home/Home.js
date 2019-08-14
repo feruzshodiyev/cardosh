@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './Home.scss'
-import {Button} from "antd";
+import {Button, Icon} from "antd";
+import {Link} from "react-router-dom";
 
 class Home extends Component{
 
@@ -18,7 +19,7 @@ class Home extends Component{
 
 
     render(){
-        return(
+        return (
             <div className="homePage">
 
 
@@ -27,14 +28,19 @@ class Home extends Component{
                     <div className='logo'/>
 
 
-
                     <div className='button-group'>
-                            <Button onClick={this.handleClick} type='default' className='search-ride-btn'>Найти поездку</Button>
-                            <Button type='default' className='offer-ride-btn'>Предложить поездку</Button>                            
-                        </div> 
+                        {/*<Link to="/search">*/}
+                            <Button onClick={this.handleClick} type='default' className='search-ride-btn'>Найти
+                                поездку</Button>
+                    {/*</Link>*/}
+                    {/*    <Link to="/offerTrip">*/}
+                            <Button type='default' className='offer-ride-btn'>Предложить
+                            поездку</Button>
+                        {/*</Link>*/}
+                    </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 export default Home;

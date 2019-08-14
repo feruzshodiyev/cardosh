@@ -38,9 +38,9 @@ class Second extends Component {
                                 <p><Icon type="environment"/>{this.props.destination}</p>
                                 </div>
                                 <div className="route-info">
-                                    <p>Отправление:   </p>
-                                    <p>Расстоярие:    </p>
-                                    <p>Время в пути:  </p>
+                                    <p>Отправление:--- {this.props.departureDate} <Icon type="clock-circle" /> {this.props.departureTime}  </p>
+                                    <p>Расстоярие:---   {this.props.distance} </p>
+                                    <p>Время в пути:--- {this.props.duration} </p>
 
                                 </div>
                             </div>
@@ -87,7 +87,9 @@ class Second extends Component {
                             </div>
                             <div>
                                 <p>Предоставьте пассажирам больше информации о поездке.</p>
-                                {getFieldDecorator('extra_info')(
+                                {getFieldDecorator('description',{
+                                    rules: [{required: true, message: 'Required field!'}],
+                                })(
                                     <TextArea
                                         placeholder="Укажите, например:
                 - место отправления и прибытия;

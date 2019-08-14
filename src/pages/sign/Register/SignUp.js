@@ -140,12 +140,11 @@ if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
      axios.post(API_BASE_URL+'/user/create/', this.state.fields
 
      ).then(response => {
-console.log(response);
+
          this.setState({
              isRegSuccess: true
          });
          this.handleSubmitFromSignUp();
-         // window.location.reload();
      }).catch(error => {
          this.setState({
              isRegError: true,

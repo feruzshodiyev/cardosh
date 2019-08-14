@@ -1,12 +1,26 @@
 body {
   background-image: url("./images/texture.png");
-  background-attachment: fixed;
+  /*background-attachment: fixed;*/
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+#background{
+  display: none;
+}
+
+@media screen and (max-width: 768px){
+  #background{
+    display: block;
+    background-image: url("./images/Cardosh_background.png");
+    background-size: 100% 100%;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 code {

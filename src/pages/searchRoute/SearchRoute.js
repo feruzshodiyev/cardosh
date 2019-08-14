@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
-import {Button, Icon} from 'antd';
+import {Button, Icon, Modal} from 'antd';
 import "./SearchRoute.scss";
-import { Link,  Route,  BrowserRouter as Router, Switch, withRouter} from 'react-router-dom'
-import ChoosePlace from "./ChoosePlace"
-
+import { Link,  Route, Switch, withRouter} from 'react-router-dom';
+import ChoosePlace from "./ChoosePlace";
+import axios from 'axios';
+import {API_BASE_URL} from "../../constants";
+import SearchResults from "./SearchResults";
+import PropTypes from 'prop-types';
 
 
 class SearchRoute extends Component {
@@ -12,24 +15,31 @@ class SearchRoute extends Component {
         super(props);
         this.state = {
             selectedPlaceFrom: '',
-            selectedPlaceTo: ''
+            selectedPlaceTo: '',
+            fromId: "",
+            toId: "",
+            results: [],
+            loading: false
         };
     }
 
-    handleSelectFrom = (description) => {
+    handleSelectFrom = (res) => {
+
         this.setState({
-            selectedPlaceFrom: description
-        })
+
+            selectedPlaceFrom: res.description,
+            fromId: res.place_id
+        });
         this.props.history.push("/search")
     };
 
-    handleSelectTo = (description) => {
+    handleSelectTo = (res) => {
         this.setState({
-            selectedPlaceTo: description
-        })
+            selectedPlaceTo: res.description,
+            toId: res.place_id
+        });
         this.props.history.push("/search")
     };
-
 
 
 
@@ -42,6 +52,7 @@ class SearchRoute extends Component {
                <Route exact path="/search" render={()=><FromTo
                selectedFrom={this.state.selectedPlaceFrom}
                selectedTo={this.state.selectedPlaceTo}
+               disabled={this.state.selectedPlaceTo&&this.state.selectedPlaceFrom}
                />}/>
                <Route path="/search/from" render={()=><ChoosePlace
                isFromPage={true}
@@ -50,6 +61,10 @@ class SearchRoute extends Component {
                <Route path="/search/to" render={()=><ChoosePlace
                isFromPage={false}
                onSelectTo={this.handleSelectTo}
+               />}/>
+               <Route path="/search/results" render={()=><SearchResults
+                   fromId={this.state.fromId}
+                   toId={this.state.toId}
                />}/>
                 </Switch>
             </div>
@@ -60,7 +75,7 @@ class SearchRoute extends Component {
 
 
 const  FromTo = (props) => {
-    const {selectedFrom, selectedTo} = props;
+    const {selectedFrom, selectedTo, disabled} = props;
     return (
         <div className="wrap-from-to">
 
@@ -84,9 +99,11 @@ const  FromTo = (props) => {
                 </div>
             </Link>
             </div>
-
-            <Button className="btn-search" type="primary">Найти</Button>
-
+            <div className="btn-search">
+                <Link to='/search/results'>
+            <Button disabled={!disabled} type="primary">Найти</Button>
+                </Link>
+            </div>
         </div>
     );
 
@@ -94,7 +111,10 @@ const  FromTo = (props) => {
 
 
 
-
+SearchRoute.propTypes={
+    onWait: PropTypes.func,
+    onResponse: PropTypes.func
+};
 
 
 export default withRouter(SearchRoute);

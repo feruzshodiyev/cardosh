@@ -50,7 +50,7 @@
 
 .app-menu {
   text-align: center;
-
+background: none;
   >li {
     padding: 0 20px;
     > a {
@@ -136,9 +136,12 @@
 
   .app-header{
     height: 55px;
+    >div{
+      height: 55px;
+    }
   }
   .app-menu {
-    //display: none;
+    height: 55px;
     > li {
       padding: 0 5px;
       > a {
@@ -150,8 +153,8 @@
   }
 }
 
-@media screen and (min-width: 1366px) {
+@media screen and (min-width: 1400px) {
   .app-header{
- width: 1366px;
+ width: 1400px;
 }
 }

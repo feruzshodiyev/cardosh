@@ -12,6 +12,7 @@ import {notification} from 'antd';
 import {getCurrentUser} from './utils/ApiUtils'
 import {ACCESS_TOKEN} from "./constants";
 import LoadingScreen from 'react-loading-screen'
+import logo from "./images/logo.png";
 
 class App extends Component {
 
@@ -22,14 +23,13 @@ class App extends Component {
             isOnHomePage: true,
             currentUser: {},
             isAuthenticated: false,
-            isLoading: false
+            isLoading: true
         }
     }
 
 //checkForCurrentPageOnLoad func is used for detecting current location on load page
     checkForCurrentPageOnLoad = () => {
         if (this.props.history.location.pathname === '/') {
-            console.log("home page");
             this.setState({
                 isOnHomePage: true
             })
@@ -85,15 +85,13 @@ class App extends Component {
                     isAuthenticated: true,
                 });
                 this.stopLoading();
-                console.log('user: '+this.state.currentUser.first_name);
-                console.log('user: '+response.first_name);
-                console.log('auth: '+this.state.isAuthenticated);
+                localStorage.setItem("user", this.state.currentUser.id);
             }).catch(error=>{
+                if (localStorage.getItem(ACCESS_TOKEN)){
+                    localStorage.clear();
+                }
                 this.stopLoading();
-        });
-
-        this.stopLoading();
-
+        }).then(this.stopLoading);
 
     };
 
@@ -129,6 +127,7 @@ handleLoginFromSignUp=()=>{
     };
 
     render(){
+const currentId = this.state.currentUser.id;
 
         return (
             <LoadingScreen
@@ -136,7 +135,7 @@ handleLoginFromSignUp=()=>{
                 bgColor='#ffffff'
                 spinnerColor='#ff6600'
                 textColor='#ff6600'
-                logoSrc='/logo.png'
+                logoSrc={logo}
                 text='Подождите!'
             >
 
@@ -147,7 +146,12 @@ handleLoginFromSignUp=()=>{
                 <Switch>
                     <Route exact path="/" render={() => <HomePage/>}/>
                     <Route path="/search" component={SearchRoute}/>
-                    <Route path="/offerTrip" component={OfferTrip}/>
+                    <Route path="/offerTrip" render={(props)=><OfferTrip
+                        onWait={this.startLoading}
+                        onResponse={this.stopLoading}
+                        currentId={currentId}
+                        {...props}
+                    />}/>
                     <Route path="/register" render={(props)=><SignUp
                         onRegWait={this.startLoading}
                         onRegSuccess={this.stopLoading}

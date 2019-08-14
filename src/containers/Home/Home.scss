@@ -9,6 +9,20 @@
   background-image:  url("../../images/logo.png");
   background-repeat: no-repeat;
 }
+@media (max-width: 846px) {
+  .logo{
+   margin-top: 20px;
+    width: 200px;
+    height: 100px;
+    background-size: 150px 70px;
+  }
+  .homePage{
+    height: 500px;
+  }
+
+}
+
+
 .homeContent{
 padding-top: 13%;
   padding-left: 10%;
@@ -26,15 +40,20 @@ padding-top: 13%;
 
 .button-group{
   margin-top: 8%;
-  > Button {
-    background-color: #ff6600;
-    height: 50px;
-    width: 240px;
-    font-size: 15px;
-    color: white;
+    > Button {
+      background-color: #ff6600;
+      height: 50px;
+      width: 240px;
+      font-size: 15px;
+      color: white;
+      @media (max-width: 846px) {
+        height: 30px;
+        width: 165px;
+      }
+
+    }
 
 
-  }
   :hover {
     background-color: #cc5200;
     color: white;

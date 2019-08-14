@@ -11,6 +11,7 @@ import Map from './Map';
 import SecondStepForm from './Second'
 import axios from 'axios'
 import Confirm from "./Confirm";
+import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 
 
 const history = createBrowserHistory();
@@ -31,13 +32,17 @@ class OfferTrip extends Component {
         super(props);
         this.state = {
             offerTripFields: {
+                'customUser': null,
                 'fromm': "",
                 'to': "",
                 'departure_date': "",
                 'departure_time': "",
-                'price': 5000,
                 'seats': 3,
-                'extra_info': "",
+                'price': 5000,
+                'description': "default",
+                'fromID': "",
+                'toID': "",
+                'phone_number': "",
             },
             origin: {},
             hasOrigin: false,
@@ -46,22 +51,35 @@ class OfferTrip extends Component {
             current: 0,
             loading: false,
             redirectSecond: false,
+            distance: '',
+            duration: '',
+            redirectConfirm: false
         }
     }
 
+    componentDidMount() {
+        const user = Number.parseInt( localStorage.getItem('user'),10);
+        console.log(user);
+        this.setState(prevState => ({
+            offerTripFields: {
+                ...prevState.offerTripFields,
+                'customUser': user,
+            }
+        }),()=>console.log(this.state.offerTripFields))
+    }
 
     handleSelectFrom = (description, place_id) => {
         this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'fromm': description
+                'fromm': description,
+                'fromID': place_id
             }
         }));
 
         geocodeByPlaceId(place_id)
             .then(results => getLatLng(results[0]))
             .then(({lat, lng}) =>
-                // console.log('Successfully got latitude and longitude', { lat, lng })
                 this.setState({
                     origin: {lat, lng},
                     hasOrigin: true
@@ -69,7 +87,6 @@ class OfferTrip extends Component {
             );
 
 
-        console.log(description, place_id);
 
     };
 
@@ -78,7 +95,8 @@ class OfferTrip extends Component {
         this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'to': description
+                'to': description,
+                'toID': place_id
             },
 
         }));
@@ -107,15 +125,13 @@ class OfferTrip extends Component {
         const day = obj.date;
         const months = obj.months;
         const years = obj.years;
-        const formattedDate = "" + day + "." + months + "." + years;
+        const formattedDate = "" + years + "-" + months + "-" + day;
         const time = moment(values.time);
         const timeObj = time.toObject();
         const hours = timeObj.hours;
         const minutes = timeObj.minutes;
         const formattedTime = ""+hours+":"+minutes;
 
-        console.log(formattedDate);
-        console.log(formattedTime);
 
         const service = new google.maps.DistanceMatrixService();
         service.getDistanceMatrix({
@@ -127,7 +143,12 @@ class OfferTrip extends Component {
             },
             (result, status) => {
                 if (status === google.maps.DistanceMatrixStatus.OK) {
-                    console.log('result from custom code: ' + result.rows[0].elements[0].distance.text);
+                    const distance = result.rows[0].elements[0].distance.text;
+                    const duration = result.rows[0].elements[0].duration.text;
+                    this.setState({
+                        distance: distance,
+                        duration: duration,
+                    });
                     notification.success({
                         message: 'Успешно',
                         description: '',
@@ -162,9 +183,43 @@ class OfferTrip extends Component {
                 ...prevState.offerTripFields,
                 'price': values.price,
                 'seats': values.seats,
-                'extra_info': values.extra_info
-            }
+                'description': values.description
+            },
+            redirectConfirm: true
         }));
+    };
+
+    getPhoneNum=(val)=>{
+        console.log("val "+val);
+        this.setState(prevState => ({
+            offerTripFields:{
+                ...prevState.offerTripFields,
+                'phone_number': val
+            }
+        }))
+    };
+
+    sendFields=()=>{
+        console.log(this.state.offerTripFields);
+        axios.post(API_BASE_URL+'/ride/create/', JSON.stringify(this.state.offerTripFields),{
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer '+ACCESS_TOKEN
+            }
+
+        }).then(res=>{
+            notification.success({
+                message: "Успешно",
+                description: "Ваша поездка успешно зарегистрирована!"
+            });
+            history.push("/")
+        }).catch(err=>{
+            notification.error({
+                message: "Ошибка",
+                description: "Произошла ошибка!"
+            });
+            history.push("/")
+        })
     };
 
 
@@ -184,6 +239,7 @@ class OfferTrip extends Component {
                                     componentRestrictions: {
                                         country: ['uz'],
                                     },
+                                    types: ['(cities)']
                                 }}
                             />
                             <hr/>
@@ -195,7 +251,8 @@ class OfferTrip extends Component {
                                 autocompletionRequest={{
                                     componentRestrictions: {
                                         country: ['uz'],
-                                    }
+                                    },
+                                    types: ['(cities)']
                                 }}
                             />
                             <hr/>
@@ -229,6 +286,10 @@ class OfferTrip extends Component {
                         <SecondStepForm
                             origin={this.state.offerTripFields.fromm}
                             destination={this.state.offerTripFields.to}
+                            distance={this.state.distance}
+                            duration={this.state.duration}
+                            departureDate={this.state.offerTripFields.departure_date}
+                            departureTime={this.state.offerTripFields.departure_time}
                             onValuesSubmit={this.handleSecondStepVal}
                         />
                     </div>
@@ -264,9 +325,15 @@ class OfferTrip extends Component {
                             <Route exact path='/offerTrip' render={() => this.state.redirectSecond ?
                                 <Redirect to='/offerTrip/second'/> : <FirstStep/>}/>
                             <Route path='/offerTrip/second'
-                                   render={() => this.state.hasOrigin && this.state.hasDestination ? <SecondStep1/> :
+                                   render={() => this.state.hasOrigin && this.state.hasDestination ? (this.state.redirectConfirm ?
+                                       <Redirect to='/offerTrip/confirm'/> : <SecondStep1/>) :
                                        <Redirect to="/offerTrip"/>}/>
-                                       <Route path='/offerTrip/confirm' render={()=> <Confirm/>}/>
+                            <Route path='/offerTrip/confirm' render={() =>
+                                this.state.redirectConfirm ?
+                                <Confirm
+                                    onConfirm={this.sendFields}
+                                getNum={this.getPhoneNum}/>:<Redirect to="/offerTrip"/>}
+                            />
 
                         </div>
                     </div>

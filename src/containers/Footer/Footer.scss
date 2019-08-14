@@ -8,8 +8,6 @@
 
   text-align: center;
   .wrapper-footer {
-    margin-top: 170px;
-
     > p {
       color: white;
     }
@@ -28,6 +26,7 @@
 .footerWithBackground {
   background-color: white;
   text-align: center;
+  height: 150px;
   .wrapper-footer {
     > p {
       color: #ff6600;

@@ -1,3 +1,5 @@
+/* global google */
+
 import React, {PureComponent} from 'react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import PropTypes from 'prop-types';
@@ -20,19 +22,21 @@ class ChoosePlace extends PureComponent {
 
 {this.props.isFromPage ? (<h1>Где бы вы хотели, чтобы вас забрали?</h1>):(<h1>Где бы вы хотели, чтобы вас высадили?</h1>)}
                 <GooglePlacesAutocomplete
-                    onSelect={({description})=>{
+                    onSelect={(res)=>{
                         if (this.props.isFromPage) {
-                            this.props.onSelectFrom(description)
+                            this.props.onSelectFrom(res);
                         }else {
-                            this.props.onSelectTo(description)
+                            this.props.onSelectTo(res)
                         }
 
                     }}
                     inputClassName="autocomplete-input"
+                    placeholder="Например: Шахрисабз"
                     autocompletionRequest={{
                         componentRestrictions: {
                             country: ['uz'],
-                        }
+                        },
+                        types: ['(cities)']
                     }}
 
                 />
