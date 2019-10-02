@@ -56,8 +56,8 @@ if (this.props.renderDirection){
         return (
             <div>
                 <GoogleMapExample
-                    containerElement={<div style={{ height: `390px`, width: "95%" }} />}
-                    mapElement={<div style={{ height: `100%` }} />}
+                    containerElement={<div className="map-container"/>}
+                    mapElement={<div className="map-element"/>}
                 />
             </div>
         );

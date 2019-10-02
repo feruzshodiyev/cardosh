@@ -29,14 +29,13 @@ class Home extends Component{
 
 
                     <div className='button-group'>
-                        {/*<Link to="/search">*/}
-                            <Button onClick={this.handleClick} type='default' className='search-ride-btn'>Найти
-                                поездку</Button>
-                    {/*</Link>*/}
-                    {/*    <Link to="/offerTrip">*/}
-                            <Button type='default' className='offer-ride-btn'>Предложить
-                            поездку</Button>
-                        {/*</Link>*/}
+
+                            <Button onClick={this.handleClick} type='default' className='search-ride-btn'><Link to="/search">Найти
+                                пасажира </Link></Button>
+
+
+                            <Button type='default' className='offer-ride-btn'><Link to="/offerTrip">Оставить заявку</Link></Button>
+
                     </div>
                 </div>
             </div>

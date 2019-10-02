@@ -1,0 +1,27 @@
+.profile-page{
+  position: relative;
+  padding-top: 70px;
+  height: 800px;
+  >div{
+    width: fit-content;
+    margin-left: 10%;
+    margin-top: 5%;
+    >div{
+      display: inline-block;
+    }
+  }
+}
+
+.profile-info{
+  position: absolute;
+  left: 40%;
+
+}
+
+.general{
+  display: inline-block;
+  //width: 700px;
+  >p{
+    text-align: center;
+  }
+}

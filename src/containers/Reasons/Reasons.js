@@ -8,6 +8,7 @@ import {Icon} from "antd";
                  <h1 className='reason-title'> 3 причины полюбить CarDosh</h1>
                  <div className='raw'>
                      <div>
+                         <div>
                     <div className='col'>
                         <div>
                             <Icon type="file-protect" />
@@ -39,6 +40,7 @@ import {Icon} from "antd";
                         </p>
                         </div>
                     </div>
+                         </div>
                      </div>
                  </div>
              </div>

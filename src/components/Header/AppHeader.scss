@@ -112,25 +112,32 @@ background: none;
   > div{
     display: inline-flex;
     height: 63px;
-    //border: 1px black solid;
     >p {
       padding-right: 10px;
+      font-size: large;
+      font-weight: bolder;
   }
-    >i{
-      padding-top: 21%;
-    }
-
-    >span{
-      >i{
-         min-width: 0px;
-         margin-right: 0px;
-         font-size: 30px;
-      }
+     >span{
+      margin-top: 10px;
     }
   };
 }
 
+.menu-mobile{
+  display: none;
+}
 
+.mob-avatar{
+  display: none;
+}
+
+.head-mob{
+  display: none;
+}
+
+.logo-header{
+  display: none;
+}
 
 @media (max-width: 846px) {
 
@@ -141,20 +148,45 @@ background: none;
     }
   }
   .app-menu {
-    height: 55px;
-    > li {
-      padding: 0 5px;
-      > a {
-        padding: 0 15px;
-        margin: 0 -15px;
+    display: none;
+  }
+  .menu-mobile{
+    display: inline-block;
+    width: 40%;
+    margin-left: 20px;
+    >i{
+      color: #ff6600;
+      font-size: x-large;
 
-      }
     }
+  }
+  .logo-header{
+
+    width: 50px;
+    height: 20px;
+    background-image: url("../../images/logo.png");
+    background-size: cover;
+    display: inline-block;
+  }
+  .mob-avatar{
+    display: inline-block;
+    float: right;
+    margin-right: 10px;
+    > div{
+      display: inline-flex;
+      height: 63px;
+      >p {
+        padding-right: 10px;
+        font-size: large;
+        font-weight: bolder;
+      }
+      >span{
+        margin-top: 10px;
+      }
+    };
+  }
+  .head-mob{
+display: block;
   }
 }
 
-@media screen and (min-width: 1400px) {
-  .app-header{
- width: 1400px;
-}
-}

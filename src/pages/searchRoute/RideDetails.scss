@@ -1,0 +1,137 @@
+.wrap-ride{
+  width: 50%;
+  margin: auto;
+  >h1{
+    text-align: center;
+    color: #ff6600;
+    font-weight: bold;
+  }
+}
+
+
+
+.detail-date{
+  margin: auto;
+  >h2{
+    //font-weight: bolder;
+    color: #555555;
+    >span{
+      color: #ff6600;
+    }
+    >i{
+      color: #52c41a;
+    }
+
+  }
+}
+
+.addresses{
+  margin: auto;
+  >div{
+    display: inline-block;
+    margin-left: 10px;
+    >h1{
+      color: #555555;
+
+    }
+    >i{
+      font-size: large;
+      color: #52c41a;
+    }
+  }
+}
+
+.modal-content{
+  text-align: center;
+}
+
+.detail-seats{
+  >p{
+    color: #555555;
+    font-size: large;
+    font-weight: bold;
+    >span{
+      color: #ff6600;
+    }
+  }
+}
+
+.detail-price{
+  @extend .detail-seats;
+}
+
+.new-price{
+  display: block;
+text-align: center;
+  margin: auto;
+  border-radius: 40px;
+  border: #ff6600 1px solid;
+  width: 200px;
+  height: 40px;
+  outline: none;
+  color: #ff6600;
+  font-weight: bold;
+  font-size: large;
+}
+
+
+
+.disabled-input{
+  display: none;
+}
+
+.price-checkbox{
+  color: #555555;
+  font-size: larger;
+}
+
+.btn-offer{
+  margin-left: 35%;
+  margin-top: 70px;
+  border: #ff6600 1px solid;
+  height: 40px;
+  border-radius: 40px;
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.user{
+  width: max-content;
+  margin: auto;
+  >a {
+    > div {
+      display: inline-block;
+      padding: 10px;
+      font-weight: bolder;
+
+      > h3 {
+        color: #555555;
+      }
+
+      > p {
+        color: #ff6600;
+      }
+
+      > p:hover {
+        color: #4f1407;
+      }
+
+    }
+  }
+}
+
+.detail-info{
+  margin-top: 20px;
+  >p{
+    //padding-left: 20px;
+    color: #555555;
+    font-weight: bolder;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .wrap-ride {
+    margin-top: 50px;
+    width: 90%;
+  }
+}

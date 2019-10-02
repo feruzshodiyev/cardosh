@@ -1,25 +1,37 @@
 .wrap-mob{
-  width: 90%;
+  //width: 90%;
   margin: 60px auto;
 
 >div{
-  width: 50%;
+  //width: 50%;
 margin: auto;
+
   >h1{
     text-align: center;
     color: white;
     font-weight: bold;
   }
-  >a {
-    > div {
-      display: inline-flex;
-      background-repeat: no-repeat;
-      margin: 20px;
+  >div{
+    width: fit-content;
+    margin: auto;
+    >a {
+      > div {
+        display: inline-flex;
+        background-repeat: no-repeat;
+        margin: 20px;
 
+      }
     }
   }
+
 }
 }
+
+@media screen and (min-width: 2730px) {
+  .wrap-mob {
+    margin-top: 400px;
+  }
+  }
 
 #app-store{
   width: 200px;
@@ -39,4 +51,22 @@ margin: auto;
   height: 70px;
   background-size: 200px 70px;
   background-image: url("../../images/playMarket.png");
+}
+
+@media (max-width: 846px) {
+  .wrap-mob{
+    >div{
+
+      >div{
+
+        >a {
+          > div {
+            display: block;
+
+          }
+        }
+      }
+
+    }
+  }
 }

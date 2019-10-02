@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Form, Input, Button, notification, Icon} from 'antd'
-import {Link} from 'react-router-dom'
+
 import "./SignIn.scss"
 import {ACCESS_TOKEN, API_BASE_URL} from "../../../constants";
 import {login} from "../../../utils/ApiUtils";
@@ -48,8 +48,10 @@ class LoginForm extends Component{
                         notification.error({
                             message: 'Cardosh login',
                             description: error.message || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
-                        })
+                        });
+
                     }
+                    console.log(error);
                 });
             }
         })
@@ -65,7 +67,7 @@ class LoginForm extends Component{
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
                     {getFieldDecorator('email', {
-                        rules: [{required: true, message: 'Please input your email address!'}]
+                        rules: [{required: true, message: 'Пожалуйста, введите свой адрес электронной почты!'}]
                     })(
                         <Input type="text" className="input-data" placeholder="Эл.почта"/>
                     )}
@@ -73,7 +75,7 @@ class LoginForm extends Component{
 
                 <FormItem>
                     {getFieldDecorator('password', {
-                        rules: [{required: true, message: 'Please input password!'}]
+                        rules: [{required: true, message: 'Пожалуйста, введите пароль!'}]
                     })(
                         <Input type="password" className="input-data" placeholder="Пароль"/>
                     )}

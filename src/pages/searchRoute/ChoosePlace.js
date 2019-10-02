@@ -20,7 +20,7 @@ class ChoosePlace extends PureComponent {
         return (
             <div className="container-autocomplete">
 
-{this.props.isFromPage ? (<h1>Где бы вы хотели, чтобы вас забрали?</h1>):(<h1>Где бы вы хотели, чтобы вас высадили?</h1>)}
+{this.props.isFromPage ? (<h1>Откуда вы выезжаете?</h1>):(<h1>Куда вы едете?</h1>)}
                 <GooglePlacesAutocomplete
                     onSelect={(res)=>{
                         if (this.props.isFromPage) {

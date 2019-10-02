@@ -1,8 +1,58 @@
 .signin-wrapper{
     padding-top: 70px;
     text-align: center;
-    background-color: white;
-    height: 600px;
+    height: 100%;
+    padding-bottom: 200px;
 }
 
 
+.input-data{
+    border-radius: 40px!important;
+    font-size: large !important;
+    text-align: center;
+}
+
+
+.input-data:focus::placeholder{
+    color:transparent;
+}
+.input-data:focus::-webkit-input-placeholder{
+    color:transparent;
+}
+.input-data:focus::-moz-placeholder {
+    color:transparent;
+}
+
+.input-data:focus:-ms-input-placeholder {
+    color:transparent;
+}
+
+.input-data::placeholder{
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.input-data::-webkit-input-placeholder{
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.input-data:-moz-placeholder {
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.input-data:-ms-input-placeholder {
+    -webkit-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}

@@ -44,70 +44,74 @@ class Second extends Component {
 
                                 </div>
                             </div>
+
+                            <div className="price-seats">
+
                             <div className="price">
                                 <div>
+                                    <Form.Item label="Желаемая цена за место:">
                                     {getFieldDecorator('price',{
                                         initialValue: 5000
                                     })(
                                         <InputNumber
-                                            size="large"
                                             min={0}
                                             max={200000}
                                             step={5000}
                                             autoFocus={true}
                                         />
                                     )}
-
+                                    </Form.Item>
                                     <div className="currency">
                                         <p>Сум</p>
                                     </div>
                                 </div>
 
                             </div>
-                        </div>
+
                         <div className="seats">
-                            <div>
-                                <p>Свободных мест:</p>
-                            </div>
                             <div id="inp">
+                                <Form.Item label="Необходимое количество мест:">
                                 {getFieldDecorator('seats',{
-                                    initialValue: 3
+                                    initialValue: 1
                                 })(
                                     <InputNumber
-                                        min={1} max={7}
+                                        min={1} max={4}
                                     />
                                 )}
-
+                                </Form.Item>
                             </div>
                         </div>
-                        <hr/>
+                            </div>
+                        </div>
+
+                <hr/>
                         <div className="extra-info">
                             <div>
-                                <h2>Подробнее о поездке</h2>
+                                <h2>Подробнее о заявке</h2>
                             </div>
                             <div>
-                                <p>Предоставьте пассажирам больше информации о поездке.</p>
+                                {/*<p>Предоставьте пассажирам больше информации о поездке.</p>*/}
+                                <Form.Item label="Предоставьте попутчикам больше информации о заявке.">
                                 {getFieldDecorator('description',{
-                                    rules: [{required: true, message: 'Required field!'}],
+                                    rules: [{required: true, message: 'Обязательное поле!'}],
                                 })(
                                     <TextArea
                                         placeholder="Укажите, например:
                 - место отправления и прибытия;
                 - возможность взять багаж;
-                - количество пассажиров;
-                - правила поведение в вашем автомобиле."
+                "
                                         rows={4}/>
                                 )}
-
+                                </Form.Item>
                             </div>
                             <div><p>
-                                <Icon type="exclamation-circle" /> Не указывайте здесь ваши контактные данные. Потенциальные пассажиры получат ваш номер телефона.
+                                <Icon type="exclamation-circle" /> Не указывайте здесь ваши контактные данные. Потенциальные попутчмки получат ваш номер телефона.
                             </p></div>
                         </div>
 
                         <div className="wrap-back-forward">
                             <div><Button type="primary"><Icon type="double-left" />Назад</Button></div>
-                            <div id="forward"><Button type="primary" htmlType="submit">Продлжить<Icon type="double-right" /></Button></div>
+                            <div id="forward"><Button type="primary" htmlType="submit">Закочить<Icon type="double-right" /></Button></div>
                         </div>
             </Form>
         );

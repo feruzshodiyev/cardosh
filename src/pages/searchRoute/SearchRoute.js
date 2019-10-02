@@ -7,6 +7,8 @@ import axios from 'axios';
 import {API_BASE_URL} from "../../constants";
 import SearchResults from "./SearchResults";
 import PropTypes from 'prop-types';
+import RideDetails from "./RideDetails";
+import UserInfo from "./UserInfo";
 
 
 class SearchRoute extends Component {
@@ -45,6 +47,7 @@ class SearchRoute extends Component {
 
 
     render() {
+        const isAuthenticated = this.props.isAuthenticated;
         return (
 
             <div className="wrapper-search">
@@ -52,6 +55,8 @@ class SearchRoute extends Component {
                <Route exact path="/search" render={()=><FromTo
                selectedFrom={this.state.selectedPlaceFrom}
                selectedTo={this.state.selectedPlaceTo}
+               fromId={this.state.fromId}
+               toId={this.state.toId}
                disabled={this.state.selectedPlaceTo&&this.state.selectedPlaceFrom}
                />}/>
                <Route path="/search/from" render={()=><ChoosePlace
@@ -62,10 +67,18 @@ class SearchRoute extends Component {
                isFromPage={false}
                onSelectTo={this.handleSelectTo}
                />}/>
-               <Route path="/search/results" render={()=><SearchResults
-                   fromId={this.state.fromId}
-                   toId={this.state.toId}
+               <Route path="/search/results/:selectedPlaceFrom-:selectedPlaceTo-:fromId-:toId" render={(props)=><SearchResults
+                   // fromId={this.state.fromId}
+                   // toId={this.state.toId}
+                   {...props}
                />}/>
+               <Route path="/search/result/:id" render={(props)=><RideDetails
+                   isAuthenticated={isAuthenticated}
+                   {...props}/>}/>
+
+                   <Route path="/search/user/:id" render={(props)=><UserInfo
+                   isAuthenticated={isAuthenticated}
+                   {...props}/>}/>
                 </Switch>
             </div>
 
@@ -75,23 +88,26 @@ class SearchRoute extends Component {
 
 
 const  FromTo = (props) => {
-    const {selectedFrom, selectedTo, disabled} = props;
+    const {selectedFrom, selectedTo, disabled, fromId, toId} = props;
     return (
         <div className="wrap-from-to">
 
             <h1>Найти поездку</h1>
             <div className="relative">
+                <div className="wrap-section">
             <Link to='/search/from'>
-                <div className="section">
+                <div className={selectedFrom===''?"section":"section-active"}>
                     {selectedFrom===''?
                         <p className="text"><Icon type="environment"/>Откуда</p> :
                         <p className="text">{selectedFrom}</p>}
 
                 </div>
             </Link>
+                </div>
             <br/>
+            <div className="wrap-section">
             <Link to='/search/to'>
-                <div className="section">
+                <div className={selectedTo===''?"section":"section-active"}>
                     {selectedTo===''?
                         <p className="text"><Icon type="environment"/> Куда</p> :
                         <p className="text">{selectedTo}</p>
@@ -99,9 +115,10 @@ const  FromTo = (props) => {
                 </div>
             </Link>
             </div>
+            </div>
             <div className="btn-search">
-                <Link to='/search/results'>
-            <Button disabled={!disabled} type="primary">Найти</Button>
+                <Link to={`/search/results/${selectedFrom}-${selectedTo}-${fromId}-${toId}`}>
+            <Button className="btttn" disabled={!disabled} type="primary">Найти</Button>
                 </Link>
             </div>
         </div>

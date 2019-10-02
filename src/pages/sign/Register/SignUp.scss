@@ -1,13 +1,14 @@
-.wrapper-reg{
+.wrapper-reg {
     padding-top: 70px;
     text-align: center;
-    height: 500px;
-    background-color: white;
+    padding-bottom: 200px;
+
+
 }
 
 .login-form{
-    display: inline-block;
     width: 40%;
+    margin: auto;
 }
 .register-title{
     text-align: center;
@@ -82,6 +83,37 @@
     .btn-gender{
         @extend .input-data;
     }
+    >p{
+        font-weight: bold;
+        color: #3f4f59;
+    }
+}
 
+.icon-loading{
+  font-size: xx-large;
+  color: #ff6600;
 
+}
+
+.reg-success{
+padding-top: 50px;
+  >h1{
+    font-weight: bolder;
+    color: #ff6600;
+  }
+  >p{
+    color: #3f4f59;
+    font-size: medium;
+    font-weight: bolder;
+  }
+}
+
+@media screen and (max-width: 500px){
+    .login-form{
+        width: 90%;
+    }
+    .btn-gender {
+        display: block;
+        width: 250px;
+    }
 }

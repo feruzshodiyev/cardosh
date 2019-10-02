@@ -1,14 +1,20 @@
 .raw {
   width: 100%;
   >div{
-    width: 70%;
+    //width: 70%;
     margin: auto;
+    >div{
+      margin: auto;
+      width: fit-content;
+
+    }
   }
 }
 
 .col {
   display: inline-flex;
   margin-right: 20px;
+  align-content: center;
 
   >div {
     >i{
@@ -39,4 +45,18 @@
 .reason-title {
   color: #f0f1f2;
   text-align: center;
+}
+
+@media screen and (min-width: 2730px){
+  .reasons-wrapper {
+    margin-top: 400px;
+
+  }
+}
+
+@media (max-width: 846px) {
+
+  .col {
+    display: block;
+  }
 }

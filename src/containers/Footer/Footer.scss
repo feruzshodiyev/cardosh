@@ -24,9 +24,11 @@
 
 
 .footerWithBackground {
-  background-color: white;
+  //background-color: white;
+  margin: auto;
   text-align: center;
-  height: 150px;
+  height: available;
+  background: none;
   .wrapper-footer {
     > p {
       color: #ff6600;
@@ -36,4 +38,10 @@
     }
     }
 }
+
+@media screen and (min-width: 2730px) {
+  .footer {
+  margin-top: 400px;
+  }
+  }
 

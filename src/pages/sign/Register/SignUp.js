@@ -4,7 +4,7 @@ import "./SignUp.scss";
 import {Button, Icon, Form, Input, notification} from 'antd'
 import ButtonGroup from 'antd/lib/button/button-group';
 
-import { HashRouter as Router, Link, Route, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Link, Route, Redirect} from 'react-router-dom'
 import axios from "axios";
 import {ACCESS_TOKEN, API_BASE_URL} from "../../../constants";
 import PropTypes from 'prop-types';
@@ -17,175 +17,215 @@ import GoogleLogin from 'react-google-login';
 
 class SignUp extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             isEmailValid: false,
+            isEmailExists: false,
             isFirstNameFilled: false,
             isLastNameFilled: false,
             isDobFilled: false,
             isPasswordValid: false,
             isRegSuccess: false,
             isRegError: false,
+            btnLoading: false,
             fields: {
                 'first_name': "",
                 'last_name': "",
                 'email': "",
                 "dob": null,
                 "gender": 1,
-                'password': ""},
+                'password': "",
+                'phone_number': '+998909377247'
+            },
             loginFields: {
                 'email': "",
-                'password': ""}
+                'password': ""
+            }
         };
 
 
     }
 
-    handleEmailChange=(e)=>{
-        // this.setState({email:e.target.email});
+    startBtnLoading = () => {
+        this.setState({
+            btnLoading: true,
+        })
+    };
 
-if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState(prevState=>({
-        isEmailValid: true,
-        fields: {
-            ...prevState.fields,
-            [name] : value
-        },
-        loginFields: {
-            ...prevState.loginFields,
-            [name] : value
+    stopBtnLoading = () => {
+        this.setState({
+            btnLoading: false,
+        })
+    };
+
+    handleEmailChange = (e) => {
+
+        this.setState({
+            isEmailExists: false
+        });
+
+        if (e.target.value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
+            this.startBtnLoading();
+
+            const target = e.target;
+            const name = target.name;
+            const value = target.value;
+
+            axios.get(API_BASE_URL + "/user/email/check/", {
+                params: {
+                    email: value
+                }
+            }).then(res => {
+                console.log(res.data.message);
+                if (res.data.message) {
+                    this.setState({
+                        isEmailExists: true,
+                    }, () => {
+                        this.stopBtnLoading();
+                    })
+                } else {
+                    this.setState(prevState => ({
+                        isEmailValid: true,
+                        fields: {
+                            ...prevState.fields,
+                            [name]: value
+                        },
+                        loginFields: {
+                            ...prevState.loginFields,
+                            [name]: value
+                        }
+                    }), () => {
+                        this.stopBtnLoading();
+                    });
+                }
+            }).catch(err => {
+                console.log(err)
+            });
+        } else {
+            this.setState({
+                isEmailValid: false,
+            })
         }
-    }));
-
-}else {
-    this.setState({
-        isEmailValid: false,
-    })
-}
 
     };
- handleFirstNameChange=(e)=>{
-     if (e.target.value.length >=3){
-         const target = e.target;
-         const name = target.name;
-         const value = target.value;
-         this.setState(prevState=>({
-             isFirstNameFilled: true,
-             fields: {
-                 ...prevState.fields,
-                 [name] : value
-             }
-         }));
-     }else {
-         this.setState({
-             isFirstNameFilled: false,
-         })
-     }
- };
+    handleFirstNameChange = (e) => {
+        if (e.target.value.length >= 3) {
+            const target = e.target;
+            const name = target.name;
+            const value = target.value;
+            this.setState(prevState => ({
+                isFirstNameFilled: true,
+                fields: {
+                    ...prevState.fields,
+                    [name]: value
+                }
+            }));
+        } else {
+            this.setState({
+                isFirstNameFilled: false,
+            })
+        }
+    };
 
- handleLastNameChange=(e)=>{
-     if (e.target.value.length >=3){
-         const target = e.target;
-         const name = target.name;
-         const value = target.value;
-         this.setState(prevState=>({
-             isLastNameFilled: true,
-             fields: {
-                 ...prevState.fields,
-                 [name] : value
-             }
-         }));
-     }else {
-         this.setState({
-             isLastNameFilled: false,
-         })
-     }
- };
+    handleLastNameChange = (e) => {
+        if (e.target.value.length >= 3) {
+            const target = e.target;
+            const name = target.name;
+            const value = target.value;
+            this.setState(prevState => ({
+                isLastNameFilled: true,
+                fields: {
+                    ...prevState.fields,
+                    [name]: value
+                }
+            }));
+        } else {
+            this.setState({
+                isLastNameFilled: false,
+            })
+        }
+    };
 
- handlePasswordChange=(e)=>{
-     if (e.target.value.length >=6){
-         const target = e.target;
-         const name = target.name;
-         const value = target.value;
-         this.setState(prevState=>({
-             isPasswordValid: true,
-             fields: {
-                 ...prevState.fields,
-                 [name] : value
-             },
-             loginFields: {
-                 ...prevState.loginFields,
-                 [name] : value
-             }
-         }));
-     }else {
-         this.setState({
-             isPasswordValid: false,
-         })
-     }
+    handlePasswordChange = (e) => {
+        if (e.target.value.length >= 6) {
+            const target = e.target;
+            const name = target.name;
+            const value = target.value;
+            this.setState(prevState => ({
+                isPasswordValid: true,
+                fields: {
+                    ...prevState.fields,
+                    [name]: value
+                },
+                loginFields: {
+                    ...prevState.loginFields,
+                    [name]: value
+                }
+            }));
+        } else {
+            this.setState({
+                isPasswordValid: false,
+            })
+        }
 
 
- };
+    };
 
- onPasswordButtonClick=()=>{
+    onPasswordButtonClick = () => {
 
-     this.props.onRegWait();
+        this.props.onRegWait();
 
-     console.log("State values: ",this.state.fields);
+        console.log("State values: ", this.state.fields);
 
-     axios.post(API_BASE_URL+'/user/create/', this.state.fields
+        axios.post(API_BASE_URL + '/user/create/', this.state.fields
+        ).then(response => {
 
-     ).then(response => {
+            this.setState({
+                isRegSuccess: true
+            });
+            this.handleSubmitFromSignUp();
+        }).catch(error => {
+            this.setState({
+                isRegError: true,
+            });
+            this.props.onRegSuccess();
+            console.log("this is error", error);
+            window.location.reload();
 
-         this.setState({
-             isRegSuccess: true
-         });
-         this.handleSubmitFromSignUp();
-     }).catch(error => {
-         this.setState({
-             isRegError: true,
-         });
-         this.props.onRegSuccess();
-         console.log("this is error", error);
-         window.location.reload();
+        });
 
-     });
+    };
 
- };
-
-    handleDateInputChange=(e)=>{
-console.log(e.target.value);
+    handleDateInputChange = (e) => {
+        console.log(e.target.value);
         const target = e.target;
         const name = target.name;
         const value = target.value;
-        this.setState(prevState=>({
+        this.setState(prevState => ({
             isDobFilled: true,
             fields: {
                 ...prevState.fields,
-                [name] : value
+                [name]: value
             }
         }));
     };
 
-    handleMaleButtonClick=()=>{
-        this.setState(prevState=>({
+    handleMaleButtonClick = () => {
+        this.setState(prevState => ({
             isDobFilled: true,
             fields: {
                 ...prevState.fields,
-                "gender" : 1
+                "gender": 1
             }
         }));
     };
-    handleFemaleButtonClick=()=>{
-        this.setState(prevState=>({
+    handleFemaleButtonClick = () => {
+        this.setState(prevState => ({
             isDobFilled: true,
             fields: {
                 ...prevState.fields,
-                "gender" : 2
+                "gender": 2
             }
         }));
     };
@@ -194,48 +234,47 @@ console.log(e.target.value);
 //auth
     handleSubmitFromSignUp = () => {
 
-                const loginRequest = Object.assign({}, this.state.loginFields);
-                login(JSON.stringify(loginRequest))
-                    .then(response => {
-                        localStorage.setItem(ACCESS_TOKEN, response.access);
-                        this.props.onLogin();
-                        console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
-                        this.props.onRegSuccess();
-                        window.location.reload();
-                    }).catch(error => {
-                    if (error.status ===401) {
-                        notification.error({
-                            message: 'Cardosh login',
-                            description:"Ваш электронный адрес или пароль неверны. Пожалуйста, попробуйте еще раз!"
-                        })
-                    }else {
-                        notification.error({
-                            message: 'Cardosh login',
-                            description: error.message || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
-                        })
-                    }
-                });
+        const loginRequest = Object.assign({}, this.state.loginFields);
+        login(JSON.stringify(loginRequest))
+            .then(response => {
+                localStorage.setItem(ACCESS_TOKEN, response.access);
+                this.props.onLogin();
+                console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
+                this.props.onRegSuccess();
+                window.location.reload();
+            }).catch(error => {
+            if (error.status === 401) {
+                notification.error({
+                    message: 'Cardosh login',
+                    description: "Ваш электронный адрес или пароль неверны. Пожалуйста, попробуйте еще раз!"
+                })
+            } else {
+                notification.error({
+                    message: 'Cardosh login',
+                    description: error.message || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
+                })
+            }
+        });
 
     };
 
     // Social authentication
-     responseFacebook = (response) => {
+    responseFacebook = (response) => {
         console.log(response);
     };
 
-     responseGoogle = (response) => {
+    responseGoogle = (response) => {
         console.log(response);
     };
-
 
 
     render() {
 
-        if (this.state.isRegSuccess){
+        if (this.state.isRegSuccess) {
             return <Redirect to='/register/success'/>;
         }
 
-        if (this.state.isRegError){
+        if (this.state.isRegError) {
             return <Redirect to='/register/error'/>;
         }
 
@@ -250,7 +289,10 @@ console.log(e.target.value);
                     />}/>
                     <Route path='/register/mail' render={() => <MailForm
                         handleOnChange={this.handleEmailChange}
-                        emailIsValid={this.state.isEmailValid}/>}
+                        emailIsValid={this.state.isEmailValid}
+                        loading={this.state.btnLoading}
+                        emailExists={this.state.isEmailExists}
+                    />}
                     />
                     <Route path='/register/name' render={() => <NameForm
                         handleOnFirstNameChange={this.handleFirstNameChange}
@@ -274,17 +316,17 @@ console.log(e.target.value);
                         isDobFilled={this.state.isDobFilled}
                     />}/>
 
-                    <Route path='/register/success' component={()=><SuccessRegister/>}/>
+                    <Route path='/register/success' component={() => <SuccessRegister/>}/>
 
-                    <Route path='/register/error' component={()=><ErrorRegister/>}/>
-
+                    <Route path='/register/error' component={() => <ErrorRegister/>}/>
                 </div>
             </Router>
         );
     }
 }
-const MailForm=(props)=>{
-    const {handleOnChange, emailIsValid} = props;
+
+const MailForm = (props) => {
+    const {handleOnChange, emailIsValid, loading, emailExists} = props;
 
     return (
 
@@ -299,10 +341,13 @@ const MailForm=(props)=>{
                     className='input-data'
                     placeholder=" Эл. почта"/>
 
+                {loading ? <Icon className="icon-loading" type="loading"/> : ""}
+                {emailExists ? <p style={{color: "red", fontWeight: "bold", fontSize: "large"}}>Этот e-mail уже
+                    зарегистрирован!</p> : ""}
                 {emailIsValid ? <Button className='btn-form'>
-                        <Link to='/register/name'>Далее</Link>
-                    </Button> :
-                    " "}
+                    <Link to='/register/name'>Далее</Link>
+                </Button> : ""}
+
 
 
             </Form>
@@ -311,9 +356,9 @@ const MailForm=(props)=>{
 };
 
 
-const Reg=(props)=>{
+const Reg = (props) => {
     const {responseFacebook, responseGoogle} = props;
-    return(
+    return (
         <div>
             <h1 className='register-title'>Страница для регистрации</h1>
             <div className="login-form">
@@ -363,33 +408,34 @@ const NameForm = (props) => {
                     onChange={event => handleOnLastNameChange(event)}
                 />
                 {isFirstNameFilled && isLastNameFilled ?
-                    <Button className='btn-form'><Link to='/register/dob'>Далее</Link></Button> :""}
+                    <Button className='btn-form'><Link to='/register/dob'>Далее</Link></Button> : ""}
 
             </Form>
         </div>
     );
 
 
-
 };
 
-const GenderForm=(props)=>{
-    const {onMaleClick, onFemaleClick} =props;
-    return(
+const GenderForm = (props) => {
+    const {onMaleClick, onFemaleClick} = props;
+    return (
         <div>
             <h1 className='register-title'>Вы </h1>
             <Form className='login-form'>
                 <ButtonGroup className='gender-group'>
-                    <Button className='btn-gender' onClick={onMaleClick} name="male"><Link to='/register/password'>Мужчина</Link></Button>
-                    <Button className='btn-gender' onClick={onFemaleClick} name="female"><Link to='/register/password'>Женшина</Link></Button>
+                    <Button className='btn-gender' onClick={onMaleClick} name="male"><Link
+                        to='/register/password'>Мужчина</Link></Button>
+                    <Button className='btn-gender' onClick={onFemaleClick} name="female"><Link
+                        to='/register/password'>Женшина</Link></Button>
                 </ButtonGroup>
             </Form>
         </div>
     );
 };
-const PasswordForm=(props)=>{
+const PasswordForm = (props) => {
 
-    const {handleOnChangePassword, isPasswordValid, onButtonClick} =props;
+    const {handleOnChangePassword, isPasswordValid, onButtonClick} = props;
 
     return (
 
@@ -399,14 +445,15 @@ const PasswordForm=(props)=>{
                 <Input className='input-data' type='password' placeholder='Пароль' name='password'
                        onChange={event => handleOnChangePassword(event)}/>
                 {isPasswordValid ?
-                    <Button onClick={onButtonClick} className='btn-form' type='default'><Link to='/register'>Далее</Link></Button> :
+                    <Button onClick={onButtonClick} className='btn-form' type='default'><Link
+                        to='/register'>Далее</Link></Button> :
                     <p>Минимум 6 знаков!</p>}
 
             </Form>
         </div>
     );
 };
-const BirthForm=(props)=>{
+const BirthForm = (props) => {
     const {handleOnChange, isDobFilled} = props;
     return (
         <div>
@@ -424,23 +471,26 @@ const BirthForm=(props)=>{
 
 };
 
-const SuccessRegister = ()=>{
-    return(
-        <div>
+const SuccessRegister = () => {
+    return (
+        <div className="reg-success">
             <h1>Спасибо за регистрацию!</h1>
+            <p>Теперь вам необходимо подтвердить вашу электронную почту!</p>
+
         </div>
     )
 };
 
-const ErrorRegister = ()=>{
-    return(
+const ErrorRegister = () => {
+    return (
         <div>
-            <h1>Something went error!</h1>
+            <h1>Что то произошло ошибка!</h1>
+            <p>Не подклчен с интернета или что то друго</p>
         </div>
     )
 };
 
-SignUp.propTypes={
+SignUp.propTypes = {
     onRegWait: PropTypes.func,
     onRegSuccess: PropTypes.func
 };

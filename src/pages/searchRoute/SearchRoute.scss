@@ -1,13 +1,17 @@
 .wrapper-search{
+  //display: none;
     padding-top: 7%;
-    background-color: #ffffff;
+  background: none;
+  width: 100%;
     padding-bottom: 100px;
+  height: 100%;
 }
 
 .wrap-from-to {
-    margin: auto;
+
+  margin-left: 10%;
     width: 80%;
-    //border: 1px solid;
+
     padding: 20px;
     height: 450px;
     > h1{
@@ -17,58 +21,141 @@
 
 }
 
+.wrap-section{
+  width: 50%;
+
+}
 .section{
 
+  //display: flex;
+  width: 350px;
     height: 60px;
-    background-color: #f2f2f2;
-    border: 1px solid #ff6600;
-    border-radius: 50px;
+    background-color: #ff6600;
+   border-radius: 50px;
     margin: auto;
     padding-top: 12px;
   text-align: center;
     > .text {
         font-size: 20px;
-        color: #ff6600;
+        color: white;
     }
 }
 
-.relative {
-    width: 600px;
-    margin: auto;
-
-}
-
-.container-autocomplete{
-  width: 45%;
-  margin-top: 4%;
-  margin-left: auto;
-  margin-right: auto;
-  >h1{
-    display: block;
-    padding-left: 5%;
-    margin-bottom: 10%;
+.section-active{
+  width: 350px;
+  height: 60px;
+  border: 2px solid #ff6600;
+  border-radius: 50px;
+  margin: auto;
+  padding-top: 5px;
+  text-align: center;
+  background: none;
+  > .text {
+    font-size: xx-large;
     color: #ff6600;
   }
 }
 
-.autocomplete-input{
+.relative {
+  display: flex;
+    width: 750px;
+    margin: auto;
+}
+
+.container-autocomplete{
+  width: 45%;
+  margin-top: 9%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100vmin;
+  >h1{
+
+    display: block;
+    padding-left: 5%;
+    margin-bottom: 10%;
+    color: #ff6600;
+    text-align: center;
+  }
+}
+
+.autocomplete-input {
   width: 100%;
   height: 50px;
-  border: 2px solid #ff6600;
-  border-radius: 20px;
+  border: 3px solid #ff4400;
+  border-radius: 40px;
   padding-left: 5%;
   font-size: xx-large;
+  text-align: center;
+  background-color: #ff6600;
+  color: white;
+
+
 }
+  .autocomplete-input:focus{
+    outline: none !important;
+    text-align: center;
+  }
+
+.autocomplete-input:focus::placeholder{
+  color:transparent;
+}
+.autocomplete-input:focus::-webkit-input-placeholder{
+  color:transparent;
+}
+.autocomplete-input:focus::-moz-placeholder {
+  color:transparent;
+}
+
+.autocomplete-input:focus:-ms-input-placeholder {
+  color:transparent;
+}
+
 
 .btn-search{
   width: 200px;
   margin: auto;
-  >Button{
-    margin-top: 20px;
-    width: 200px;
-    height: 50px;
-    border-radius: 50px;
-  }
 
 }
+.btttn{
+  margin-top: 20px;
+  width: 200px;
+  height: 50px;
+  border-radius: 50px;
+  background: none;
+  color: #ff6600;
+  border: 2px solid #ff6600;
+  font-size: large;
+}
 
+@media screen and (max-width: 768px){
+  .relative {
+    display: block;
+    width: 100%;
+    //margin: auto;
+
+  }
+
+  .section{
+    width: 90%;
+  }
+
+  .wrap-section{
+    width: 100%;
+  }
+  .wrap-from-to {
+    width: 90%;
+    margin: auto;
+    padding-top: 40px;
+  }
+
+  .container-autocomplete{
+    width: 90%;
+    margin-top: 20%;
+  }
+  .autocomplete-input {
+    font-size: large;
+  }
+  .section-active{
+    width: 90%;
+  }
+}

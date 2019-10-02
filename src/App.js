@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './App.scss';
 import Footer from './containers/Footer/Footer';
 import AppHeader from './components/Header/AppHeader';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {HashRouter, Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import HomePage from "./pages/HomePage";
 import SearchRoute from "./pages/searchRoute/SearchRoute";
 import OfferTrip from "./pages/offerTrip/OfferTrip";
@@ -13,9 +13,12 @@ import {getCurrentUser} from './utils/ApiUtils'
 import {ACCESS_TOKEN} from "./constants";
 import LoadingScreen from 'react-loading-screen'
 import logo from "./images/logo.png";
+import Profile from "./pages/user/Profile"
+
 
 class App extends Component {
 
+    _isMounted = false;
 
     constructor(props) {
         super(props);
@@ -42,6 +45,7 @@ class App extends Component {
 
 
     componentDidMount() {
+        this._isMounted = true;
         this.startLoading();
         this.checkForCurrentPageOnLoad();
         // this is used for detecting location on route path change
@@ -73,6 +77,7 @@ class App extends Component {
 
     componentWillUnmount() {
         this.unlisten();
+        this._isMounted = false;
     }
 
 
@@ -85,10 +90,9 @@ class App extends Component {
                     isAuthenticated: true,
                 });
                 this.stopLoading();
-                localStorage.setItem("user", this.state.currentUser.id);
             }).catch(error=>{
-                if (localStorage.getItem(ACCESS_TOKEN)){
-                    localStorage.clear();
+                if (localStorage.getItem(ACCESS_TOKEN)&&(error.status===400||error.status===401)){
+localStorage.clear();
                 }
                 this.stopLoading();
         }).then(this.stopLoading);
@@ -127,8 +131,8 @@ handleLoginFromSignUp=()=>{
     };
 
     render(){
-const currentId = this.state.currentUser.id;
-
+const userId = this.state.currentUser.id;
+const isAuthenticated = this.state.isAuthenticated
         return (
             <LoadingScreen
                 loading={this.state.isLoading}
@@ -139,17 +143,22 @@ const currentId = this.state.currentUser.id;
                 text='Подождите!'
             >
 
-            <div className="app-js">
+                <div id={this.state.isOnHomePage?"background":'background1'}/>
+
+                <div className={this.state.isOnHomePage?"app-js":"backGr"}>
                 <AppHeader isOnHomePage={this.state.isOnHomePage} isAuthenticated={this.state.isAuthenticated}
+                           userId={userId}
                            name={this.state.currentUser.first_name}/>
 
                 <Switch>
                     <Route exact path="/" render={() => <HomePage/>}/>
-                    <Route path="/search" component={SearchRoute}/>
+                    <Route path="/search" render={(props)=><SearchRoute
+                        isAuthenticated={isAuthenticated}
+                        {...props}
+                    />}/>
                     <Route path="/offerTrip" render={(props)=><OfferTrip
-                        onWait={this.startLoading}
-                        onResponse={this.stopLoading}
-                        currentId={currentId}
+                        currentId={userId}
+                        isAuthenticated={isAuthenticated}
                         {...props}
                     />}/>
                     <Route path="/register" render={(props)=><SignUp
@@ -159,6 +168,9 @@ const currentId = this.state.currentUser.id;
                         {...props}
                     />}/>
                     <Route path="/login" render={(props) => <SignIn onLogin={this.handleLogin} {...props}/>}/>
+                    {isAuthenticated ? <Route path="/profile/:id" render={(props) => <Profile
+                        {...props}/>}/>: <Redirect to="/"/>}
+
                 </Switch>
                 <Footer isOnHomePage={this.state.isOnHomePage}/>
             </div>

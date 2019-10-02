@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Icon, Avatar, Dropdown} from 'antd';
+import {Layout, Menu, Icon, Avatar, Dropdown, Drawer} from 'antd';
 
 import {Link, withRouter} from 'react-router-dom';
 
@@ -19,7 +19,8 @@ class AppHeader extends Component {
         this.state={
             prevScrollpos: window.pageYOffset,
             visible: false,
-            rotate: false
+            drawerVisible: false,
+            drawerVisible2: false
 
         }
     }
@@ -48,11 +49,7 @@ class AppHeader extends Component {
 
 
 
-    rotateChange=()=>{
-        this.setState({
-            rotate: !   this.state.rotate
-        })
-    }
+
 
 
 
@@ -63,22 +60,48 @@ class AppHeader extends Component {
 
     };
 
+    showDrawer = () => {
+        this.setState({
+            drawerVisible: true,
+        });
+    };
+    showDrawer2 = () => {
+        this.setState({
+            drawerVisible2: true,
+        });
+    };
+
+    onCloseDrawer = () => {
+        this.setState({
+            drawerVisible: false,
+        });
+    };
+
+    onCloseDrawer2 = () => {
+        this.setState({
+            drawerVisible2: false,
+        });
+    };
+
 
 
     render() {
-
+const userId = this.props.userId;
         const menu = (
             <Menu>
-                <Menu.Item key="0">
-                    <a href="http://www.alipay.com/">1st menu item</a>
-                </Menu.Item>
                 <Menu.Item key="1">
-                    <a href="http://www.taobao.com/">2nd menu item</a>
+                    <Link to={`/profile/${userId}/general`}>Profile</Link>
+                </Menu.Item>
+                <Menu.Item key="0">
+                    <Link to="#">История поездки</Link>
                 </Menu.Item>
                 <Menu.Divider />
                 <Menu.Item key="3" onClick={this.handleLogout}><Icon type="logout" />Выйти</Menu.Item>
             </Menu>
         );
+
+        const drawerVisible = this.state.drawerVisible;
+        const drawerVisible2 = this.state.drawerVisible2;
 
         return (
 
@@ -98,11 +121,10 @@ class AppHeader extends Component {
 
                         <MenuItem key="search">
                             <Link to="/search"> <Icon type="search"
-                                                      style={{fontSize: '16px'}}/>Найти</Link>
+                                                      style={{fontSize: '16px'}}/>Найти пасажира</Link>
                         </MenuItem>
                         <MenuItem key="offerTrip">
-                            <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Предложить
-                                поездку</Link>
+                            <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить заявку</Link>
                         </MenuItem>
                         {
                             !this.props.isAuthenticated ?
@@ -120,17 +142,77 @@ class AppHeader extends Component {
                         </MenuItem>) : ''}
 
                         {this.props.isAuthenticated ? <MenuItem key="user" className="avatar">
-                            <Dropdown overlay={menu} trigger={['click']} onVisibleChange={this.rotateChange}>
+                            <Dropdown overlay={menu} trigger={['click']}>
                                 <div>
                                     <p>{this.props.name}</p>
-                                    <Avatar size={60} icon="user" />
-                                            <Icon rotate={this.state.rotate ? (180) : (0)} style={{ fontSize: '16px'}} type='down'/>
+                                    <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}} size="large"/>
+
                                 </div>
                             </Dropdown>
                         </MenuItem> : ''}
 
 
                     </Menu>
+
+                    <div className="head-mob">
+                    <div className="menu-mobile" onClick={drawerVisible ? this.onCloseDrawer:this.showDrawer}><Icon  type="menu" /></div>
+                    <Drawer
+                        title="Меню"
+                        placement="left"
+                        closable={true}
+                        onClose={this.onCloseDrawer}
+                        visible={drawerVisible}
+                    >
+                        <Menu
+                           mode="vertical"
+                           onClick={this.onCloseDrawer}
+                        >
+                            <MenuItem key="main">
+                                <Link to="/">Главная</Link>
+                            </MenuItem>
+
+                            <MenuItem key="search">
+                                <Link to="/search"> <Icon type="search"
+                                                          style={{fontSize: '16px'}}/>Найти пасажира</Link>
+                            </MenuItem>
+                            <MenuItem key="offerTrip">
+                                <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить заявку</Link>
+                            </MenuItem>
+                            {
+                                !this.props.isAuthenticated ?
+                                    <MenuItem key="addUser">
+                                        <Link to="/register"><Icon type="user-add"
+                                                                   style={{fontSize: '16px'}}/> Регистрация</Link>
+                                    </MenuItem>
+                                    : ''
+
+                            }
+
+                            {!this.props.isAuthenticated ? (<MenuItem key="login">
+                                <Link to="/login"> <Icon type="login"
+                                                         style={{fontSize: '16px'}}/>Войти</Link>
+                            </MenuItem>) : ''}
+                        </Menu>
+                    </Drawer>
+
+                        {this.props.isOnHomePage? (this.state.visible ? <div className="logo-header"/>: "") :<div className="logo-header"/> }
+
+
+                        {this.props.isAuthenticated ? <div key="user" className="mob-avatar">
+                            <div onClick={this.showDrawer2}>
+                                <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}} size="large"/>
+                            </div>
+                            <Drawer
+                                title={this.props.name}
+                                placement="right"
+                                closable={true}
+                                onClose={this.onCloseDrawer2}
+                                visible={drawerVisible2}
+                            >
+                                {menu}
+                            </Drawer>
+                        </div> : ''}
+                </div>
                 </div>
             </Header>
 
@@ -142,6 +224,7 @@ AppHeader.propTypes={
 isOnHomePage: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
     name: PropTypes.string,
+    userId: PropTypes.number,
 };
 
 

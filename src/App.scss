@@ -1,6 +1,7 @@
 
 .app-js{
     width: 100%;
+    height: auto;
     position: relative;
     background-image: url("images/Cardosh_background.png");
     background-repeat: no-repeat;
@@ -9,8 +10,19 @@
     overflow-x: hidden;
 
 }
-html,body
-{
+
+
+
+
+
+.backGr{
+
+}
+html,body{
+    background-image: url("images/Groupbg.svg");
+    background-size: cover;
+    background-attachment: fixed;
+
     width: 100%;
     height: 100vh;
     margin: 0px;
@@ -18,15 +30,20 @@ html,body
 }
 @media screen and (min-width: 1400px) {
     .app-js{
-        width: 1400px;
-        margin: auto;
+        background-size: 100%  auto;
     }
 }
 
 @media screen and (max-width: 768px){
     .app-js{
-        //background-attachment: fixed;
-        //background-size: 100% 100%;
         background: none;
+    }
+    #background{
+        display: block;
+        background-image: url("./images/Cardosh_background.png");
+        background-size: 100% 100%;
+        position: fixed;
+        width: 100%;
+        height: 100%;
     }
 }
