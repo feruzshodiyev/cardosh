@@ -25,19 +25,22 @@
 }
 
 .from-to {
-  margin:auto;
-  >div{
+  margin: auto;
+
+  > div {
     width: 45%;
     display: inline-block;
     margin: 20px;
     text-align: center;
-    >h3 {
+
+    > h3 {
       color: #ff6600;
     }
 
   }
 }
-.input{
+
+.input {
   height: 50px;
   width: 100%;
   background-color: #ff6600;
@@ -49,33 +52,35 @@
   color: white;
 
 }
-.input:focus{
+
+.input:focus {
   outline: none !important;
   text-align: center;
 }
 
-.input1{
-  background: none ;
+.input1 {
+  background: none;
   color: #ff6600;
 }
 
-.input:focus::placeholder{
-  color:transparent;
+.input:focus::placeholder {
+  color: transparent;
 }
-.input:focus::-webkit-input-placeholder{
-  color:transparent;
+
+.input:focus::-webkit-input-placeholder {
+  color: transparent;
 }
+
 .input:focus::-moz-placeholder {
-  color:transparent;
+  color: transparent;
 }
 
 .input:focus:-ms-input-placeholder {
-  color:transparent;
+  color: transparent;
 }
 
 
-
-::placeholder{
+::placeholder {
   color: white;
   opacity: 1; /* Firefox */
   transition: all 0.2s ease;
@@ -94,7 +99,7 @@
 }
 
 
-.input ::placeholder{
+.input ::placeholder {
   color: white !important;
 }
 
@@ -103,20 +108,22 @@
 }
 
 .date-time-inputs {
- width: fit-content;
+  width: fit-content;
   margin: auto;
-  >div{
+
+  > div {
     display: inline-block;
   }
 }
 
 .submit-btn {
   margin: auto;
-  >div{
-    >div{
-      >div{
-        >span{
-          >button{
+
+  > div {
+    > div {
+      > div {
+        > span {
+          > button {
             width: 200px;
             height: 40px;
             border-radius: 40px;
@@ -140,15 +147,18 @@
 
   > div {
     display: inline-flex;
-    button{
+
+    button {
       background: #ff6600;
       border: #ff6600 1px solid;
     }
-    button:hover{
+
+    button:hover {
       background: #ff360e;
       border: #ff6600 1px solid;
     }
-    button:focus{
+
+    button:focus {
       background: #ff4707;
       border: #ff6600 1px solid;
     }
@@ -162,6 +172,7 @@
 .price-seats {
   width: fit-content;
   margin: auto;
+
   > div {
     display: inline-block;
     font-weight: bolder;
@@ -171,31 +182,40 @@
 }
 
 .seats {
-  margin-left: 50px;
-  label{
+  label {
     color: #ff6600;
+    text-align: center;
   }
 
   > div {
-    display: inline-flex;
+    width: fit-content;
+    margin: auto;
 
-    >div{
-      >div{
-        >div{
+    > div {
+      > div {
+        > div {
           width: fit-content;
           margin: auto;
-          >span{
-            >div{
-              border: #ff6600 1px solid;
+
+          > span {
+            > div {
+              border: #ff6600 3px solid;
+              border-radius: 40px;
               box-shadow: none;
               font-size: large;
+              color: #ff6600;
+              font-weight: bold;
+              background: transparent;
 
             }
-            >div:hover{
-              border: #ff6600 1px solid;
+
+            > div:hover {
+
+              border: #ff6600 3px solid;
               box-shadow: 0 0 0 2px rgba(255, 115, 30, 0.2);
             }
-            >div:focus{
+
+            > div:focus {
               border: #ff6600 1px solid;
               box-shadow: 0 0 0 2px rgba(255, 115, 30, 0.2);
             }
@@ -205,10 +225,17 @@
     }
   }
 
-  #inp {
-    margin-left: 30px;
-  }
 }
+
+.form-dtsd{
+  transition-timing-function: ease-in;
+  transition:0.5s;
+}
+.form-disabled{
+  display: none;
+}
+
+
 
 .route-map {
   margin: auto;
@@ -223,9 +250,9 @@
 
 }
 
-.price-wrap{
-  >div{
-    >h2{
+.price-wrap {
+  > div {
+    > h2 {
       font-weight: bolder;
       color: #192c3e;
     }
@@ -234,27 +261,33 @@
 
 .price {
   position: relative;
-  label{
+
+  label {
     color: #ff6600;
   }
+
   > div {
     display: inline-flex;
-    >div{
-      >div{
+
+    > div {
+      > div {
         width: fit-content;
-        >div{
-          >span{
-            >div{
+
+        > div {
+          > span {
+            > div {
               width: 119px;
               border: 1px solid #ff6600;
               font-size: large;
               box-shadow: none;
             }
-            >div:focus{
+
+            > div:focus {
               border: #ff6600 1px solid;
               box-shadow: 0 0 0 2px rgba(255, 115, 30, 0.2);
             }
-            >div:hover{
+
+            > div:hover {
               border: #ff540b 1px solid;
               box-shadow: 0 0 0 2px rgba(255, 115, 30, 0.2);
 
@@ -270,6 +303,7 @@
 .currency {
   position: absolute;
   right: 30px;
+
   > p {
     margin-top: 44px;
     font-size: large;
@@ -279,7 +313,7 @@
 .map-container {
   height: 300px;
   width: 800px;
-  margin: 20px auto ;
+  margin: 20px auto;
 
 }
 
@@ -295,38 +329,43 @@
   > .selected-routes {
     width: max-content;
     margin: auto;
-   >p{
-     display: inline-block;
-     margin-left: 20px;
-     font-size: large;
-     font-weight: bold;
-     color: #ff6600;
-     >i{
-       color: #52c41a;
-     }
-   }
+
+    > p {
+      display: inline-block;
+      margin-left: 20px;
+      font-size: large;
+      font-weight: bold;
+      color: #ff6600;
+
+      > i {
+        color: #52c41a;
+      }
+    }
   }
 
   > .route-info {
     margin: auto;
     width: fit-content;
     color: #192c3e;
-    >p{
+
+    > p {
       //display: inline-flex;
       margin-left: 20px;
       font-weight: bolder;
       font-size: large;
-      >i{
+
+      > i {
         margin-left: 20px;
       }
     }
   }
 }
 
-.date-picker{
+.date-picker {
   margin-right: 20px;
-  >div{
-    >input{
+
+  > div {
+    > input {
       border-radius: 40px;
       width: 200px;
       height: 40px;
@@ -337,17 +376,21 @@
       border: 3px solid #ff6600;
       color: white;
     }
-    >input:focus{
+
+    > input:focus {
       border-color: #ff2e0f !important;
 
     }
-    >input:hover{
+
+    > input:hover {
       border-color: #ff2e0f !important;
 
     }
-    >i{
+
+    > i {
       right: 25px;
-      >svg {
+
+      > svg {
         color: white !important;
       }
     }
@@ -355,16 +398,18 @@
 }
 
 
-.date-filled{
-  >div{
-    >input{
+.date-filled {
+  > div {
+    > input {
       background: none !important;
       color: #ff6600;
 
     }
-    >i{
+
+    > i {
       right: 25px;
-      >svg {
+
+      > svg {
         color: #ff6600 !important;
       }
     }
@@ -372,11 +417,11 @@
 }
 
 
-
-.time-picker{
+.time-picker {
   margin-left: 20px;
   display: inline;
-  >input{
+
+  > input {
     background-color: #ff6600;
     display: inline;
     width: 200px;
@@ -387,16 +432,20 @@
     font-weight: bold;
     font-size: large;
   }
-  >input:focus{
+
+  > input:focus {
     border-color: #ff2e0f !important;
 
   }
-  >input:hover{
+
+  > input:hover {
     border-color: #ff2e0f !important;
 
   }
-  >span{
+
+  > span {
     right: 25px;
+
     > i {
       > svg {
         color: white !important;
@@ -405,13 +454,14 @@
   }
 }
 
-.time-filled{
-  >input{
+.time-filled {
+  > input {
     background: none;
     color: #ff6600;
 
   }
-  >span {
+
+  > span {
     > i {
       right: 25px;
 
@@ -422,59 +472,66 @@
   }
 }
 
-:disabled{
+:disabled {
   background-color: #ff6600 !important;
   border: #ff6600 1px solid !important;
   color: white !important;
+  border-radius: 40px !important;
 
 }
 
-:disabled::placeholder{
+:disabled::placeholder {
   color: white;
 }
 
-h3{
+h3 {
   color: #ff6600;
   margin-bottom: 0;
 }
-.anticon-close-circle{
+
+.anticon-close-circle {
   display: none;
 }
 
-.button-fill{
+.button-fill {
   background-color: transparent !important;
   color: #ff6600 !important;
 }
-.button-fill:hover{
+
+.button-fill:hover {
   border-color: #ff2605 !important;
 }
- .extra-info{
-   h2{
-     color: #192c3e;
-     font-weight: bolder;
-   }
-   >div{
-     >div{
-       >div{
-         label{
-           font-weight: bolder;
-           color: #192c3e;
-         }
-         textarea{
-           border: #ff6600 1px solid;
-         }
-         textarea:hover{
-           border: #ff6600 1px solid;
-         }
-         textarea:focus{
-           border: #ff6600 1px solid;
 
-         }
-       }
-     }
-   }
- }
+.extra-info {
+  h2 {
+    color: #192c3e;
+    font-weight: bolder;
+  }
 
+  > div {
+    > div {
+      > div {
+        label {
+          font-weight: bolder;
+          color: #192c3e;
+        }
+
+        textarea {
+          border: #ff6600 1px solid;
+        }
+
+        textarea:hover {
+          border: #ff6600 1px solid;
+        }
+
+        textarea:focus {
+          border: #ff6600 1px solid;
+
+        }
+      }
+    }
+  }
+}
 
 
 @media (max-width: 846px) {
@@ -485,17 +542,19 @@ h3{
     width: 100%;
   }
 
-  .from-to{
-width: 100%;
+  .from-to {
+    width: 100%;
+
     > div {
-    width: 42%;
+      width: 42%;
+    }
   }
-}
 }
 
 @media (max-width: 600px) {
-  .from-to{
+  .from-to {
     width: 100%;
+
     > div {
       width: 90%;
     }
@@ -506,32 +565,34 @@ width: 100%;
 
     }
   }
-  .price{
+  .price {
     width: fit-content;
     margin: auto;
   }
   .currency {
     position: relative;
-    >p{
+
+    > p {
       margin-top: 30px;
     }
   }
-  .seats{
+  .seats {
     width: fit-content;
     margin: auto;
-    >#inp{
+
+    > #inp {
       margin-left: 0;
     }
   }
 }
 
-@media screen and (max-width: 490px){
+@media screen and (max-width: 490px) {
 
-  .time-picker{
+  .time-picker {
     margin-left: 0;
   }
 
-  .date-picker{
+  .date-picker {
     margin-right: 0;
   }
 

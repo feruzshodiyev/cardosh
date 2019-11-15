@@ -13,6 +13,7 @@ import {login} from "../../../utils/ApiUtils";
 import FacebookLogin from 'react-facebook-login';
 
 import GoogleLogin from 'react-google-login';
+import PhoneNum from "./PhoneNum";
 
 
 class SignUp extends Component {
@@ -22,6 +23,7 @@ class SignUp extends Component {
         this.state = {
             isEmailValid: false,
             isEmailExists: false,
+            emailConnectErr: false,
             isFirstNameFilled: false,
             isLastNameFilled: false,
             isDobFilled: false,
@@ -36,7 +38,7 @@ class SignUp extends Component {
                 "dob": null,
                 "gender": 1,
                 'password': "",
-                'phone_number': '+998909377247'
+                'phone_number': ''
             },
             loginFields: {
                 'email': "",
@@ -100,6 +102,9 @@ class SignUp extends Component {
                     });
                 }
             }).catch(err => {
+                this.setState({
+                    emailConnectErr: true,
+                });
                 console.log(err)
             });
         } else {
@@ -229,6 +234,15 @@ class SignUp extends Component {
             }
         }));
     };
+    getPhoneNum=(val)=>{
+        console.log("val "+val);
+        this.setState(prevState => ({
+            fields:{
+                ...prevState.fields,
+                'phone_number': val
+            }
+        }))
+    };
 
 
 //auth
@@ -292,6 +306,11 @@ class SignUp extends Component {
                         emailIsValid={this.state.isEmailValid}
                         loading={this.state.btnLoading}
                         emailExists={this.state.isEmailExists}
+                        connectionError={this.state.emailConnectErr}
+                    />}
+                    />
+                    <Route path='/register/phone' render={()=><PhoneNum
+                        getNum={this.getPhoneNum}
                     />}
                     />
                     <Route path='/register/name' render={() => <NameForm
@@ -326,7 +345,7 @@ class SignUp extends Component {
 }
 
 const MailForm = (props) => {
-    const {handleOnChange, emailIsValid, loading, emailExists} = props;
+    const {handleOnChange, emailIsValid, loading, emailExists, connectionError} = props;
 
     return (
 
@@ -344,8 +363,9 @@ const MailForm = (props) => {
                 {loading ? <Icon className="icon-loading" type="loading"/> : ""}
                 {emailExists ? <p style={{color: "red", fontWeight: "bold", fontSize: "large"}}>Этот e-mail уже
                     зарегистрирован!</p> : ""}
+                {connectionError ? <p style={{color: "red", fontWeight: "bold", fontSize: "large"}}>Произошло ошибка!</p>:""}
                 {emailIsValid ? <Button className='btn-form'>
-                    <Link to='/register/name'>Далее</Link>
+                    <Link to='/register/phone'>Далее</Link>
                 </Button> : ""}
 
 
@@ -365,21 +385,21 @@ const Reg = (props) => {
                 <ButtonGroup className="reg-btns-form">
                     <br/>
                     <br/>
-                    <FacebookLogin
-                        textButton="Регистрация через Facebook"
-                        appId="916694295343872" //APP ID
-                        fields="first_name, last_name, email, picture, birthday, gender"
-                        callback={responseFacebook}
-                        scope="public_profile, email, user_birthday, user_gender"
-                    />
-                    <br/>
-                    <br/>
-                    <GoogleLogin
-                        clientId="823750689194-2n636shuiamk842p9ahehglrlkd3es22.apps.googleusercontent.com" //CLIENTID
-                        buttonText="Регистрация через Google"
-                        onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
-                    />
+                    {/*<FacebookLogin*/}
+                    {/*    textButton="Регистрация через Facebook"*/}
+                    {/*    appId="916694295343872" //APP ID*/}
+                    {/*    fields="first_name, last_name, email, picture, birthday, gender"*/}
+                    {/*    callback={responseFacebook}*/}
+                    {/*    scope="public_profile, email, user_birthday, user_gender"*/}
+                    {/*/>*/}
+                    {/*<br/>*/}
+                    {/*<br/>*/}
+                    {/*<GoogleLogin*/}
+                    {/*    clientId="823750689194-2n636shuiamk842p9ahehglrlkd3es22.apps.googleusercontent.com" //CLIENTID*/}
+                    {/*    buttonText="Регистрация через Google"*/}
+                    {/*    onSuccess={responseGoogle}*/}
+                    {/*    onFailure={responseGoogle}*/}
+                    {/*/>*/}
                     <br/>
                     <br/>
                     <Button type="link"><Link to='/register/mail'>Регистрация через эл. почту</Link></Button>

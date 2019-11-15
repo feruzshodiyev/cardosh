@@ -14,6 +14,8 @@ import {ACCESS_TOKEN} from "./constants";
 import LoadingScreen from 'react-loading-screen'
 import logo from "./images/logo.png";
 import Profile from "./pages/user/Profile"
+import MyRides from "./pages/user/MyRides";
+import Requests from "./pages/user/Requests";
 
 
 class App extends Component {
@@ -22,7 +24,7 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state={
+        this.state = {
             isOnHomePage: true,
             currentUser: {},
             isAuthenticated: false,
@@ -50,11 +52,11 @@ class App extends Component {
         this.checkForCurrentPageOnLoad();
         // this is used for detecting location on route path change
         this.unlisten = this.props.history.listen((location) => {
-            if (location.pathname==="/") {
+            if (location.pathname === "/") {
                 this.setState({
                     isOnHomePage: true
                 })
-            }else {
+            } else {
                 this.setState({
                     isOnHomePage: false
                 })
@@ -66,7 +68,7 @@ class App extends Component {
         if (localStorage.getItem(ACCESS_TOKEN)) {
 
             this.loadCurrentUser();
-        }else {
+        } else {
             this.stopLoading();
 
         }
@@ -88,51 +90,52 @@ class App extends Component {
                 this.setState({
                     currentUser: response,
                     isAuthenticated: true,
-                });
+                })
+                console.log(response);
                 this.stopLoading();
-            }).catch(error=>{
-                if (localStorage.getItem(ACCESS_TOKEN)&&(error.status===400||error.status===401)){
-localStorage.clear();
-                }
-                this.stopLoading();
+            }).catch(error => {
+            if (localStorage.getItem(ACCESS_TOKEN) && (error.status === 400 || error.status === 401)) {
+                localStorage.clear();
+            }
+            this.stopLoading();
         }).then(this.stopLoading);
 
     };
 
-handleLogin=()=>{
-    this.stopLoading();
-    notification.success({
-        message: 'Cardosh App',
-        description: "Вы успешно вошли в систему.",
-    });
-this.loadCurrentUser();
-    this.props.history.push("/");
-};
+    handleLogin = () => {
+        this.stopLoading();
+        notification.success({
+            message: 'Cardosh App',
+            description: "Вы успешно вошли в систему.",
+        });
+        this.loadCurrentUser();
+        this.props.history.push("/");
+    };
 
-handleLoginFromSignUp=()=>{
-    notification.success({
-        message: 'Cardosh App',
-        description: "Вы успешно вошли в систему.",
-    });
-    this.loadCurrentUser();
+    handleLoginFromSignUp = () => {
+        notification.success({
+            message: 'Cardosh App',
+            description: "Вы успешно вошли в систему.",
+        });
+        this.loadCurrentUser();
 
-};
+    };
 
-    startLoading=()=>{
+    startLoading = () => {
         this.setState({
             isLoading: true,
         })
     };
 
-    stopLoading=()=>{
+    stopLoading = () => {
         this.setState({
             isLoading: false,
         })
     };
 
-    render(){
-const userId = this.state.currentUser.id;
-const isAuthenticated = this.state.isAuthenticated
+    render() {
+        const userId = this.state.currentUser.id;
+        const isAuthenticated = this.state.isAuthenticated
         return (
             <LoadingScreen
                 loading={this.state.isLoading}
@@ -143,42 +146,53 @@ const isAuthenticated = this.state.isAuthenticated
                 text='Подождите!'
             >
 
-                <div id={this.state.isOnHomePage?"background":'background1'}/>
+                <div id={this.state.isOnHomePage ? "background" : 'background1'}/>
 
-                <div className={this.state.isOnHomePage?"app-js":"backGr"}>
-                <AppHeader isOnHomePage={this.state.isOnHomePage} isAuthenticated={this.state.isAuthenticated}
-                           userId={userId}
-                           name={this.state.currentUser.first_name}/>
+                <div className={this.state.isOnHomePage ? "app-js" : "backGr"}>
+                    <AppHeader isOnHomePage={this.state.isOnHomePage} isAuthenticated={this.state.isAuthenticated}
+                               userId={userId}
+                               name={this.state.currentUser.first_name}
+                               profile_image={this.state.currentUser.profile_image}/>
 
-                <Switch>
-                    <Route exact path="/" render={() => <HomePage/>}/>
-                    <Route path="/search" render={(props)=><SearchRoute
-                        isAuthenticated={isAuthenticated}
-                        {...props}
-                    />}/>
-                    <Route path="/offerTrip" render={(props)=><OfferTrip
-                        currentId={userId}
-                        isAuthenticated={isAuthenticated}
-                        {...props}
-                    />}/>
-                    <Route path="/register" render={(props)=><SignUp
-                        onRegWait={this.startLoading}
-                        onRegSuccess={this.stopLoading}
-                        onLogin={this.handleLoginFromSignUp}
-                        {...props}
-                    />}/>
-                    <Route path="/login" render={(props) => <SignIn onLogin={this.handleLogin} {...props}/>}/>
-                    {isAuthenticated ? <Route path="/profile/:id" render={(props) => <Profile
-                        {...props}/>}/>: <Redirect to="/"/>}
+                    <Switch>
+                        <Route exact path="/" render={() => <HomePage/>}/>
+                        <Route path="/search" render={(props) => <SearchRoute
+                            isAuthenticated={isAuthenticated}
+                            currentId={userId}
+                            {...props}
+                        />}/>
+                        <Route path="/offerTrip" render={(props) => <OfferTrip
+                            currentId={userId}
+                            isAuthenticated={isAuthenticated}
+                            {...props}
+                        />}/>
+                        <Route path="/register" render={(props) => <SignUp
+                            onRegWait={this.startLoading}
+                            onRegSuccess={this.stopLoading}
+                            onLogin={this.handleLoginFromSignUp}
+                            {...props}
+                        />}/>
+                        <Route path="/login" render={(props) => <SignIn onLogin={this.handleLogin} {...props}/>}/>
+                        {isAuthenticated ? <Route path="/profile/:id" render={(props) => <Profile
+                            uploaded={this.loadCurrentUser}
+                            {...props}/>}/> : <Redirect to="/"/>}
 
-                </Switch>
-                <Footer isOnHomePage={this.state.isOnHomePage}/>
-            </div>
+                        {isAuthenticated ? <Route path="/my-rides/:id" render={(props) => <MyRides
+
+                            {...props}/>}/> : <Redirect to="/"/>}
+
+                            {isAuthenticated ? <Route path="/requests/:id" render={(props) => <Requests
+
+                            {...props}/>}/> : <Redirect to="/"/>}
+
+                    </Switch>
+                    <Footer isOnHomePage={this.state.isOnHomePage}/>
+                </div>
             </LoadingScreen>
 
 
         );
-}
+    }
 }
 
 export default withRouter(App);

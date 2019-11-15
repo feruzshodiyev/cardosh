@@ -75,7 +75,7 @@ class Second extends Component {
                                     initialValue: 1
                                 })(
                                     <InputNumber
-                                        min={1} max={4}
+                                        min={1} max={4 }
                                     />
                                 )}
                                 </Form.Item>

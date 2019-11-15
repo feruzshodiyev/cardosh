@@ -1,0 +1,36 @@
+
+.my-ride-layout{
+  width: 90%;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.ant-layout-footer {
+  padding: 10px 50px;
+}
+
+.ant-layout-header {
+  padding: 0;
+}
+.list-date{
+  >p{
+    display: inline-block;
+    margin: 0 10px;
+  }
+}
+
+.btn-list{
+  display: inline-flex;
+  float: right;
+}
+
+@media screen and (max-width: 450px){
+  .my-ride-layout{
+    width: 100% !important;
+    padding-top: 55px !important;
+  }
+  .content-main{
+    padding: 0 !important;
+  }
+
+}

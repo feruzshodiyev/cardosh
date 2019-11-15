@@ -1,16 +1,16 @@
-.profile-page{
+.profile-page {
+  width: 90%;
   position: relative;
-  padding-top: 70px;
-  height: 800px;
-  >div{
-    width: fit-content;
-    margin-left: 10%;
-    margin-top: 5%;
-    >div{
-      display: inline-block;
-    }
+  padding-top: 100px;
+  margin: auto;
+  padding-bottom: 40px;
+}
+@media screen and (max-width: 846px){
+  .profile-page{
+    padding-top: 56px;
   }
 }
+
 
 .profile-info{
   position: absolute;
@@ -18,10 +18,59 @@
 
 }
 
+.avatar-uploader{
+  margin: auto;
+   .ant-upload {
+    width: 200px;
+    height: 200px;
+     margin: auto;
+  }
+}
+.form-item-upload{
+>div{
+  width: 100%;
+}
+}
+
+.ready-avatar{
+  margin: auto;
+
+}
+
+.btn-clear-photo{
+  display: inline-flex;
+  margin-left: 30px;
+}
+
+.upload-loading{
+  color: #ff6600;
+  font-size: xx-large;
+
+}
+
 .general{
-  display: inline-block;
-  //width: 700px;
+  width: 100%;
+
   >p{
     text-align: center;
   }
+  .general-form{
+    //width: 300px;
+    display: inline-block;
+
+    margin: auto;
+  }
+}
+
+.logo {
+background-image: url("../../images/logo.png");
+  background-repeat: no-repeat;
+  width: 100px;
+  height:60px;
+  margin: 15px auto;
+background-size: 100%;
+}
+
+.form-item{
+
 }

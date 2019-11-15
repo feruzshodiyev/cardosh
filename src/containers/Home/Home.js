@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import './Home.scss'
-import {Button, Icon} from "antd";
+import {Button} from "antd";
 import {Link} from "react-router-dom";
 
 class Home extends Component{
@@ -13,8 +13,6 @@ class Home extends Component{
         }
     }
 
-    handleClick = () => {
-    };
 
 
 
@@ -25,12 +23,12 @@ class Home extends Component{
 
                 <div className='homeContent'>
 
-                    <div className='logo'/>
+                    <div className='logotype'/>
 
 
                     <div className='button-group'>
 
-                            <Button onClick={this.handleClick} type='default' className='search-ride-btn'><Link to="/search">Найти
+                            <Button type='default' className='search-ride-btn'><Link to="/search">Найти
                                 пасажира </Link></Button>
 
 

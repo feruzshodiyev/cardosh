@@ -29,52 +29,48 @@
   }
 }
 
-.card-avatar {
-  //position: relative;
-  //left: 15px;
-
-  border: 1px #e2ddc5 solid;
-}
 
 .card-details {
-  > div {
-    display: inline-block;
+
     font-size: large;
     font-weight: bold;
     color: #3f4f59;
-    margin-left: 10px;
-  }
+
 }
 
 .card-date {
-  float: left;
-  padding-bottom: 10px;
+margin-top: 10px;
 }
 
-.price-card {
-  float: right;
-  font-size: x-large;
-  font-weight: bold;
-  color: #3f4f59;
-  margin-top: 10px;
-  margin-right: 10px;
-}
 
 .card-route {
-  margin-left: 30px;
-  font-size: large;
-  font-weight: bold;
-  color: #3f4f59;
+  width: fit-content;
+  margin: 15px auto;
+  >p{
+    display: inline;
+    margin: 10px;
+  }
 
 }
 
-.card-user {
+.card-user-date {
+  margin: 20px;
   > div {
     display: inline-block;
     font-size: large;
     font-weight: bold;
     color: #3f4f59;
   }
+.user-avatar-name{
+  float: right;
+  >div{
+    margin: 10px;
+    display: inline-block;
+    >p{
+      display: inline;
+    }
+  }
+}
 }
 
 .wrap-loading {
@@ -122,6 +118,20 @@
   }
 }
 
+.no-result{
+  >i{
+    color:#ff6600;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 46%;
+    margin-bottom: 30px;
+    font-size: 70px;
+  }
+
+>h2{
+  text-align: center;
+}
+}
 
 .icons8-map-pinpoint {
   display: inline-block;
@@ -134,9 +144,15 @@
   .search-info {
     margin-top: 50px;
   }
+  .no-result{
+    >i{
+      margin-left: 43%;
+    }
+  }
+
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .wrap-card {
     width: 90%;
   }
@@ -147,4 +163,21 @@
     margin-top: 50px;
     width: 96%;
   }
+  .no-result{
+    >i{
+      margin-left: 38%;
+    }
   }
+  }
+
+@media screen and (max-width: 400px){
+  .card-user-date{
+    margin: 10px;
+  }
+}
+
+@media screen and (max-width: 340px){
+  .card-user-date{
+    margin: 0;
+  }
+}

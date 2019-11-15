@@ -48,6 +48,7 @@ class SearchRoute extends Component {
 
     render() {
         const isAuthenticated = this.props.isAuthenticated;
+        const currentId = this.props.currentId;
         return (
 
             <div className="wrapper-search">
@@ -68,12 +69,11 @@ class SearchRoute extends Component {
                onSelectTo={this.handleSelectTo}
                />}/>
                <Route path="/search/results/:selectedPlaceFrom-:selectedPlaceTo-:fromId-:toId" render={(props)=><SearchResults
-                   // fromId={this.state.fromId}
-                   // toId={this.state.toId}
                    {...props}
                />}/>
                <Route path="/search/result/:id" render={(props)=><RideDetails
                    isAuthenticated={isAuthenticated}
+                   currentId={currentId}
                    {...props}/>}/>
 
                    <Route path="/search/user/:id" render={(props)=><UserInfo

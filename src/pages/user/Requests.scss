@@ -1,0 +1,22 @@
+#components-layout-demo-top .logo-my-ride {
+  background-image: url("../../images/logo.png");
+  width: 120px;
+  height: 31px;
+  //background: rgba(255, 255, 255, 0.2);
+  //margin: 16px 24px 16px 0;
+  //float: left;
+}
+
+.my-ride-layout{
+  width: 90%;
+  margin: auto;
+  padding-top: 100px;
+}
+
+.ant-layout-footer {
+  padding: 10px 50px;
+}
+
+.ant-layout-header {
+  padding: 0;
+}

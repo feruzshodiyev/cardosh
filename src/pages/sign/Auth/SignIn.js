@@ -26,20 +26,38 @@ class SignIn extends Component {
 
 
 class LoginForm extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            loading: false,
+        }
+
+    }
 
 
     handleSubmit = (event) => {
+
         event.preventDefault();
         this.props.form.validateFields((err, values)=>{
             if (!err) {
+                this.setState({
+                    loading: true,
+                });
                 const loginRequest = Object.assign({}, values);
                 login(JSON.stringify(loginRequest))
                     .then(response => {
+                        this.setState({
+                            loading: false,
+                        });
                         localStorage.setItem(ACCESS_TOKEN, response.access);
                         this.props.onLogin();
                         console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
                     }).catch(error => {
-                    if (error.status ===401) {
+                    this.setState({
+                        loading: true,
+                    });
+                        console.log(error);
+                    if (error.detail === "No active account found with the given credentials") {
                         notification.error({
                             message: 'Cardosh login',
                             description:"Ваш электронный адрес или пароль неверны. Пожалуйста, попробуйте еще раз!"
@@ -47,7 +65,7 @@ class LoginForm extends Component{
                     }else {
                         notification.error({
                             message: 'Cardosh login',
-                            description: error.message || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
+                            description: error.details || 'Сожалею! Что-то пошло не так. Пожалуйста, попробуйте еще раз!'
                         });
 
                     }
@@ -62,6 +80,7 @@ class LoginForm extends Component{
     render() {
 
         const {getFieldDecorator} = this.props.form;
+        const loading = this.state.loading;
 
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -82,9 +101,11 @@ class LoginForm extends Component{
 
                 </FormItem>
 
-                <FormItem>
-                    <Button htmlType='submit' className="btn-form" type="default">Войти</Button>
-                </FormItem>
+                {
+                    loading ? <Icon className="loading-auth" type="loading"/> :  <FormItem>
+                        <Button htmlType='submit' className="btn-form" type="default">Войти</Button>
+                    </FormItem>
+                }
             </Form>
         );
 

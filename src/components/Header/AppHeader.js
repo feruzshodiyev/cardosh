@@ -7,16 +7,17 @@ import PropTypes from 'prop-types';
 
 
 import './AppHeader.scss';
-import {ACCESS_TOKEN} from "../../constants";
+import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 
 const Header = Layout.Header;
 const MenuItem = Menu.Item;
+
 class AppHeader extends Component {
 
     constructor(props) {
         super(props);
 
-        this.state={
+        this.state = {
             prevScrollpos: window.pageYOffset,
             visible: false,
             drawerVisible: false,
@@ -26,7 +27,9 @@ class AppHeader extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleScroll )
+        window.addEventListener('scroll', this.handleScroll)
+
+        const {profile_image} = this.props;
 
     }
 
@@ -34,7 +37,7 @@ class AppHeader extends Component {
         window.removeEventListener("scroll", this.handleScroll);
     }
 
-    handleScroll=()=>{
+    handleScroll = () => {
         const {prevScrollpos} = this.state;
 
         const currentScrollPos = window.pageYOffset;
@@ -48,12 +51,7 @@ class AppHeader extends Component {
     };
 
 
-
-
-
-
-
-    handleLogout=()=>{
+    handleLogout = () => {
         localStorage.removeItem(ACCESS_TOKEN);
         window.location.reload();
 
@@ -84,24 +82,27 @@ class AppHeader extends Component {
     };
 
 
-
     render() {
-const userId = this.props.userId;
+        const userId = this.props.userId;
         const menu = (
             <Menu>
                 <Menu.Item key="1">
-                    <Link to={`/profile/${userId}/general`}>Profile</Link>
+                    <Link to={`/profile/${userId}/general`}>Профиль</Link>
                 </Menu.Item>
-                <Menu.Item key="0">
-                    <Link to="#">История поездки</Link>
+                <Menu.Item key="2">
+                    <Link to={`/requests/${userId}`}>Предложенные поездки</Link>
                 </Menu.Item>
-                <Menu.Divider />
-                <Menu.Item key="3" onClick={this.handleLogout}><Icon type="logout" />Выйти</Menu.Item>
+                <Menu.Item key="3">
+                    <Link to={`/my-rides/${userId}`}>Мои заявки</Link>
+                </Menu.Item>
+                <Menu.Divider/>
+                <Menu.Item key="4" onClick={this.handleLogout}><Icon type="logout"/>Выйти</Menu.Item>
             </Menu>
         );
 
         const drawerVisible = this.state.drawerVisible;
         const drawerVisible2 = this.state.drawerVisible2;
+        const {profile_image} = this.props;
 
         return (
 
@@ -124,7 +125,8 @@ const userId = this.props.userId;
                                                       style={{fontSize: '16px'}}/>Найти пасажира</Link>
                         </MenuItem>
                         <MenuItem key="offerTrip">
-                            <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить заявку</Link>
+                            <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить
+                                заявку</Link>
                         </MenuItem>
                         {
                             !this.props.isAuthenticated ?
@@ -145,7 +147,11 @@ const userId = this.props.userId;
                             <Dropdown overlay={menu} trigger={['click']}>
                                 <div>
                                     <p>{this.props.name}</p>
-                                    <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}} size="large"/>
+                                    {profile_image !=null ? <Avatar size='large'
+                                        src={"http://api.cardosh.uz"+profile_image}/> :
+                                        <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
+                                                size="large"/>
+                                    }
 
                                 </div>
                             </Dropdown>
@@ -155,52 +161,58 @@ const userId = this.props.userId;
                     </Menu>
 
                     <div className="head-mob">
-                    <div className="menu-mobile" onClick={drawerVisible ? this.onCloseDrawer:this.showDrawer}><Icon  type="menu" /></div>
-                    <Drawer
-                        title="Меню"
-                        placement="left"
-                        closable={true}
-                        onClose={this.onCloseDrawer}
-                        visible={drawerVisible}
-                    >
-                        <Menu
-                           mode="vertical"
-                           onClick={this.onCloseDrawer}
+                        <div className="menu-mobile" onClick={drawerVisible ? this.onCloseDrawer : this.showDrawer}>
+                            <Icon type="menu"/></div>
+                        <Drawer
+                            title="Меню"
+                            placement="left"
+                            closable={true}
+                            onClose={this.onCloseDrawer}
+                            visible={drawerVisible}
                         >
-                            <MenuItem key="main">
-                                <Link to="/">Главная</Link>
-                            </MenuItem>
+                            <Menu
+                                mode="vertical"
+                                onClick={this.onCloseDrawer}
+                            >
+                                <MenuItem key="main">
+                                    <Link to="/">Главная</Link>
+                                </MenuItem>
 
-                            <MenuItem key="search">
-                                <Link to="/search"> <Icon type="search"
-                                                          style={{fontSize: '16px'}}/>Найти пасажира</Link>
-                            </MenuItem>
-                            <MenuItem key="offerTrip">
-                                <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить заявку</Link>
-                            </MenuItem>
-                            {
-                                !this.props.isAuthenticated ?
-                                    <MenuItem key="addUser">
-                                        <Link to="/register"><Icon type="user-add"
-                                                                   style={{fontSize: '16px'}}/> Регистрация</Link>
-                                    </MenuItem>
-                                    : ''
+                                <MenuItem key="search">
+                                    <Link to="/search"> <Icon type="search"
+                                                              style={{fontSize: '16px'}}/>Найти пасажира</Link>
+                                </MenuItem>
+                                <MenuItem key="offerTrip">
+                                    <Link to="/offerTrip"><Icon type="plus-circle" style={{fontSize: '16px'}}/>Оставить
+                                        заявку</Link>
+                                </MenuItem>
+                                {
+                                    !this.props.isAuthenticated ?
+                                        <MenuItem key="addUser">
+                                            <Link to="/register"><Icon type="user-add"
+                                                                       style={{fontSize: '16px'}}/> Регистрация</Link>
+                                        </MenuItem>
+                                        : ''
 
-                            }
+                                }
 
-                            {!this.props.isAuthenticated ? (<MenuItem key="login">
-                                <Link to="/login"> <Icon type="login"
-                                                         style={{fontSize: '16px'}}/>Войти</Link>
-                            </MenuItem>) : ''}
-                        </Menu>
-                    </Drawer>
+                                {!this.props.isAuthenticated ? (<MenuItem key="login">
+                                    <Link to="/login"> <Icon type="login"
+                                                             style={{fontSize: '16px'}}/>Войти</Link>
+                                </MenuItem>) : ''}
+                            </Menu>
+                        </Drawer>
 
-                        {this.props.isOnHomePage? (this.state.visible ? <div className="logo-header"/>: "") :<div className="logo-header"/> }
+                        {this.props.isOnHomePage ? (this.state.visible ? <div className="logo-header"/> : "") :
+                            <div className="logo-header"/>}
 
 
                         {this.props.isAuthenticated ? <div key="user" className="mob-avatar">
                             <div onClick={this.showDrawer2}>
-                                <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}} size="large"/>
+                                {profile_image !=null ? <Avatar size='large'
+                                                                src={"http://api.cardosh.uz"+profile_image}/> :
+                                <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
+                                        size="large"/>}
                             </div>
                             <Drawer
                                 title={this.props.name}
@@ -212,7 +224,7 @@ const userId = this.props.userId;
                                 {menu}
                             </Drawer>
                         </div> : ''}
-                </div>
+                    </div>
                 </div>
             </Header>
 
@@ -220,13 +232,12 @@ const userId = this.props.userId;
     }
 }
 
-AppHeader.propTypes={
-isOnHomePage: PropTypes.bool,
+AppHeader.propTypes = {
+    isOnHomePage: PropTypes.bool,
     isAuthenticated: PropTypes.bool,
     name: PropTypes.string,
     userId: PropTypes.number,
 };
-
 
 
 export default withRouter(AppHeader);

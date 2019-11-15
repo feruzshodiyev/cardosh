@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './SearchResults.scss'
-import {Avatar, Icon} from "antd";
+import {Avatar, Icon, Result} from "antd";
 import axios from "axios";
 import {API_BASE_URL} from "../../constants";
 import moment from "moment";
@@ -15,7 +15,8 @@ class SearchResults extends Component {
         this.state = {
             loading: true,
             results: [],
-            isError: false
+            isError: false,
+            emptyResult: false
         };
     }
 
@@ -23,20 +24,37 @@ class SearchResults extends Component {
         const fromId = this.props.match.params.fromId;
         const toId = this.props.match.params.toId;
 
+        console.log("from: " + fromId);
+        console.log("to: " + toId);
         axios.get(API_BASE_URL + '/ride/search/', {
             params: {
                 fromID: fromId,
                 toID: toId
             }
         }).then(res => {
+
             const results = res.data;
-            this.setState({
-                results: results,
-            }, () => {
+
+            if (results.length === 0) {
                 this.setState({
-                    loading: false,
-                });
-            })
+                    emptyResult: true
+                }, () => {
+                    this.setState({
+                        loading: false
+                    });
+                    console.log("no result" + results)
+                })
+            } else {
+                console.log(results);
+                this.setState({
+                    results: results,
+                }, () => {
+                    this.setState({
+                        loading: false,
+                    });
+                })
+            }
+
         }).catch(err => {
             this.setState({
                 loading: false,
@@ -67,23 +85,27 @@ class SearchResults extends Component {
                             <div className="card-details">
                                 <div className="card-route">
                                     <p><Icon type="down-circle"/>{result.fromm}</p>
-
+                                    <p><Icon type="arrow-right"/></p>
                                     <p><Icon type="environment"/>{result.to}</p>
                                 </div>
-                                <div className="price-card">
-                                    <p>{result.price} Сум</p>
-                                    <div className="card-date">
-                                        <p>Дата:{date}</p>
+
+                            </div>
+                            <div className="card-user-date">
+                                <div className="card-date">
+                                    <p>Дата:{date}</p>
+                                </div>
+                                <div className="user-avatar-name">
+                                    {result.passenger.profile_image ?
+                                        <Avatar src={result.passenger.profile_image} size='large'/> :
+                                        <Avatar className="card-avatar" size='large'
+                                                icon="user"/>}
+
+                                    <div>
+                                        <p>{result.passenger.first_name}</p>
+                                        <p><Icon type="double-right" /></p>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="card-user">
-                                <Avatar className="card-avatar" size={60}
-                                    // src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                        icon="user"/>
-                                <div>
-                                    <p>{result.customUser.first_name}</p>
-                                </div>
+
                             </div>
                         </Link>
                     </div>
@@ -115,12 +137,18 @@ class SearchResults extends Component {
         return (
             <div className="wrap-results">
                 <div className="search-info">
-                 <div>
-                     <div className="search-from"><p>{from}</p></div>
-                     <div className="icons8-map-pinpoint"/>
-                     <div><p>{to}</p></div></div>
+                    <div>
+                        <div className="search-from"><p>{from}</p></div>
+                        <div className="icons8-map-pinpoint"/>
+                        <div><p>{to}</p></div>
+                    </div>
                 </div>
-                <Cards/>
+                {this.state.emptyResult ?
+                    <div className="no-result">
+                        <Icon type="question-circle"/>
+                        <h2>По этому маршруту ничего не найдено!</h2>
+                    </div> : <Cards/>}
+
             </div>
         );
     }

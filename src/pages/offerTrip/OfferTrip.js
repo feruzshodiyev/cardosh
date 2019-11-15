@@ -1,31 +1,21 @@
 /* global google */
 import React, {Component} from 'react';
 import './OfferTrip.scss'
-import {DatePicker, TimePicker, Button, Steps, Form, Icon, notification, Modal} from 'antd';
+import {DatePicker, TimePicker, Button, Form, Icon, notification, Modal, InputNumber, Input} from 'antd';
 import moment from 'moment';
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 import {geocodeByPlaceId, getLatLng} from 'react-places-autocomplete';
-import {HashRouter as Router, Switch, Route, Redirect, withRouter, Link} from 'react-router-dom';
-import {createBrowserHistory} from 'history';
+import { Switch, Route, Redirect, Link} from 'react-router-dom';
+
 import Map from './Map';
 import SecondStepForm from './Second'
 import axios from 'axios'
-import Confirm from "./Confirm";
+
 import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 
 
-// const history = createBrowserHistory();
-// const location = history.location;
-// history.listen((location) => {
-//     console.log('location', location);
-// });
 
-
-// const {Step} = Steps;
-//
-// const steps = [
-//     "First", "Second", "Last"
-// ];
+const { TextArea } = Input;
 
 class OfferTrip extends Component {
     _isMounted = false;
@@ -33,17 +23,15 @@ class OfferTrip extends Component {
         super(props);
         this.state = {
             offerTripFields: {
-                'customUser': null,
+                'passenger': null,
                 'fromm': "",
                 'to': "",
                 'departure_date': "",
                 'departure_time': "",
-                'seats': 3,
-                'price': 5000,
+                'peopleNumber': 1,
                 'description': "default",
                 'fromID': "",
                 'toID': ""
-                // 'phone_number': "",
             },
             origin: {},
             hasOrigin: false,
@@ -72,7 +60,7 @@ class OfferTrip extends Component {
                 this.setState(prevState => ({
                     offerTripFields: {
                         ...prevState.offerTripFields,
-                        'customUser': user,
+                        'passenger': user,
                     }
                 }))
             }.bind(this),5000);
@@ -135,74 +123,69 @@ class OfferTrip extends Component {
 
         const formattedTime = moment(values.time).format("HH:mm");
 
-
-
-
-        const service = new google.maps.DistanceMatrixService();
-        service.getDistanceMatrix({
-                origins: [new google.maps.LatLng(this.state.origin)],
-                destinations: [new google.maps.LatLng(this.state.destination)],
-                travelMode: window.google.maps.TravelMode.DRIVING,
-                avoidHighways: false,
-                avoidTolls: false,
-            },
-            (result, status) => {
-                if (status === google.maps.DistanceMatrixStatus.OK) {
-                    const distance = result.rows[0].elements[0].distance.text;
-                    const duration = result.rows[0].elements[0].duration.text;
-                    this.setState({
-                        distance: distance,
-                        duration: duration,
-                    });
-                    notification.success({
-                        message: 'Успешно',
-                        description: '',
-                    });
-                    this.setState({
-                        loading: false,
-                        redirectSecond: true,
-                    })
-                } else {
-                    this.setState({
-                        loading: false,
-                        redirectSecond: true,
-                    })
-                }
-            });
-
         this.setState( prevState=>({
-        offerTripFields: {
-            ...prevState.offerTripFields,
-            'departure_date': formattedDate,
-            'departure_time': formattedTime,
-        }
-
-        }));
-
-    };
-
-
-    handleSecondStepVal = (values) => {
-        this.setState(prevState => ({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'price': values.price,
-                'seats': values.seats,
+                'departure_date': formattedDate,
+                'departure_time': formattedTime,
+                'peopleNumber': values.seats,
                 'description': values.description
-            },
-            redirectConfirm: true
+            }
+
         }),()=>this.sendFields());
+
+
+
+        // const service = new google.maps.DistanceMatrixService();
+        // service.getDistanceMatrix({
+        //         origins: [new google.maps.LatLng(this.state.origin)],
+        //         destinations: [new google.maps.LatLng(this.state.destination)],
+        //         travelMode: window.google.maps.TravelMode.DRIVING,
+        //         avoidHighways: false,
+        //         avoidTolls: false,
+        //     },
+        //     (result, status) => {
+        //         if (status === google.maps.DistanceMatrixStatus.OK) {
+        //             const distance = result.rows[0].elements[0].distance.text;
+        //             const duration = result.rows[0].elements[0].duration.text;
+        //             this.setState({
+        //                 distance: distance,
+        //                 duration: duration,
+        //             });
+        //             notification.success({
+        //                 message: 'Успешно',
+        //                 description: '',
+        //             });
+        //             this.setState({
+        //                 loading: false,
+        //                 redirectSecond: true,
+        //             })
+        //         } else {
+        //             this.setState({
+        //                 loading: false,
+        //                 redirectSecond: true,
+        //             })
+        //         }
+        //     });
+
+
+
     };
 
-    // getPhoneNum=(val)=>{
-    //     console.log("val "+val);
+
+    // handleSecondStepVal = (values) => {
     //     this.setState(prevState => ({
-    //         offerTripFields:{
+    //         offerTripFields: {
     //             ...prevState.offerTripFields,
-    //             'phone_number': val
-    //         }
-    //     }))
+    //             'price': values.price,
+    //             'seats': values.seats,
+    //             'description': values.description
+    //         },
+    //         redirectConfirm: true
+    //     }),()=>this.sendFields());
     // };
+
+
 
     sendFields=()=>{
         console.log(this.state.offerTripFields);
@@ -273,11 +256,17 @@ class OfferTrip extends Component {
                             />
                             </div>
                         </div>
-                        <DateAndTime
-                            onClickDale={this.handleClickDale}
-                            disabled={this.state.hasOrigin && this.state.hasDestination}
-                            loading={this.state.loading}
-                        />
+
+                        {/*DateTime component contains also seats and description!!*/}
+                        <div
+                            className={this.state.hasOrigin && this.state.hasDestination? "form-dtsd":"form-disabled"}>
+                            <DateAndTime
+                                onClickDale={this.handleClickDale}
+                                disabled={this.state.hasOrigin && this.state.hasDestination}
+                                loading={this.state.loading}
+                            />
+                        </div>
+
                     </div>
 
                     <div className="route-map">
@@ -308,33 +297,33 @@ class OfferTrip extends Component {
 
         };
 
-        const SecondStep1 = () => {
-            return (
-                <div className="form-flex">
-                    <div className="plll">
-                        <SecondStepForm
-                            origin={this.state.offerTripFields.fromm}
-                            destination={this.state.offerTripFields.to}
-                            distance={this.state.distance}
-                            duration={this.state.duration}
-                            departureDate={this.state.offerTripFields.departure_date}
-                            departureTime={this.state.offerTripFields.departure_time}
-                            onValuesSubmit={this.handleSecondStepVal}
-                        />
-                    </div>
-                    <div className="route-map google-maps">
-                        <div>
-                            <Map
-                                origin={this.state.origin}
-                                destination={this.state.destination}
-                                renderDirection={this.state.hasOrigin && this.state.hasDestination}
-                            />
-                        </div>
-                    </div>
-
-                </div>
-            );
-        };
+        // const SecondStep1 = () => {
+        //     return (
+        //         <div className="form-flex">
+        //             <div className="plll">
+        //                 <SecondStepForm
+        //                     origin={this.state.offerTripFields.fromm}
+        //                     destination={this.state.offerTripFields.to}
+        //                     distance={this.state.distance}
+        //                     duration={this.state.duration}
+        //                     departureDate={this.state.offerTripFields.departure_date}
+        //                     departureTime={this.state.offerTripFields.departure_time}
+        //                     onValuesSubmit={this.handleSecondStepVal}
+        //                 />
+        //             </div>
+        //             <div className="route-map google-maps">
+        //                 <div>
+        //                     <Map
+        //                         origin={this.state.origin}
+        //                         destination={this.state.destination}
+        //                         renderDirection={this.state.hasOrigin && this.state.hasDestination}
+        //                     />
+        //                 </div>
+        //             </div>
+        //
+        //         </div>
+        //     );
+        // };
 
 
         return (
@@ -345,22 +334,18 @@ class OfferTrip extends Component {
                         <br/>
                         <div className='offer-form'>
                             <Switch>
-                            <Route exact path='/offerTrip' render={() => this.state.redirectSecond ?
-                                <Redirect to='/offerTrip/second'/> : <FirstStep/>}/>
-                            <Route path='/offerTrip/second'
-                                   render={() => this.state.hasOrigin && this.state.hasDestination ?
-                                       // (this.state.redirectConfirm ?
-                                //       {/*<Redirect to='/offerTrip/confirm'/> : */}
-                                       <SecondStep1/>
-                                       // )
-                                       :
-                                       <Redirect to="/offerTrip"/>}/>
-                            {/*<Route path='/offerTrip/confirm' render={() =>*/}
-                            {/*    this.state.redirectConfirm ?*/}
-                            {/*    <Confirm*/}
-                            {/*        onConfirm={this.sendFields}*/}
-                            {/*    getNum={this.getPhoneNum}/>:<Redirect to="/offerTrip"/>}*/}
-                            {/*/>*/}
+                            <Route exact path='/offerTrip' render={() =>
+                                // this.state.redirectSecond ?
+                                // <Redirect to='/offerTrip/second'/> :
+                                    <FirstStep/>}/>
+                            {/*<Route path='/offerTrip/second'*/}
+                            {/*       render={() => this.state.hasOrigin && this.state.hasDestination ?*/}
+                            {/*           // (this.state.redirectConfirm ?*/}
+                            {/*    //       /!*<Redirect to='/offerTrip/confirm'/> : *!/*/}
+                            {/*           <SecondStep1/>*/}
+                            {/*           // )*/}
+                            {/*           :*/}
+                            {/*           <Redirect to="/offerTrip"/>}/>*/}
                             </Switch>
 
                         </div>
@@ -391,7 +376,7 @@ class DateAndTimeComponent extends Component {
 
     };
     disabledDate = (current) => {
-        // Can not select days before today and today
+        // Can not select days before today
         return current < moment().startOf('day');
     };
     handleDateChange=()=>{
@@ -410,7 +395,8 @@ return date=true;
 
 
         return (
-            <Form onSubmit={this.handleClickSubmit}>
+            <Form
+                onSubmit={this.handleClickSubmit}>
                 <div className='date-time'>
                     <div>
                         <h3>Дата и время</h3>
@@ -445,8 +431,45 @@ return date=true;
                                 />
                             )}
                         </Form.Item>
-
                     </div>
+                </div>
+                        <div className="seats">
+                            <div id="inp">
+                        <Form.Item label="Необходимое количество мест:">
+                            {getFieldDecorator('seats',{
+                                rules: [{required: true, message: 'Пожалуйста, укажите количество мест!'}],
+                                initialValue: 1
+                            })(
+                                <InputNumber
+                                    min={1} max={4 }
+                                    disabled={!disabled}
+                                />
+                            )}
+                        </Form.Item>
+                            </div>
+                        </div>
+                        <div className="extra-info">
+                            <div>
+                                <h2>Подробнее о заявке</h2>
+                            </div>
+                            <div>
+                        <Form.Item label="Предоставьте попутчикам больше информации о заявке.">
+                            {getFieldDecorator('description',{
+                                rules: [{required: true, message: 'Обязательное поле!'}],
+                            })(
+
+                                <TextArea
+                                    placeholder="Укажите, например:
+                - место отправления и прибытия;
+                - возможность взять багаж;
+                "
+                                    disabled={!disabled}
+                                    rows={4}/>
+                            )}
+                        </Form.Item>
+                            </div>
+                        </div>
+
                     <br/>
                     <div className="submit-btn">
                         <Form.Item>
@@ -457,13 +480,14 @@ return date=true;
                                 type="primary"
                                 htmlType="submit"
                             >
-                                Продолжить
+                                {/*Продолжить*/}
+                                 Подать заявку
                                 {loading ? <Icon type="loading"/> : <Icon type="double-right"/>}
                             </Button>
 
                         </Form.Item>
                     </div>
-                </div>
+
             </Form>
         );
     }

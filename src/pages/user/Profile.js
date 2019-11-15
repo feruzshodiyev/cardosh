@@ -1,170 +1,114 @@
 import React, {Component} from 'react';
-import {Menu, Icon, Form, Input, Button} from 'antd';
+import {Menu, Icon, Form, Input, Button, Layout, Select, notification, Upload, message, Modal, Avatar} from 'antd';
 import {Switch, Route, NavLink} from 'react-router-dom';
 import './Profile.scss'
 import axios from 'axios';
 import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
+import imageCompression from 'browser-image-compression';
 
 
+const {Header, Content, Footer, Sider} = Layout;
+const {Option} = Select;
 
 class Profile extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            user:{},
+        this.state = {
+
+            user: {},
+            userId: 0,
+            profile_image: null,
             loading: false,
             confirmLoading: false,
             emailConfirmText: <div><p>Подтвердите свою электронную почту, чтобы мы
                 могли связаться с вами, если понадобится.</p>
-                <Button onClick={this.handleEmailConfirm}><Icon type="check" />Подтвердить электронную почту</Button></div>
+                <Button onClick={this.handleEmailConfirm}><Icon type="check"/>Подтвердить электронную почту</Button>
+            </div>
 
-        }
+        };
+
     }
 
 
     componentDidMount() {
         const userId = this.props.match.params.id;
+        this.setState({
+            userId: userId
+        });
         console.log(userId);
-        axios.get(API_BASE_URL+`/user/detail/${userId}/`).then(res=>{
-            console.log(res)
+        axios.get(API_BASE_URL + `/user/detail/${userId}/`).then(res => {
+            console.log(res);
             this.setState({
-                user: res.data
+                user: res.data,
+                profile_image: res.data.profile_image
             })
-        }).catch(err=>{
+        }).catch(err => {
             console.log(err)
         })
     }
 
-
-
-    handleSubmitGeneral = () => {
-
+    afterUpload = () => {
+        this.props.uploaded()
     };
 
-    handleEmailConfirm = () =>{
+    handleEmailConfirm = () => {
         this.setState({
             confirmLoading: true
         });
-        axios.get(API_BASE_URL+"/verify_email/",{
-            headers:{
+        axios.get(API_BASE_URL + "/verify_email/", {
+            headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
             }
-        }).then(res=>{
+        }).then(res => {
             this.setState({
                 confirmLoading: false,
                 emailConfirmText: <p>
-                    Mail sent!
+                    Почта отправлена!
                 </p>
             });
             console.log(res)
-        }).catch(err=>{
+        }).catch(err => {
             this.setState({
                 confirmLoading: false,
                 emailConfirmText: <p>
-                    Mail didn't send!
+                    Почта не отправлена!
                 </p>
             });
             console.log(err)
         })
     };
 
+
     render() {
-        const GeneralForm = (props) => {
-            const {getFieldDecorator} = props.form;
-            const formItemLayout = {
-                labelCol: {
-                    xs: {span: 24},
-                    sm: {span: 8},
-                },
-                wrapperCol: {
-                    xs: {span: 24},
-                    sm: {span: 16},
-                },
-            };
 
-            const user = this.state.user;
-            return (
-                <Form hideRequiredMark={true} {...formItemLayout} onSubmit={this.handleSubmitGeneral}>
-
-                    <Form.Item label="Пол">
-                        {getFieldDecorator('gender', {
-                            initialValue:  (user.gender===1 ? "Мужчина":"Женщина"),
-                        })(<Input disabled={true}/>)}
-                    </Form.Item>
-                    <Form.Item label="Имя">
-                        {getFieldDecorator('first_name', {
-                            initialValue: user.first_name,
-                            rules: [
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста, введите ваше имя!',
-                                },
-                            ],
-                        })(<Input/>)}
-                    </Form.Item>
-                    <Form.Item label="Фамилия">
-                        {getFieldDecorator('last_name', {
-                            initialValue: user.last_name,
-                            rules: [
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста, введите вашу фамилию!',
-                                },
-                            ],
-                        })(<Input/>)}
-                    </Form.Item>
-                    <Form.Item label="Эл. почта">
-                        {getFieldDecorator('email', {
-                            initialValue: user.email,
-                            rules: [
-                                {
-                                    type: 'email',
-                                    message: 'Введен неверный E-mail!',
-                                },
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста, введите свой адрес электронной почты!',
-                                },
-                            ],
-                        })(<Input/>)}
-                    </Form.Item>
-                    <Form.Item label="Моб. телефон:">
-                        {getFieldDecorator('phone_number', {
-                            initialValue: user.phone_number,
-                            rules: [
-                                {
-                                    required: true,
-                                    message: 'Пожалуйста, введите свой адрес электронной почты!',
-                                },
-                            ],
-                        })(<Input/>)}
-                    </Form.Item>
-
-                </Form>)
-        };
-
-        const GenForm = Form.create()(GeneralForm);
 
         const General = () => {
             return (
                 <div className="general">
                     <h2>Мои персональные данные</h2>
                     <hr/>
-                    <GenForm/>
+                    <div className="general-form">
+                        <GenForm
+                            user={this.state.user}
+                            userId={this.state.userId}
+                        />
+                    </div>
                 </div>
-            )
+            );
         };
 
-        const Picture = () => {
+        const Car = () => {
             return (
                 <div>
-                    <p>Фото профиля</p>
+                    <p>car</p>
                     <hr/>
                 </div>
             )
         };
+
+
         const Verifications = () => {
             const {confirmLoading, emailConfirmText} = this.state;
             const email = this.state.user.email;
@@ -183,14 +127,14 @@ class Profile extends Component {
             )
         };
 
-        const Verified =()=>{
+        const Verified = () => {
             const email = this.state.user.email;
 
-            return(
+            return (
                 <div>
                     <p>Подтверждение</p>
                     <hr/>
-                    <h2><Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a" /> Эл. почта подтверждена </h2>
+                    <h2><Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a"/> Эл. почта подтверждена </h2>
                     <p>Ваша эл. почта: {email} </p>
                     <p>Вы подтвердили свою электронную почту, и теперь мы сможем связаться с вами, если понадобится.</p>
                 </div>
@@ -202,50 +146,412 @@ class Profile extends Component {
 
         return (
             <div className="profile-page">
-                <div>
-                    <div className="menu-wrap">
-                        <Menu
-                            style={{width: 256}}
-                            defaultSelectedKeys={['1']}
-                        >
+                <Layout>
+                    <Sider
+                        breakpoint='xs'
+                        collapsedWidth="0"
+                        theme="light"
+                        width={250}
+                        defaultCollapsed={true}
+                    >
+                        <div className="logo"/>
+                        <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
                             <Menu.Item key="1">
-                                <NavLink to={`/profile/${userId}/general`}> Персональные данные</NavLink>
+                                <NavLink to={`/profile/${userId}/general`}>
+                                    <Icon type="user"/>
+                                    <span className="nav-text"> Персональные данные </span>
+                                </NavLink>
+
                             </Menu.Item>
-                            <Menu.Divider/>
                             <Menu.Item key="2">
-                                <NavLink to={`/profile/${userId}/picture`}>Фото профиля</NavLink>
+                                <NavLink to={`/profile/${userId}/verifications`}>
+                                    <Icon type="file-protect"/>
+                                    <span className="nav-text"> Надежность пользователя </span>
+                                </NavLink>
+
                             </Menu.Item>
-                            <Menu.Divider/>
                             <Menu.Item key="3">
-                                <NavLink to={`/profile/${userId}/verifications`}> Надежность пользователя</NavLink>
+                                <NavLink to={`/profile/${userId}/picture`}>
+                                    <Icon type="file-image"/>
+                                    <span className="nav-text">Фото профиля</span>
+                                </NavLink>
                             </Menu.Item>
-                            <Menu.Divider/>
                             <Menu.Item key="4">
-                                Мой автомобиль
-                            </Menu.Item>
-                            <Menu.Divider/>
-                            <Menu.Item key="5">
-                                Пароль
+                                <NavLink to={`/profile/${userId}/car`}>
+                                    <Icon type="car"/>
+                                    <span className="nav-text"> Мой автомобиль</span>
+                                </NavLink>
                             </Menu.Item>
                         </Menu>
-                    </div>
-                    <div className="profile-info">
-                        <Switch>
-                            <Route exact path="/profile/:id/general" render={() => <General/>}/>
-                            <Route path="/profile/:id/picture" render={() => <Picture/>}/>
-                            <Route path="/profile/:id/verifications" render={() => email_confirmed ? <Verified/> : <Verifications/> }/>
+                    </Sider>
+                    <Layout>
+                        {/*<Header style={{ background: '#fff', padding: 0 }} />*/}
+                        <Content style={{margin: '24px 16px 0', overflow: 'initial'}}>
+                            <div style={{padding: 24, background: '#fff', minHeight: 360}}>
+                                <Switch>
+                                    <Route exact path="/profile/:id/general" render={() => <General/>}/>
+                                    <Route path="/profile/:id/picture"
+                                           render={() => <PicFrom
+                                               userId={this.state.userId}
+                                               profile_image={this.state.profile_image}
+                                               afterUpload={this.afterUpload}/>}/>
+                                    <Route path="/profile/:id/verifications"
+                                           render={() => email_confirmed ? <Verified/> : <Verifications/>}/>
+                                    <Route path="/profile/:id/car" render={() => <Car/>}/>
 
-                        </Switch>
-                    </div>
-
-                </div>
+                                </Switch>
+                            </div>
+                        </Content>
+                        <Footer style={{textAlign: 'center'}}>CarDosh</Footer>
+                    </Layout>
+                </Layout>
             </div>
         );
     }
 }
 
-Profile.propTypes={
+class GeneralForm extends Component {
+
+
+    handleSubmitGeneral = e => {
+        const userId = this.props.userId;
+
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                axios.put(API_BASE_URL + `/user/${userId}/update/`, values, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN)
+                    }
+                }).then(res => {
+                    console.log(res);
+                    notification.success({
+                        message: 'Данные успешно сохранены!'
+                    })
+                }).catch(err => {
+                    notification.error({
+                        message: 'Произошло ошибка!'
+                    })
+                })
+            }
+        })
+
+    };
+
+    render() {
+        const {getFieldDecorator} = this.props.form;
+        const formItemLayout = {
+            labelCol: {
+                xs: {span: 24},
+                sm: {span: 8},
+            },
+            wrapperCol: {
+                xs: {span: 24},
+                sm: {span: 16},
+            },
+        };
+        const user = this.props.user;
+
+        return (
+            <Form
+                hideRequiredMark={true}
+                {...formItemLayout}
+                onSubmit={this.handleSubmitGeneral}>
+
+
+                <Form.Item className="form-item" label="Пол">
+                    {getFieldDecorator('gender', {
+                        initialValue: (user.gender === 1 ? "1" : "2"),
+                    })(
+                        <Select>
+                            <Option value="1">Мужчина</Option>
+                            <Option value="2">Женщина</Option>
+                        </Select>
+                    )}
+                </Form.Item>
+
+
+                <Form.Item className="form-item" label="Имя">
+                    {getFieldDecorator('first_name', {
+                        initialValue: user.first_name,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите ваше имя!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+
+
+                <Form.Item className="form-item" label="Фамилия">
+                    {getFieldDecorator('last_name', {
+                        initialValue: user.last_name,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите вашу фамилию!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+                <Form.Item className="form-item" label="Эл. почта">
+                    {getFieldDecorator('email', {
+                        initialValue: user.email,
+                        rules: [
+                            {
+                                type: 'email',
+                                message: 'Введен неверный E-mail!',
+                            },
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите свой адрес электронной почты!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+                <Form.Item className="form-item" label="Моб. телефон:">
+                    {getFieldDecorator('phone_number', {
+                        initialValue: user.phone_number,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите свой адрес электронной почты!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+
+                <Form.Item
+                    wrapperCol={{
+                        xs: {span: 24, offset: 0},
+                        sm: {span: 16, offset: 8},
+                    }}
+                >
+                    <Button type="primary" htmlType="submit">
+                        Сохранить
+                    </Button>
+                </Form.Item>
+
+            </Form>)
+
+    }
+}
+
+function getBase64(img, callback) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result));
+    reader.readAsDataURL(img);
+}
+
+function beforeUpload(file) {
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+    if (!isJpgOrPng) {
+        message.error('Вы можете загрузить только JPG / PNG файл!');
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+        message.error('Изображение должно быть меньше 2 МБ!');
+    }
+    return isJpgOrPng && isLt2M;
+}
+
+class Picture extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            imageUrl: null,
+            imageUrl1: null,
+            loading: false,
+            uploadSuccess: false,
+            uploadError: false,
+            fileList: [],
+            showSubmitBtn: false
+        }
+    }
+
+    componentDidMount() {
+        const {profile_image} = this.props;
+        this.setState({
+            imageUrl1: profile_image
+        })
+    }
+
+
+    handlePicSubmit = e => {
+        this.setState({
+            loading: true,
+        });
+        let formData = new FormData();
+        formData.append("profile_image", this.state.fileList[0].originFileObj);
+        const userId = this.props.userId;
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log('values: ', formData);
+                axios.put(`${API_BASE_URL}/${userId}/profile_image/update/`, formData, {
+                    headers: {
+                        'Authorization': 'Bearer ' + localStorage.getItem(ACCESS_TOKEN),
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then(res => {
+                    this.setState({
+                        loading: false,
+                        uploadSuccess: true,
+                        showSubmitBtn:false
+                    });
+                    notification.success({
+                        message: "Фотография профиля была успешно сохранена!"
+                    });
+                    this.props.afterUpload();
+                    console.log(res);
+                }).catch(err => {
+                    this.setState({
+                        loading: false,
+                        uploadError: true
+                    });
+
+                    notification.error({
+                        message: "Фотография профиля не была сохранена!"
+                    });
+                    console.log(err);
+                })
+            }
+        })
+    };
+
+
+    // normFile = e => {
+    //     console.log('Upload event:', e);
+    //
+    //     if (Array.isArray(e)) {
+    //         return e;
+    //     }
+    //     return e && e.fileList;
+    //
+    // };
+
+    resetPhoto = () => {
+        this.setState({
+            imageUrl: null,
+            imageUrl1: null,
+            fileList: [],
+            showSubmitBtn: false
+        })
+    };
+
+    handlePicChange = ({fileList}) => {
+        const file = fileList[0];
+
+        const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (isJpgOrPng&&isLt2M){
+            getBase64(fileList[0].originFileObj, imageUrl =>{
+                this.setState({
+                    imageUrl,
+                });
+
+                }
+
+
+            );
+
+            // if (!isLt2M) {
+            //     const options = {
+            //         maxSizeMB: 1,
+            //         maxWidthOrHeight: 1920,
+            //         useWebWorker: false
+            //     };
+            //     const blob = new Blob([file],{type:'image/png'});
+            //
+            //         imageCompression(blob, options).then(compressedFile=>{
+            //             console.log('compressedFile instanceof Blob', compressedFile.instanceOf.Blob); // true
+            //             console.log(`compressedFile size ${compressedFile.size / 1024 / 1024} MB`); // smaller than maxSizeMB
+            //         }).catch(error => {
+            //             console.log(error.message);
+            //         })
+            // }
+            this.setState({
+                fileList,
+                showSubmitBtn: true
+            });
+        }
+
+    };
+
+    render() {
+        const {imageUrl, imageUrl1} = this.state;
+        const {getFieldDecorator} = this.props.form;
+
+        const formItemLayout = {
+            labelCol: {span: 6},
+            wrapperCol: {span: 14},
+        };
+
+        const uploadButton = (
+            <div>
+                <Icon type={'plus'}/>
+                <div className="ant-upload-text">Upload</div>
+            </div>
+        );
+        return (
+
+            <Form {...formItemLayout} onSubmit={this.handlePicSubmit}>
+                <p>Фото профиля</p>
+                <hr/>
+
+                {imageUrl != null ?
+                    <div style={{margin: "auto", width: "200px"}}><Avatar className="ready-avatar" size={200}
+                                                                          src={imageUrl}/></div> :
+                    imageUrl1 ?
+                        <div style={{margin: "auto", width: "200px"}}><Avatar className="ready-avatar" size={200}
+                                                                              src={imageUrl1}/></div> : ''}
+                <Form.Item className="form-item-upload">
+                    {getFieldDecorator('profile_image', {
+                        valuePropName: 'file',
+                        getValueFromEvent: this.normFile,
+                        rules: [{required: true, message: 'Пожалуйста, загрузите файл!'}]
+                    })(
+                        <Upload
+                            name="avatar"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            action="/upload.do"
+                            beforeUpload={beforeUpload}
+                            showUploadList={false}
+                            onChange={this.handlePicChange}
+                        >
+                            {imageUrl || imageUrl1 ? null : uploadButton}
+
+                        </Upload>
+                    )}
+                </Form.Item>
+
+                {this.state.loading ? <Icon className="upload-loading" type='loading'/> :
+                    <Form.Item wrapperCol={{span: 12, offset: 6}}>
+                        {this.state.showSubmitBtn ? <Button type="primary" htmlType="submit">
+                            Сохранить фото
+                        </Button> : ''}
+
+                        <Button className="btn-clear-photo" onClick={this.resetPhoto}>
+                            Новое фото
+                        </Button>
+                    </Form.Item>}
+
+
+            </Form>
+        );
+    }
+
+}
+
+const PicFrom = Form.create()(Picture);
+
+const GenForm = Form.create()(GeneralForm);
+
+Profile.propTypes = {
     email_confirmed: PropTypes.bool,
+    uploaded: PropTypes.func
 };
 
 export default Profile;
