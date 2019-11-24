@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {Layout, Menu, Icon, Avatar, Dropdown, Drawer} from 'antd';
+import {Layout, Menu, Icon, Avatar, Dropdown, Drawer, Badge} from 'antd';
+import axios from "axios";
 
 import {Link, withRouter} from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const Header = Layout.Header;
 const MenuItem = Menu.Item;
 
 class AppHeader extends Component {
-
+ interval=null;
     constructor(props) {
         super(props);
 
@@ -21,20 +22,23 @@ class AppHeader extends Component {
             prevScrollpos: window.pageYOffset,
             visible: false,
             drawerVisible: false,
-            drawerVisible2: false
+            drawerVisible2: false,
+            badgeCount: 0,
 
         }
     }
 
     componentDidMount() {
+        this.interval=setInterval(()=>{
+            this.getRequests();
+            },60000);
         window.addEventListener('scroll', this.handleScroll)
-
-        const {profile_image} = this.props;
-
+        this.getRequests();
     }
 
     componentWillUnmount() {
         window.removeEventListener("scroll", this.handleScroll);
+
     }
 
     handleScroll = () => {
@@ -47,6 +51,42 @@ class AppHeader extends Component {
         this.setState({
             visible: visible
         });
+
+    };
+
+    getRequests = () => {
+
+        axios.get("http://api.cardosh.uz/v1/notifications/new/requests/number/", {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+            }
+        }).then(res => {
+            console.log(res);
+            this.setState({
+               badgeCount: res.data
+            });
+        }).catch(err => {
+            console.log("New requests number error", err)
+        })
+
+    };
+
+
+    cleanNotifications = () =>{
+        if (this.state.badgeCount>0){
+            axios.put("http://api.cardosh.uz/v1/notifications/clean/",{}, {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+                }
+            }).then(res=>{
+                this.setState({
+                    badgeCount: 0
+                });
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
 
     };
 
@@ -90,10 +130,12 @@ class AppHeader extends Component {
                     <Link to={`/profile/${userId}/general`}>Профиль</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
-                    <Link to={`/requests/${userId}`}>Предложенные поездки</Link>
+                    <Link to={`/requests/${userId}`}>Предложеня</Link>
                 </Menu.Item>
-                <Menu.Item key="3">
+                <Menu.Item key="3" onClick={this.cleanNotifications}>
+                    <Badge dot={this.state.badgeCount>0}>
                     <Link to={`/my-rides/${userId}`}>Мои заявки</Link>
+                    </Badge>
                 </Menu.Item>
                 <Menu.Divider/>
                 <Menu.Item key="4" onClick={this.handleLogout}><Icon type="logout"/>Выйти</Menu.Item>
@@ -144,13 +186,27 @@ class AppHeader extends Component {
                         </MenuItem>) : ''}
 
                         {this.props.isAuthenticated ? <MenuItem key="user" className="avatar">
-                            <Dropdown overlay={menu} trigger={['click']}>
+                            <Dropdown
+                                placement="bottomCenter"
+                                overlayStyle={{width: "200px"}}
+                                overlay={menu}
+                                trigger={['click']}>
                                 <div>
                                     <p>{this.props.name}</p>
-                                    {profile_image !=null ? <Avatar size='large'
-                                        src={"http://api.cardosh.uz"+profile_image}/> :
-                                        <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
+                                    {profile_image != null ? <Badge count={this.state.badgeCount}>
+                                            <Avatar
+                                                size='large'
+                                                src={"http://api.cardosh.uz" + profile_image}/>
+                                        </Badge> :
+                                        <Badge count={this.state.badgeCount}>
+                                            <Avatar
+                                                icon="user"
+                                                style={{
+                                                    backgroundColor: "#ff6600",
+                                                    verticalAlign: 'middle'
+                                                }}
                                                 size="large"/>
+                                        </Badge>
                                     }
 
                                 </div>
@@ -209,10 +265,15 @@ class AppHeader extends Component {
 
                         {this.props.isAuthenticated ? <div key="user" className="mob-avatar">
                             <div onClick={this.showDrawer2}>
-                                {profile_image !=null ? <Avatar size='large'
-                                                                src={"http://api.cardosh.uz"+profile_image}/> :
-                                <Avatar icon="user" style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
-                                        size="large"/>}
+                                {profile_image != null ?
+                                    <Badge count={this.state.badgeCount}>
+                                    <Avatar size='large'
+                                            src={"http://api.cardosh.uz" + profile_image}/>
+                                    </Badge>:
+                                    <Badge count={this.state.badgeCount}>
+                                    <Avatar icon="user"
+                                            style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
+                                            size="large"/></Badge>}
                             </div>
                             <Drawer
                                 title={this.props.name}

@@ -55,10 +55,9 @@
     text-align: center;
   }
   .general-form{
-    //width: 300px;
-    display: inline-block;
-
     margin: auto;
+    width: 70%;
+
   }
 }
 
@@ -73,4 +72,24 @@ background-size: 100%;
 
 .form-item{
 
+}
+@media screen and (max-width: 846px) {
+  .profile-page {
+    padding-top: 56px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .general{
+    width: 100%;
+
+    >p{
+      text-align: center;
+    }
+    .general-form{
+      margin: auto;
+      width: 100%;
+
+    }
+  }
 }

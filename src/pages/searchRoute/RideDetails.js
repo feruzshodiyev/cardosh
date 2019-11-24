@@ -10,6 +10,7 @@ import NumberFormat from 'react-number-format';
 
 moment.locale('ru', localization);
 
+
 class RideDetails extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +20,8 @@ class RideDetails extends Component {
             loading: false,
             modalVisible: false,
             alertVisible: false,
-            price: ""
+            price: "",
+            noCar: false
 
         }
     }
@@ -75,15 +77,33 @@ class RideDetails extends Component {
                     alertVisible: true
                 })
             } else {
-                console.log(formData.getAll("passengerID"))
-                axios.post(API_BASE_URL + "/request/make/", formData).then(res => {
-                    notification.success({
-                        message: "Вы "
-                    });
+                const currentId = this.props.currentId;
+                axios.get(API_BASE_URL+"/"+currentId+"/user/car/").then(res=>{
                     console.log(res)
-                }).catch(err => {
-                    console.log(err)
-                })
+                    if(res.data.car!==null){
+                        axios.post(API_BASE_URL + "/request/make/", formData).then(res => {
+                            notification.success({
+                                message: "Сохранен!"
+                            });
+                            console.log(res)
+                        }).catch(err => {
+                            notification.error({
+                                message: "Произошло ошибка!"
+                            });
+                            console.log(err)
+                        })
+                    }else {
+                        this.setState({
+                            noCar: true
+                        },()=>
+                            this.setState({
+                            modalVisible: true,
+                        }))
+
+                    }
+                }).catch(err=>{
+
+                });
             }
 
         } else {
@@ -119,14 +139,16 @@ class RideDetails extends Component {
             return <LoadingContent/>
         }
 
-        const date = this.state.response.departure_date;
-        const time = this.state.response.departure_time;
+        const date = this.state.response.active_until;
 
-        const time1 = moment(time, "HH:mm").format("HH:mm");
+
+        const time1 = moment(date).format("HH:mm");
 
 
         const res = this.state.response;
         const user = this.state.user;
+
+        const currentId = this.props.currentId;
 
 
         return (
@@ -202,7 +224,7 @@ class RideDetails extends Component {
                 </div>
                 <Modal
                     visible={this.state.modalVisible}
-                    title="Авторизуйтесь чтобы предложить свою поездку!"
+                    title={this.state.noCar ? "Автомобиль не добавлен!":"Авторизуйтесь чтобы предложить свою поездку!"}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
@@ -211,11 +233,14 @@ class RideDetails extends Component {
                         </Button>
                     ]}>
 
-                    <div className="modal-content">
+                    {this.state.noCar ? <div className="modal-content">
+                        <h2><Link to={`/profile/${currentId}/general`}>Мой профил</Link></h2>
+                    </div>:<div className="modal-content">
                         <h2><Link to="/register">Зарегистрироваться</Link></h2>
                         <br/>
                         <h2><Link to="/login">Войти в систему</Link></h2>
-                    </div>
+                        </div> }
+
                 </Modal>
             </div>
         );

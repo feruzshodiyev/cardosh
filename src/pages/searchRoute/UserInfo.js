@@ -23,7 +23,7 @@ class UserInfo extends Component {
         });
         const userId = this.props.match.params.id;
         axios.get(API_BASE_URL + `/user/detail/${userId}/`).then(res => {
-            console.log(res.data.profile_image);
+
             this.setState({
                 loadSuccess: true,
                 user: res.data
@@ -94,7 +94,7 @@ class UserInfo extends Component {
 
                 </div>
                 <div className="user-name">
-                    <h1>{user.first_name}</h1>
+                    <h1>{user.first_name+"  "+user.last_name}</h1>
                     <p>{formattedAge}</p>
                 </div>
             </div>

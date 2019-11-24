@@ -24,6 +24,26 @@
   float: right;
 }
 
+.modal-content-req{
+  p{
+    margin: 10px auto;
+  }
+}
+
+.avatar-req{
+  right: 15px;
+  margin-bottom: 7px;
+
+}
+
+.modal-avatar-user{
+  width: fit-content;
+  margin: auto;
+  >div{
+    display: inline-block;
+  }
+}
+
 @media screen and (max-width: 450px){
   .my-ride-layout{
     width: 100% !important;

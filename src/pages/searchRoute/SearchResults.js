@@ -72,12 +72,13 @@ class SearchResults extends Component {
 
             const cards = this.state.results.map((result, i) => {
 
-                const date1 = moment(result.departure_date);
-                const givenDate = moment(result.departure_date).format("ll").split(' 20')[0];
-                const givenDate1 = moment(result.departure_date).calendar().split(', ')[0];
+                const now = moment();
+                const date1 = moment(result.active_until);
+                const givenDate = moment(result.active_until).format("llll").split("г.,")[0];
+                const givenDate1 = moment(result.active_until).calendar().split(', ')[0];
 
-                const date = (moment().diff(date1, 'days') >= 1) ? givenDate : givenDate1;
-
+               // const date = (moment().diff(date1, 'days') >= 1) ? givenDate+"г." : givenDate1;
+                const date = (moment(date1-now).format('D') >= 1) ? givenDate+"г." : givenDate1;
                 return (
 
                     <div key={i} className="wrap-card">
@@ -92,7 +93,7 @@ class SearchResults extends Component {
                             </div>
                             <div className="card-user-date">
                                 <div className="card-date">
-                                    <p>Дата:{date}</p>
+                                    <p>Дата:<span style={{marginLeft: "10px"}}>{date}</span></p>
                                 </div>
                                 <div className="user-avatar-name">
                                     {result.passenger.profile_image ?

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import {Menu, Icon, Form, Input, Button, Layout, Select, notification, Upload, message, Modal, Avatar} from 'antd';
+import {Menu, Icon, Form, Input, Button, Layout, Select, notification, Upload, message, Avatar} from 'antd';
 import {Switch, Route, NavLink} from 'react-router-dom';
 import './Profile.scss'
 import axios from 'axios';
 import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 import PropTypes from "prop-types";
-import imageCompression from 'browser-image-compression';
 
 
 const {Header, Content, Footer, Sider} = Layout;
@@ -100,10 +99,16 @@ class Profile extends Component {
         };
 
         const Car = () => {
+            const car = this.state.user.car;
             return (
-                <div>
-                    <p>car</p>
+                <div className="general">
+                    <h2> Мой автомобиль</h2>
                     <hr/>
+                    <div className="general-form">
+                        <CarForma
+                            car={car}
+                        />
+                    </div>
                 </div>
             )
         };
@@ -114,7 +119,7 @@ class Profile extends Component {
             const email = this.state.user.email;
             return (
                 <div>
-                    <p>Подтверждение</p>
+                    <h2>Подтверждение</h2>
                     <hr/>
                     <p>Подтвердите ваш профиль, чтобы стать надежным пользователем и легко находить попутчиков!</p>
                     <div>
@@ -132,7 +137,7 @@ class Profile extends Component {
 
             return (
                 <div>
-                    <p>Подтверждение</p>
+                    <h2>Подтверждение</h2>
                     <hr/>
                     <h2><Icon type="check-circle" theme="twoTone" twoToneColor="#52c41a"/> Эл. почта подтверждена </h2>
                     <p>Ваша эл. почта: {email} </p>
@@ -247,7 +252,7 @@ class GeneralForm extends Component {
             },
             wrapperCol: {
                 xs: {span: 24},
-                sm: {span: 16},
+                sm: {span: 12},
             },
         };
         const user = this.props.user;
@@ -398,7 +403,7 @@ class Picture extends Component {
                     this.setState({
                         loading: false,
                         uploadSuccess: true,
-                        showSubmitBtn:false
+                        showSubmitBtn: false
                     });
                     notification.success({
                         message: "Фотография профиля была успешно сохранена!"
@@ -421,16 +426,6 @@ class Picture extends Component {
     };
 
 
-    // normFile = e => {
-    //     console.log('Upload event:', e);
-    //
-    //     if (Array.isArray(e)) {
-    //         return e;
-    //     }
-    //     return e && e.fileList;
-    //
-    // };
-
     resetPhoto = () => {
         this.setState({
             imageUrl: null,
@@ -445,15 +440,13 @@ class Picture extends Component {
 
         const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
         const isLt2M = file.size / 1024 / 1024 < 2;
-        if (isJpgOrPng&&isLt2M){
-            getBase64(fileList[0].originFileObj, imageUrl =>{
-                this.setState({
-                    imageUrl,
-                });
+        if (isJpgOrPng && isLt2M) {
+            getBase64(fileList[0].originFileObj, imageUrl => {
+                    this.setState({
+                        imageUrl,
+                    });
 
                 }
-
-
             );
 
             // if (!isLt2M) {
@@ -497,7 +490,7 @@ class Picture extends Component {
         return (
 
             <Form {...formItemLayout} onSubmit={this.handlePicSubmit}>
-                <p>Фото профиля</p>
+                <h2>Фото профиля</h2>
                 <hr/>
 
                 {imageUrl != null ?
@@ -542,12 +535,171 @@ class Picture extends Component {
             </Form>
         );
     }
-
 }
+
+
+class CarForm extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasCar: false,
+            car: null
+        }
+    }
+
+    componentDidMount() {
+        const propsCar = this.props.car;
+        if (propsCar) {
+            this.setState({
+                hasCar:true,
+                car: propsCar
+            })
+        }
+    }
+
+    handleCarSubmit = e =>{
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+                console.log(values);
+
+                if (this.state.hasCar){
+                    axios.put(API_BASE_URL+"/manage/car/", values, {
+                        headers:{
+                            "Authorization" : "Bearer "+localStorage.getItem(ACCESS_TOKEN),
+                            "Content-Type" : "application/json"
+                        }
+                    }).then(res=>{
+                        notification.success({
+                            message:"Данные автомобиля изменены!",
+                        });
+                    }).catch(err=>{
+                        notification.error({
+                            message:"Ошибка подключения!"
+                        });
+                        this.setState({
+                            car: values,
+                        },()=>this.setState({hasCar: true}))
+                    })
+                } else {
+                    axios.post(API_BASE_URL+"/manage/car/", values, {
+                        headers:{
+                            "Authorization" : "Bearer "+localStorage.getItem(ACCESS_TOKEN),
+                            "Content-Type" : "application/json"
+                        }
+                    }).then(res=>{
+
+                        notification.success({
+                            message:"Автомобиль добавлен!",
+                        });
+                        this.setState({
+                            car: values,
+                        },()=>this.setState({hasCar: true}))
+                    }).catch(err=>{
+                        notification.error({
+                            message:"Ошибка подключения!"
+                        });
+
+                    })
+                }
+
+            }
+        })
+    };
+
+
+    render() {
+        const {getFieldDecorator} = this.props.form;
+
+        const formItemLayout = {
+            labelCol: {
+                xs: {span: 24},
+                sm: {span: 8},
+            },
+            wrapperCol: {
+                xs: {span: 24},
+                sm: {span: 12},
+            },
+        };
+        const car = this.state.car;
+        const hasCar = this.state.hasCar;
+        return (
+            <Form
+                hideRequiredMark={true}
+                {...formItemLayout}
+                onSubmit={this.handleCarSubmit}
+            >
+
+
+                <Form.Item className="form-item" label="Марка">
+                    {getFieldDecorator('brand', {
+                        initialValue: `${hasCar? car.brand:""}`,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите марку автомоболя!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+
+
+                <Form.Item className="form-item" label="Модель">
+                    {getFieldDecorator('car_model', {
+                        initialValue: `${hasCar? car.car_model:""}`,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите модель автомоболя!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+                <Form.Item className="form-item" label="Цвет">
+                    {getFieldDecorator('color', {
+                        initialValue: `${hasCar? car.color:""}`,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите цвет автомоболя!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+                <Form.Item className="form-item" label="Гос. номер">
+                    {getFieldDecorator('gov_number', {
+                        initialValue: `${hasCar? car.gov_number:""}`,
+                        rules: [
+                            {
+                                required: true,
+                                message: 'Пожалуйста, введите свой адрес электронной почты!',
+                            },
+                        ],
+                    })(<Input/>)}
+                </Form.Item>
+
+                <Form.Item
+                    wrapperCol={{
+                        xs: {span: 24, offset: 0},
+                        sm: {span: 16, offset: 8},
+                    }}
+                >
+                    <Button type="primary" htmlType="submit">
+                        Сохранить
+                    </Button>
+                </Form.Item>
+
+            </Form>
+        );
+    }
+}
+
+const CarForma = Form.create()(CarForm);
 
 const PicFrom = Form.create()(Picture);
 
 const GenForm = Form.create()(GeneralForm);
+
 
 Profile.propTypes = {
     email_confirmed: PropTypes.bool,

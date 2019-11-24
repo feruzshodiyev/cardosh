@@ -17,8 +17,8 @@ import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 
 const { TextArea } = Input;
 
+let modalVisible = false;
 class OfferTrip extends Component {
-    _isMounted = false;
     constructor(props) {
         super(props);
         this.state = {
@@ -26,12 +26,11 @@ class OfferTrip extends Component {
                 'passenger': null,
                 'fromm': "",
                 'to': "",
-                'departure_date': "",
-                'departure_time': "",
                 'peopleNumber': 1,
                 'description': "default",
                 'fromID': "",
-                'toID': ""
+                'toID': "",
+                "active_until": null
             },
             origin: {},
             hasOrigin: false,
@@ -43,32 +42,22 @@ class OfferTrip extends Component {
             distance: '',
             duration: '',
             redirectConfirm: false,
-            modalVisible: false
+            modalVisible: false,
+
+
         }
     }
 
     componentDidMount() {
-        this._isMounted = true;
 
             setTimeout(function(){
                 if (!this.props.isAuthenticated){
-                this.setState({
-                    modalVisible: true
-                })
+                    modalVisible = true
                 }
-                const user = Number.parseInt(this.props.currentId);
-                this.setState(prevState => ({
-                    offerTripFields: {
-                        ...prevState.offerTripFields,
-                        'passenger': user,
-                    }
-                }))
             }.bind(this),5000);
     }
 
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
+
 
     handleSelectFrom = (description, place_id) => {
         this.setState(prevState => ({
@@ -123,13 +112,17 @@ class OfferTrip extends Component {
 
         const formattedTime = moment(values.time).format("HH:mm");
 
+        const dateTime = formattedDate + ' ' + formattedTime;
+        const user = Number.parseInt(this.props.currentId);
+
+
         this.setState( prevState=>({
             offerTripFields: {
                 ...prevState.offerTripFields,
-                'departure_date': formattedDate,
-                'departure_time': formattedTime,
                 'peopleNumber': values.seats,
-                'description': values.description
+                'description': values.description,
+                "active_until": dateTime,
+                'passenger' : user
             }
 
         }),()=>this.sendFields());
@@ -173,17 +166,7 @@ class OfferTrip extends Component {
     };
 
 
-    // handleSecondStepVal = (values) => {
-    //     this.setState(prevState => ({
-    //         offerTripFields: {
-    //             ...prevState.offerTripFields,
-    //             'price': values.price,
-    //             'seats': values.seats,
-    //             'description': values.description
-    //         },
-    //         redirectConfirm: true
-    //     }),()=>this.sendFields());
-    // };
+
 
 
 
@@ -192,7 +175,7 @@ class OfferTrip extends Component {
         axios.post(API_BASE_URL+'/ride/create/', JSON.stringify(this.state.offerTripFields),{
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer '+localStorage.getItem(ACCESS_TOKEN)
+                // 'Authorization': 'Bearer '+localStorage.getItem(ACCESS_TOKEN)
             }
 
         }).then(res=>{
@@ -223,6 +206,7 @@ class OfferTrip extends Component {
             return (
                 <div className="form-flex">
                     <div className="plll">
+                        {this.state.waiting ? <div></div>:null}
                         <div className='from-to'>
                             <div>
                             <h3>Где бы вы хотели, чтобы вас забрали?</h3>
@@ -280,7 +264,7 @@ class OfferTrip extends Component {
                         </div>
                     </div>
                     <Modal
-                        visible={this.state.modalVisible}
+                        visible={modalVisible}
                         title="Авторизуйтесь чтобы подать заявку!"
                         closable={false}
                         footer={null}
@@ -297,33 +281,7 @@ class OfferTrip extends Component {
 
         };
 
-        // const SecondStep1 = () => {
-        //     return (
-        //         <div className="form-flex">
-        //             <div className="plll">
-        //                 <SecondStepForm
-        //                     origin={this.state.offerTripFields.fromm}
-        //                     destination={this.state.offerTripFields.to}
-        //                     distance={this.state.distance}
-        //                     duration={this.state.duration}
-        //                     departureDate={this.state.offerTripFields.departure_date}
-        //                     departureTime={this.state.offerTripFields.departure_time}
-        //                     onValuesSubmit={this.handleSecondStepVal}
-        //                 />
-        //             </div>
-        //             <div className="route-map google-maps">
-        //                 <div>
-        //                     <Map
-        //                         origin={this.state.origin}
-        //                         destination={this.state.destination}
-        //                         renderDirection={this.state.hasOrigin && this.state.hasDestination}
-        //                     />
-        //                 </div>
-        //             </div>
-        //
-        //         </div>
-        //     );
-        // };
+
 
 
         return (
@@ -335,17 +293,9 @@ class OfferTrip extends Component {
                         <div className='offer-form'>
                             <Switch>
                             <Route exact path='/offerTrip' render={() =>
-                                // this.state.redirectSecond ?
-                                // <Redirect to='/offerTrip/second'/> :
+
                                     <FirstStep/>}/>
-                            {/*<Route path='/offerTrip/second'*/}
-                            {/*       render={() => this.state.hasOrigin && this.state.hasDestination ?*/}
-                            {/*           // (this.state.redirectConfirm ?*/}
-                            {/*    //       /!*<Redirect to='/offerTrip/confirm'/> : *!/*/}
-                            {/*           <SecondStep1/>*/}
-                            {/*           // )*/}
-                            {/*           :*/}
-                            {/*           <Redirect to="/offerTrip"/>}/>*/}
+
                             </Switch>
 
                         </div>
