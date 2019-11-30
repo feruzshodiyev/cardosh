@@ -23,7 +23,8 @@ class AppHeader extends Component {
             visible: false,
             drawerVisible: false,
             drawerVisible2: false,
-            badgeCount: 0,
+            newReq: 0,
+            acceptedReq: 0
 
         }
     }
@@ -56,6 +57,7 @@ class AppHeader extends Component {
 
     getRequests = () => {
 
+        // Get count of new requests
         axios.get("http://api.cardosh.uz/v1/notifications/new/requests/number/", {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
@@ -63,24 +65,40 @@ class AppHeader extends Component {
         }).then(res => {
             console.log(res);
             this.setState({
-               badgeCount: res.data
+                newReq: res.data
             });
         }).catch(err => {
             console.log("New requests number error", err)
-        })
+        });
+
+        // Get count of accepted requests
+        axios.get("http://api.cardosh.uz/v1/notifications/accepted/requests/number/", {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+            }
+        }).then(res => {
+            console.log(res);
+            this.setState({
+                acceptedReq: res.data
+            });
+        }).catch(err => {
+            console.log("Accepted requests number error", err)
+        });
+
+
 
     };
 
 
     cleanNotifications = () =>{
-        if (this.state.badgeCount>0){
+        if (this.state.newReq>0){
             axios.put("http://api.cardosh.uz/v1/notifications/clean/",{}, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
                 }
             }).then(res=>{
                 this.setState({
-                    badgeCount: 0
+                    newReq: 0
                 });
                 console.log(res)
             }).catch(err=>{
@@ -89,6 +107,26 @@ class AppHeader extends Component {
         }
 
     };
+
+    cleanNotifications2 = () =>{
+        if (this.state.newReq>0){
+            axios.put("http://api.cardosh.uz/v1/notifications/clean/requests/number/",{}, {
+                headers: {
+                    "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+                }
+            }).then(res=>{
+                this.setState({
+                    acceptedReq: 0
+                });
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+
+    };
+
+
 
 
     handleLogout = () => {
@@ -130,10 +168,12 @@ class AppHeader extends Component {
                     <Link to={`/profile/${userId}/general`}>Профиль</Link>
                 </Menu.Item>
                 <Menu.Item key="2">
+                    <Badge dot={this.state.acceptedReq>0}>
                     <Link to={`/requests/${userId}`}>Предложеня</Link>
+                    </Badge>
                 </Menu.Item>
                 <Menu.Item key="3" onClick={this.cleanNotifications}>
-                    <Badge dot={this.state.badgeCount>0}>
+                    <Badge dot={this.state.newReq>0}>
                     <Link to={`/my-rides/${userId}`}>Мои заявки</Link>
                     </Badge>
                 </Menu.Item>
@@ -193,12 +233,12 @@ class AppHeader extends Component {
                                 trigger={['click']}>
                                 <div>
                                     <p>{this.props.name}</p>
-                                    {profile_image != null ? <Badge count={this.state.badgeCount}>
+                                    {profile_image != null ? <Badge count={this.state.newReq+this.state.acceptedReq}>
                                             <Avatar
                                                 size='large'
                                                 src={"http://api.cardosh.uz" + profile_image}/>
                                         </Badge> :
-                                        <Badge count={this.state.badgeCount}>
+                                        <Badge count={this.state.newReq+this.state.acceptedReq}>
                                             <Avatar
                                                 icon="user"
                                                 style={{
@@ -266,11 +306,11 @@ class AppHeader extends Component {
                         {this.props.isAuthenticated ? <div key="user" className="mob-avatar">
                             <div onClick={this.showDrawer2}>
                                 {profile_image != null ?
-                                    <Badge count={this.state.badgeCount}>
+                                    <Badge count={this.state.newReq+this.state.acceptedReq}>
                                     <Avatar size='large'
                                             src={"http://api.cardosh.uz" + profile_image}/>
                                     </Badge>:
-                                    <Badge count={this.state.badgeCount}>
+                                    <Badge count={this.state.newReq+this.state.acceptedReq}>
                                     <Avatar icon="user"
                                             style={{backgroundColor: "#ff6600", verticalAlign: 'middle'}}
                                             size="large"/></Badge>}

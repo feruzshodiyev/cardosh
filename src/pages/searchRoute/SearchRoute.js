@@ -68,7 +68,7 @@ class SearchRoute extends Component {
                isFromPage={false}
                onSelectTo={this.handleSelectTo}
                />}/>
-               <Route path="/search/results/:selectedPlaceFrom-:selectedPlaceTo-:fromId-:toId" render={(props)=><SearchResults
+               <Route path="/search/results/:selectedPlaceFrom/:selectedPlaceTo/:fromId/:toId" render={(props)=><SearchResults
                    {...props}
                />}/>
                <Route path="/search/result/:id" render={(props)=><RideDetails
@@ -117,7 +117,7 @@ const  FromTo = (props) => {
             </div>
             </div>
             <div className="btn-search">
-                <Link to={`/search/results/${selectedFrom}-${selectedTo}-${fromId}-${toId}`}>
+                <Link to={`/search/results/${selectedFrom}/${selectedTo}/${fromId}/${toId}`}>
             <Button className="btttn" disabled={!disabled} type="primary">Найти</Button>
                 </Link>
             </div>

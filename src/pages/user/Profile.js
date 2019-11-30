@@ -84,6 +84,7 @@ class Profile extends Component {
 
 
         const General = () => {
+            console.log('user', this.state.user);
             return (
                 <div className="general">
                     <h2>Мои персональные данные</h2>
@@ -303,6 +304,7 @@ class GeneralForm extends Component {
                 <Form.Item className="form-item" label="Эл. почта">
                     {getFieldDecorator('email', {
                         initialValue: user.email,
+
                         rules: [
                             {
                                 type: 'email',

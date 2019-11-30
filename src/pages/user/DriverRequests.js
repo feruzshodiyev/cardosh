@@ -172,7 +172,7 @@ class DriverRequests extends Component {
                                     <Avatar icon="user"/>}
                                 title={item.driverID.first_name + " " + item.driverID.last_name}
                                 description={<div>
-                                    <p>Предлагаемая сумма: {item.price}</p>
+                                    <p>Предлагаемая цена: {item.price}</p>
                                     {item.is_dealed ?<Button onClick={()=>this.showModal(item.id)}>Посмотреть</Button>:null}
                                 </div>}
                             />

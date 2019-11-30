@@ -206,7 +206,6 @@ class OfferTrip extends Component {
             return (
                 <div className="form-flex">
                     <div className="plll">
-                        {this.state.waiting ? <div></div>:null}
                         <div className='from-to'>
                             <div>
                             <h3>Где бы вы хотели, чтобы вас забрали?</h3>
@@ -288,7 +287,7 @@ class OfferTrip extends Component {
 
                 <div className="wrapper-offer">
                     <div className="form-group">
-                        <h1 className="trip-header">Оставит заявку</h1>
+                        <h1 className="trip-header">Оставить заявку</h1>
                         <br/>
                         <div className='offer-form'>
                             <Switch>
@@ -430,7 +429,7 @@ return date=true;
                                 type="primary"
                                 htmlType="submit"
                             >
-                                {/*Продолжить*/}
+
                                  Подать заявку
                                 {loading ? <Icon type="loading"/> : <Icon type="double-right"/>}
                             </Button>

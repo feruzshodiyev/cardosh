@@ -42,7 +42,7 @@ class SearchResults extends Component {
                     this.setState({
                         loading: false
                     });
-                    console.log("no result" + results)
+                    console.log("no results", res)
                 })
             } else {
                 console.log(results);
@@ -77,10 +77,11 @@ class SearchResults extends Component {
                 const givenDate = moment(result.active_until).format("llll").split("г.,")[0];
                 const givenDate1 = moment(result.active_until).calendar().split(', ')[0];
 
-               // const date = (moment().diff(date1, 'days') >= 1) ? givenDate+"г." : givenDate1;
-                const date = (moment(date1-now).format('D') >= 1) ? givenDate+"г." : givenDate1;
+               const date = (date1.diff(now, 'days') >= 1) ? givenDate+"г." : givenDate1;
+                // const date = (moment(date1-now).format('D') >= 2) ? givenDate+"г." : givenDate1;
+                console.log("diff",moment(date1-now).format('D'));
+                console.log('diff method',date1.diff(now,'days'));
                 return (
-
                     <div key={i} className="wrap-card">
                         <Link key={i} to={`/search/result/${result.id}`}>
                             <div className="card-details">
