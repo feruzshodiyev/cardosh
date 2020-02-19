@@ -302,7 +302,7 @@ class MyRides extends Component {
             <div className="my-ride-layout">
                 <Layout>
                     <Breadcrumb style={{margin: '10px auto', fontWeight: "bold"}}>
-                        <Breadcrumb.Item>Мои заяви</Breadcrumb.Item>
+                        <Breadcrumb.Item>Мои заявки</Breadcrumb.Item>
                     </Breadcrumb>
                     <Header style={{backgroundColor: "transparent"}}>
                         <div className="logo-my-ride"/>

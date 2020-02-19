@@ -65,9 +65,10 @@ class RideDetails extends Component {
     };
 
     handleClickOffer = () => {
+        const currentId = this.props.currentId;
         let formData = new FormData();
         formData.append("price", this.state.price);
-        formData.append("driverID", this.props.currentId);
+        formData.append("driverID", currentId);
         formData.append("passengerID", this.state.response.id);
         const price = this.state.price;
         if (this.props.isAuthenticated) {
@@ -77,9 +78,9 @@ class RideDetails extends Component {
                     alertVisible: true
                 })
             } else {
-                const currentId = this.props.currentId;
+
                 axios.get(API_BASE_URL+"/"+currentId+"/user/car/").then(res=>{
-                    console.log(res)
+                    console.log(res);
                     if(res.data.car!==null){
                         axios.post(API_BASE_URL + "/request/make/", formData).then(res => {
                             notification.success({
@@ -143,6 +144,8 @@ class RideDetails extends Component {
 
 
         const time1 = moment(date).format("HH:mm");
+
+
 
 
         const res = this.state.response;

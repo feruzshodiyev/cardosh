@@ -132,7 +132,7 @@ class DriverRequests extends Component {
                                 <p><span style={{fontWeight: "bolder"}}>Цена: </span>{item.price}</p>
                             </Col>
                             <Col span={12}>
-                                <p><span style={{fontWeight: "bolder"}}>Тел: </span>{driverID.phone_number}</p>
+                                <p><span style={{fontWeight: "bolder"}}>Тел: </span>{item.is_dealed ? driverID.phone_number : <span style={{fontSize: 10, color: '#ff6a42'}}>предложение не принято</span>}</p>
                             </Col>
                         </Row>
                         <h2 style={{textAlign: "center"}}>Автомобиль</h2>

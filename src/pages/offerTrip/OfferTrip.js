@@ -68,6 +68,7 @@ class OfferTrip extends Component {
             }
         }));
 
+
         geocodeByPlaceId(place_id)
             .then(results => getLatLng(results[0]))
             .then(({lat, lng}) =>
@@ -408,10 +409,7 @@ return date=true;
                             })(
 
                                 <TextArea
-                                    placeholder="Укажите, например:
-                - место отправления и прибытия;
-                - возможность взять багаж;
-                "
+                                    placeholder={"Укажите, например:\n- место отправления и прибытия;\n - возможность взять багаж;"}
                                     disabled={!disabled}
                                     rows={4}/>
                             )}

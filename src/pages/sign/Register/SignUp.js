@@ -477,7 +477,7 @@ const BirthForm = (props) => {
     const {handleOnChange, isDobFilled} = props;
     return (
         <div>
-            <h1 className='register-title'>Когда вы родились?</h1>
+            <h1 className='register-title'>Дата рождения</h1>
             <Form className='login-form'>
                 <Input type='date' className='input-data' placeholder='Дата рождение' name='dob'
                        onChange={event => handleOnChange(event)}/>

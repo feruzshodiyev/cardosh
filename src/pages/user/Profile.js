@@ -15,7 +15,6 @@ class Profile extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
             user: {},
             userId: 0,
             profile_image: null,
@@ -152,7 +151,7 @@ class Profile extends Component {
 
         return (
             <div className="profile-page">
-                <Layout>
+                <Layout style={{minHeight: '700px'}}>
                     <Sider
                         breakpoint='xs'
                         collapsedWidth="0"
@@ -257,7 +256,7 @@ class GeneralForm extends Component {
             },
         };
         const user = this.props.user;
-
+console.log('user: ',user)
         return (
             <Form
                 hideRequiredMark={true}

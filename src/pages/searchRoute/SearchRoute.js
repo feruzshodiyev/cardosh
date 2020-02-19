@@ -92,7 +92,7 @@ const  FromTo = (props) => {
     return (
         <div className="wrap-from-to">
 
-            <h1>Найти поездку</h1>
+            <h1>Найти пассажира</h1>
             <div className="relative">
                 <div className="wrap-section">
             <Link to='/search/from'>

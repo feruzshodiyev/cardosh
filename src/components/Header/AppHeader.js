@@ -109,7 +109,7 @@ class AppHeader extends Component {
     };
 
     cleanNotifications2 = () =>{
-        if (this.state.newReq>0){
+        if (this.state.acceptedReq>0){
             axios.put("http://api.cardosh.uz/v1/notifications/clean/requests/number/",{}, {
                 headers: {
                     "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
@@ -123,7 +123,6 @@ class AppHeader extends Component {
                 console.log(err)
             })
         }
-
     };
 
 
@@ -167,9 +166,9 @@ class AppHeader extends Component {
                 <Menu.Item key="1">
                     <Link to={`/profile/${userId}/general`}>Профиль</Link>
                 </Menu.Item>
-                <Menu.Item key="2">
+                <Menu.Item key="2" onClick={this.cleanNotifications2}>
                     <Badge dot={this.state.acceptedReq>0}>
-                    <Link to={`/requests/${userId}`}>Предложеня</Link>
+                    <Link to={`/requests/${userId}`}>Предложения</Link>
                     </Badge>
                 </Menu.Item>
                 <Menu.Item key="3" onClick={this.cleanNotifications}>

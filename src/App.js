@@ -90,7 +90,7 @@ class App extends Component {
                 this.setState({
                     currentUser: response,
                     isAuthenticated: true,
-                })
+                });
                 console.log(response);
                 this.stopLoading();
             }).catch(error => {
