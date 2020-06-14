@@ -163,7 +163,6 @@ class OfferTrip extends Component {
         //     });
 
 
-
     };
 
 
@@ -209,10 +208,10 @@ class OfferTrip extends Component {
                     <div className="plll">
                         <div className='from-to'>
                             <div>
-                            <h3>Где бы вы хотели, чтобы вас забрали?</h3>
+                            {/*<h2><Icon type="environment"/>Откуда</h2>*/}
                             <GooglePlacesAutocomplete
                                 inputClassName={this.state.offerTripFields.fromm===""?"input":"input input1"}
-                                placeholder='Например: Ташкент'
+                                placeholder='Откуда'
                                 initialValue={this.state.offerTripFields.fromm}
                                 onSelect={({description, place_id}) => (this.handleSelectFrom(description, place_id))}
                                 autocompletionRequest={{
@@ -225,10 +224,10 @@ class OfferTrip extends Component {
                             </div>
 
                             <div>
-                            <h3>Где бы вы хотели, чтобы вас высадили?</h3>
+                            {/*<h2><Icon type="environment"/> Куда</h2>*/}
                             <GooglePlacesAutocomplete
                                 inputClassName={this.state.offerTripFields.to===""?"input":"input input1"}
-                                placeholder='Например: Шахрисабз'
+                                placeholder='Куда'
                                 initialValue={this.state.offerTripFields.to}
                                 onSelect={({description, place_id}) => (this.handleSelectTo(description, place_id))}
                                 autocompletionRequest={{
@@ -289,7 +288,6 @@ class OfferTrip extends Component {
                 <div className="wrapper-offer">
                     <div className="form-group">
                         <h1 className="trip-header">Оставить заявку</h1>
-                        <br/>
                         <div className='offer-form'>
                             <Switch>
                             <Route exact path='/offerTrip' render={() =>
@@ -404,10 +402,7 @@ return date=true;
                             </div>
                             <div>
                         <Form.Item label="Предоставьте попутчикам больше информации о заявке.">
-                            {getFieldDecorator('description',{
-                                rules: [{required: true, message: 'Обязательное поле!'}],
-                            })(
-
+                            {getFieldDecorator('description')(
                                 <TextArea
                                     placeholder={"Укажите, например:\n- место отправления и прибытия;\n - возможность взять багаж;"}
                                     disabled={!disabled}

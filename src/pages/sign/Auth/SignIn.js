@@ -54,7 +54,7 @@ class LoginForm extends Component{
                         console.log(response.access, localStorage.getItem(ACCESS_TOKEN))
                     }).catch(error => {
                     this.setState({
-                        loading: true,
+                        loading: false,
                     });
                         console.log(error);
                     if (error.detail === "No active account found with the given credentials") {

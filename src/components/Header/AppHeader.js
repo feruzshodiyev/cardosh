@@ -91,37 +91,38 @@ class AppHeader extends Component {
 
 
     cleanNotifications = () =>{
+
+
+
         if (this.state.newReq>0){
-            axios.put("http://api.cardosh.uz/v1/notifications/clean/",{}, {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
-                }
-            }).then(res=>{
-                this.setState({
-                    newReq: 0
-                });
-                console.log(res)
-            }).catch(err=>{
-                console.log(err)
-            })
+
+            this.setState({
+                newReq: 0
+            });
+
         }
 
     };
 
     cleanNotifications2 = () =>{
         if (this.state.acceptedReq>0){
-            axios.put("http://api.cardosh.uz/v1/notifications/clean/requests/number/",{}, {
-                headers: {
-                    "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
-                }
-            }).then(res=>{
-                this.setState({
-                    acceptedReq: 0
-                });
-                console.log(res)
-            }).catch(err=>{
-                console.log(err)
-            })
+
+            this.setState({
+                acceptedReq: 0
+            });
+            //
+            // axios.put("http://api.cardosh.uz/v1/notifications/clean/requests/number/",{}, {
+            //     headers: {
+            //         "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+            //     }
+            // }).then(res=>{
+            //     this.setState({
+            //         acceptedReq: 0
+            //     });
+            //     console.log(res)
+            // }).catch(err=>{
+            //     console.log(err)
+            // })
         }
     };
 

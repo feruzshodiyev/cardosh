@@ -9,17 +9,100 @@
 
 .wrap-from-to {
 
-  margin-left: 10%;
-    width: 80%;
+  //margin-left: 10%;
+    width: 100%;
 
     padding: 20px;
-    height: 450px;
+    height: max-content;
     > h1{
       text-align: center;
         color: #ff6600;
     }
 
 }
+
+
+
+.from-to {
+  margin: auto;
+max-width: 800px;
+  > div {
+    width: 45%;
+    display: inline-block;
+    margin: 5px 20px ;
+    text-align: center;
+
+    > h2 {
+      color: #ff6600;
+    }
+
+  }
+}
+
+.input {
+  height: 50px;
+  width: 100%;
+  background-color: #ff6600;
+  border: 3px solid #ff6600;
+  border-radius: 40px;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  color: white;
+
+}
+
+.input:focus {
+  outline: none !important;
+  text-align: center;
+}
+
+.input1 {
+  background: none;
+  color: #ff6600;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+}
+
+.input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.input:focus::-moz-placeholder {
+  color: transparent;
+}
+
+.input:focus:-ms-input-placeholder {
+  color: transparent;
+}
+
+
+::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+  transition: all 0.2s ease;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+  transition: all 0.2s ease;
+
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+  transition: all 0.2s ease;
+
+}
+
+
+.input ::placeholder {
+  color: white !important;
+}
+
+
 
 .wrap-section{
   width: 50%;

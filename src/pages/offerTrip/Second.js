@@ -93,7 +93,7 @@ class Second extends Component {
                                 {/*<p>Предоставьте пассажирам больше информации о поездке.</p>*/}
                                 <Form.Item label="Предоставьте попутчикам больше информации о заявке.">
                                 {getFieldDecorator('description',{
-                                    rules: [{required: true, message: 'Обязательное поле!'}],
+                                    // rules: [{required: true, message: 'Обязательное поле!'}],
                                 })(
                                     <TextArea
                                         placeholder="Укажите, например:

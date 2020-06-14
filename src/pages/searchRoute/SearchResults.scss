@@ -158,6 +158,22 @@ margin-top: 10px;
   }
 }
 
+@media screen and (max-width: 439px) {
+  .card-date{
+    font-size: small !important;
+  }
+  .user-avatar-name{
+    font-size: small !important;
+  }
+}
+
+
+@media screen and (max-width: 312px) {
+  .wrap-card {
+    min-height: 160px;
+  }
+}
+
 @media screen and (max-width: 500px){
   .search-info {
     margin-top: 50px;
@@ -173,6 +189,7 @@ margin-top: 10px;
 @media screen and (max-width: 400px){
   .card-user-date{
     margin: 10px;
+    font-size: 15px;
   }
 }
 

@@ -30,10 +30,10 @@
   > div {
     width: 45%;
     display: inline-block;
-    margin: 20px;
+    margin: 5px 20px ;
     text-align: center;
 
-    > h3 {
+    > h2 {
       color: #ff6600;
     }
 
@@ -298,6 +298,10 @@
     }
   }
 ;
+}
+
+.trip-header{
+margin-bottom: 0;
 }
 
 .currency {

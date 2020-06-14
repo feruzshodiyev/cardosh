@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import axios from "axios/index";
-import {API_BASE_URL} from "../../constants";
-import {Avatar, Button, Col, List, Modal, notification, Row} from "antd";
+import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
+import {Avatar, Badge, Button, Col, List, Modal, notification, Row} from "antd";
 
+let ids = [];
 
 class DriverRequests extends Component {
     constructor(props) {
@@ -14,7 +15,8 @@ class DriverRequests extends Component {
             confirmLoading: false,
             car: null,
             driver: null,
-            req: null
+            req: null,
+            ids: []
         }
     }
 
@@ -82,14 +84,29 @@ class DriverRequests extends Component {
         })
     };
 
-    showModal = (id) => {
+    showModal = (id, viewed) => {
+
         this.setState({
             showModal:{visible: true, id: id}
         });
+
+        if (!viewed){
+            axios.put(`http://api.cardosh.uz/v1/notifications/clean/${id}/request/`,{},{
+                headers: {
+                    'Authorization' : 'Bearer '+localStorage.getItem(ACCESS_TOKEN)
+                }
+            }).then(res=>{
+                console.log(res);
+
+            }).catch(err=>{
+                console.log(err);
+            })
+        }
     };
 
 
     handleClickCancel = (id) => {
+        this.getReqList();
         this.setState({
             showModal:{visible: false, id: null}
         });
@@ -98,6 +115,7 @@ class DriverRequests extends Component {
     render() {
 
         const MyModal = (props) => {
+            console.log(props)
 
             const {showModal, confirmLoading} = this.state;
             const {item} = props;
@@ -165,18 +183,23 @@ class DriverRequests extends Component {
                     itemLayout="horizontal"
                     dataSource={this.state.requests}
                     renderItem={item => (
+
                         <List.Item>
+
                             <List.Item.Meta
                                 avatar={item.driverID.profile_image ?
-                                    <Avatar src={item.driverID.profile_image}/> :
-                                    <Avatar icon="user"/>}
+                                    <Badge count={item.is_viewed ? 0 : 1} dot>
+                                    <Avatar src={item.driverID.profile_image}/>  </Badge>:
+                                        <Badge count={item.is_viewed ? 0 : 1} dot>
+                                    <Avatar icon="user"/> </Badge>}
                                 title={item.driverID.first_name + " " + item.driverID.last_name}
                                 description={<div>
                                     <p>Предлагаемая цена: {item.price}</p>
                                     {item.is_dealed ?<Button onClick={()=>this.showModal(item.id)}>Посмотреть</Button>:null}
                                 </div>}
                             />
-                            {item.is_dealed === null ? <Button onClick={()=>this.showModal(item.id)} type="danger"
+
+                            {item.is_dealed === null ? <Button onClick={()=>this.showModal(item.id, item.is_viewed)} type="danger"
                                                                shape="round">Показать</Button>:item.is_dealed ? <div>
                                 <h3 style={{color: "#33cc33"}}>Принято!</h3>
 
@@ -188,6 +211,7 @@ class DriverRequests extends Component {
                             />
 
                         </List.Item>
+
                     )}
                 />
 

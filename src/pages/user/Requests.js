@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Avatar, Breadcrumb, Button, Col, Icon, Layout, List, Menu, Modal, notification, Row} from "antd";
+import {Avatar, Badge, Breadcrumb, Button, Col, Icon, Layout, List, Menu, Modal, notification, Row} from "antd";
 import {Switch, Route, NavLink} from 'react-router-dom';
 import axios from "axios";
 import moment from 'moment';
@@ -7,8 +7,7 @@ import moment from 'moment';
 
 import "./Requests.scss";
 import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
-import {Collapse} from "react-collapse";
-import DriverRequests from "./DriverRequests";
+
 
 const {Header, Content, Footer} = Layout;
 
@@ -23,10 +22,23 @@ class Requests extends Component {
     }
 
 
-    showAcceptedModal=(id)=>{
+    showAcceptedModal=(id, viewed)=>{
         this.setState({
             acceptedModal:{visible: true, id: id}
-        })
+        });
+
+        if (!viewed){
+            axios.put(`http://api.cardosh.uz/v1/notifications/clean/${id}/accepted/request/`, {}, {
+                headers: {
+                    "Authorization" : "Bearer "+localStorage.getItem(ACCESS_TOKEN)
+                }
+            }).then(res=>{
+                console.log(res)
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+
     };
     closeAcceptedModal=()=>{
         this.setState({
@@ -108,7 +120,9 @@ class Requests extends Component {
                                     </div>}
                                 />
 
-                                <Button type="primary" onClick={()=>this.showAcceptedModal(item.id)}>Посмотреть</Button>
+                               <Badge dot={!item.dealed_viewed}>
+                                <Button type="primary" onClick={()=>this.showAcceptedModal(item.id, item.dealed_viewed)}>Посмотреть</Button>
+                               </Badge>
                                 <Modal
                                     title="Информация о поездке и пассажирах"
                                     visible={this.state.acceptedModal.visible&&this.state.acceptedModal.id===item.id}
@@ -120,7 +134,7 @@ class Requests extends Component {
                                         <div className="modal-avatar-user">
                                             <div>{item.passengerID.passenger.profile_image ?
                                                 <Avatar className="avatar-req" size="large"
-                                                        src={item.passengerID.passenger.profile_image}/> :
+                                                        src={"http://api.cardosh.uz" +item.passengerID.passenger.profile_image}/> :
                                                 <Avatar className="avatar-req" shape="circle" size="large"
                                                         icon="user"/>}</div>
                                             <div><h2>{item.passengerID.passenger.first_name + "   " + item.passengerID.passenger.last_name}</h2>
@@ -187,22 +201,22 @@ class Requests extends Component {
         };
 
 
-        const Requested = () => {
-            return (
-                <div>
-                    <h1>Requested</h1>
-                </div>
-            )
-        };
-
-
-        const Denied = () => {
-            return (
-                <div>
-                    <h1>Denied</h1>
-                </div>
-            )
-        };
+        // const Requested = () => {
+        //     return (
+        //         <div>
+        //             <h1>Requested</h1>
+        //         </div>
+        //     )
+        // };
+        //
+        //
+        // const Denied = () => {
+        //     return (
+        //         <div>
+        //             <h1>Denied</h1>
+        //         </div>
+        //     )
+        // };
 
 
         const userId = this.props.match.params.id;

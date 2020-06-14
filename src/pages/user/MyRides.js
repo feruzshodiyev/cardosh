@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {List, Avatar, Layout, Menu, Breadcrumb, Icon, Button, Modal, Row, Col} from 'antd';
+import {List, Avatar, Layout, Menu, Breadcrumb, Icon, Button, Modal, Row, Col, Badge} from 'antd';
 import {Switch, Route, NavLink} from "react-router-dom";
 import axios from 'axios';
 import moment from 'moment';
@@ -74,6 +74,7 @@ class MyRides extends Component {
                 "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
             }
         }).then(res => {
+            console.log(res);
             this.setState({
                 history: res.data,
                 historyLoading: false,
@@ -141,8 +142,11 @@ class MyRides extends Component {
                                         </div>
 
                                         <p>{item.description}</p>
-                                        <Button onClick={() => this.handleListBtnClick(item.id)} className="btn-list"
-                                                type="primary" shape="round">Предложения</Button>
+                                        <Badge count={item.requests_number} className="btn-list">
+                                            <Button onClick={() => this.handleListBtnClick(item.id)} className="btn-list"
+                                                    type="primary" shape="round">Предложения</Button>
+                                        </Badge>
+
                                         <Collapse
                                             isOpened={this.state.showCollapse.show && this.state.showCollapse.id === item.id}>
                                             {this.state.showCollapse.show && this.state.showCollapse.id === item.id ?

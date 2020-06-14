@@ -8,8 +8,10 @@
 }
 
 .route-text {
+  display: inline-block;
   background-color: #f0f1f2;
   width: 70%;
+  height: 100%;
   margin-left: 5.6%;
   padding-top: 2%;
   padding-left: 5%;
@@ -18,7 +20,39 @@
   text-align: left;
 }
 
+.route-text2 {
+  left: 5.6%;
+  position: absolute;
+  display: inline-block;
+  background-color: #f0f1f2;
+  width: 70%;
+  height: 100%;
+  //margin-left: 5.6%;
+  padding-top: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+  color: #ff6600;
+  text-align: left;
+}
+
 .route-price {
+  height: 100%;
+  display: inline-block;
+  width: 24.4%;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #dedde2;
+  color: #ff6600;
+  padding-top: 6.5%;
+  font-weight: bold;
+}
+
+.route-price2 {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+  float: right;
+  height: 100%;
   width: 24.4%;
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
@@ -35,6 +69,13 @@
   color: #fffafe;
 }
 
+.title-text2 {
+  text-align: center;
+  margin: 0;
+  font-size: x-large;
+  color: #bc3505;
+}
+
 .popular-routes {
   font-size: large;
   align-content: center;
@@ -45,11 +86,12 @@
 }
 
 .routes {
-  margin-top: 2%;
+  //margin-top: 2%;
   margin-left: 35px;
 }
 
 .route-link {
+  margin-top: 20px;
   border-radius: 10px;
   display: inline-flex;
   width: 400px;
@@ -58,9 +100,28 @@
   background-color: #ff6600;
 }
 
+.route-link2 {
+  position: relative;
+  margin-top: 20px;
+  border-radius: 10px;
+  display: block;
+  width: 400px;
+  height: 70px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #ff6600;
+}
+
 @media screen and (max-width: 500px){
   .route-link{
-    width: 300px;
+    width: 90%;
+    margin-top: 30px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .route-link2{
+    width: 100%;
     margin-top: 30px;
   }
 }

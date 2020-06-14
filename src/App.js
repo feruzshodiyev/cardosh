@@ -90,9 +90,7 @@ class App extends Component {
                 this.setState({
                     currentUser: response,
                     isAuthenticated: true,
-                });
-                console.log(response);
-                this.stopLoading();
+                },()=> this.stopLoading());
             }).catch(error => {
             if (localStorage.getItem(ACCESS_TOKEN) && (error.status === 400 || error.status === 401)) {
                 localStorage.clear();

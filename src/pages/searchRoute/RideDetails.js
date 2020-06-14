@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios'
-import {API_BASE_URL} from "../../constants";
+import {ACCESS_TOKEN, API_BASE_URL} from "../../constants";
 import {Alert, Avatar, Button, Icon, Modal, notification} from "antd";
 import moment from "moment";
 import localization from 'moment/locale/ru';
@@ -21,7 +21,8 @@ class RideDetails extends Component {
             modalVisible: false,
             alertVisible: false,
             price: "",
-            noCar: false
+            noCar: false,
+            loadingSend: false
 
         }
     }
@@ -66,11 +67,11 @@ class RideDetails extends Component {
 
     handleClickOffer = () => {
         const currentId = this.props.currentId;
-        let formData = new FormData();
-        formData.append("price", this.state.price);
-        formData.append("driverID", currentId);
-        formData.append("passengerID", this.state.response.id);
         const price = this.state.price;
+        let formData = new FormData();
+        formData.append("price", price);
+        formData.append("passengerID", this.state.response.id);
+
         if (this.props.isAuthenticated) {
 
             if (!price) {
@@ -79,30 +80,48 @@ class RideDetails extends Component {
                 })
             } else {
 
-                axios.get(API_BASE_URL+"/"+currentId+"/user/car/").then(res=>{
+                this.setState({
+                    loadingSend: true
+                });
+
+                axios.get(API_BASE_URL + "/" + currentId + "/user/car/").then(res => {
                     console.log(res);
-                    if(res.data.car!==null){
-                        axios.post(API_BASE_URL + "/request/make/", formData).then(res => {
+                    if (res.data.car !== null) {
+                        console.log(formData.get("passengerID"));
+
+                        axios.post(API_BASE_URL + "/request/make/", formData, {
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem(ACCESS_TOKEN)
+                            }
+                        }).then(res => {
+                            this.goBack();
                             notification.success({
                                 message: "Сохранен!"
                             });
-                            console.log(res)
+                            console.log(res);
+                            this.setState({
+                                loadingSend: false
+                            });
                         }).catch(err => {
                             notification.error({
                                 message: "Произошло ошибка!"
                             });
-                            console.log(err)
+                            console.log(err);
+                            this.setState({
+                                loadingSend: false
+                            });
                         })
-                    }else {
+                    } else {
                         this.setState({
                             noCar: true
-                        },()=>
+                        }, () =>
                             this.setState({
-                            modalVisible: true,
-                        }))
+                                modalVisible: true,
+                                loadingSend: false
+                            }))
 
                     }
-                }).catch(err=>{
+                }).catch(err => {
 
                 });
             }
@@ -112,6 +131,10 @@ class RideDetails extends Component {
                 modalVisible: true,
             })
         }
+    };
+
+    goBack = () => {
+        this.props.history.goBack();
     };
 
     onChangePrice = e => {
@@ -144,8 +167,6 @@ class RideDetails extends Component {
 
 
         const time1 = moment(date).format("HH:mm");
-
-
 
 
         const res = this.state.response;
@@ -223,11 +244,13 @@ class RideDetails extends Component {
 
 
                 <div>
-                    <Button onClick={this.handleClickOffer} className="btn-offer">Предложите свою поездку</Button>
+                    {this.state.loadingSend ? <Icon className="loading-icon" type="loading"/> :
+                        <Button onClick={this.handleClickOffer} className="btn-offer">Предложите свою поездку</Button>}
+
                 </div>
                 <Modal
                     visible={this.state.modalVisible}
-                    title={this.state.noCar ? "Автомобиль не добавлен!":"Авторизуйтесь чтобы предложить свою поездку!"}
+                    title={this.state.noCar ? "Автомобиль не добавлен!" : "Авторизуйтесь чтобы предложить свою поездку!"}
                     onOk={this.handleOk}
                     onCancel={this.handleCancel}
                     footer={[
@@ -238,11 +261,11 @@ class RideDetails extends Component {
 
                     {this.state.noCar ? <div className="modal-content">
                         <h2><Link to={`/profile/${currentId}/general`}>Мой профил</Link></h2>
-                    </div>:<div className="modal-content">
+                    </div> : <div className="modal-content">
                         <h2><Link to="/register">Зарегистрироваться</Link></h2>
                         <br/>
                         <h2><Link to="/login">Войти в систему</Link></h2>
-                        </div> }
+                    </div>}
 
                 </Modal>
             </div>
